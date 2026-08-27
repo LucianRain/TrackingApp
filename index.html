@@ -43,11 +43,9 @@
   @keyframes pageFadeIn {
     from {
       opacity: 0;
-      transform: translateY(4px);
     }
     to {
       opacity: 1;
-      transform: translateY(0);
     }
   }
   @keyframes cardIn {
@@ -69,6 +67,16 @@
     }
     100% {
       transform: scale(1);
+    }
+  }
+  @keyframes eventCardIn {
+    from {
+      opacity: 0;
+      transform: translate(-50%, calc(-50% - 40px));
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%);
     }
   }
   #squares {
@@ -383,6 +391,7 @@
     box-sizing: border-box;
     -webkit-backdrop-filter: blur(var(--event-blur)) brightness(var(--event-darken));
     backdrop-filter: blur(var(--event-blur)) brightness(var(--event-darken));
+    animation: eventCardIn 260ms ease-out;
   }
   .event-label {
     color: #ffffff;
