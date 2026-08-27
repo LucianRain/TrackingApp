@@ -721,15 +721,25 @@
     const MAX_STARRED_TRAINS = 3;
     let starredTrains = [];
 
+    function updateStarElement(key) {
+      const isStarred = starredTrains.includes(key);
+      trainsRowEl.querySelectorAll(`.train-star[data-train-key="${key}"]`).forEach((el) => {
+        el.classList.toggle("starred", isStarred);
+        el.textContent = isStarred ? "★" : "☆";
+      });
+    }
+
     function toggleStar(key) {
       const idx = starredTrains.indexOf(key);
+      let evictedKey = null;
       if (idx !== -1) {
         starredTrains.splice(idx, 1);
       } else {
         starredTrains.push(key);
-        if (starredTrains.length > MAX_STARRED_TRAINS) starredTrains.shift();
+        if (starredTrains.length > MAX_STARRED_TRAINS) evictedKey = starredTrains.shift();
       }
-      renderSchedule(currentDirection);
+      updateStarElement(key);
+      if (evictedKey) updateStarElement(evictedKey);
     }
 
     trainsRowEl.addEventListener("click", (e) => {
