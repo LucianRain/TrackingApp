@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+<script src="visualSettings.js"></script>
 <style>
   :root {
     --font-main: "PT Sans", sans-serif;
@@ -60,11 +61,11 @@
     min-width: 220px;
     padding: 1rem 1.25rem 1.25rem;
     border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, var(--event-border-opacity));
+    background: rgba(255, 255, 255, var(--event-bg-opacity));
     box-sizing: border-box;
-    -webkit-backdrop-filter: blur(12px) brightness(0.6);
-    backdrop-filter: blur(12px) brightness(0.6);
+    -webkit-backdrop-filter: blur(var(--event-blur)) brightness(var(--event-darken));
+    backdrop-filter: blur(var(--event-blur)) brightness(var(--event-darken));
   }
   .event-label {
     color: #ffffff;
@@ -139,6 +140,13 @@
   </div>
   <button id="update-button">Update</button>
   <script>
+    const settings = window.VisualSettings;
+    const root = document.documentElement.style;
+    root.setProperty("--event-blur", settings.eventCard.blurPx + "px");
+    root.setProperty("--event-darken", settings.eventCard.darken);
+    root.setProperty("--event-bg-opacity", settings.eventCard.backgroundOpacity);
+    root.setProperty("--event-border-opacity", settings.eventCard.borderOpacity);
+
     function updateClock() {
       const now = new Date();
       const hours24 = now.getHours();
@@ -156,10 +164,10 @@
     updateClock();
     setInterval(updateClock, 1000);
 
-    const CYCLE_DURATION_MS = 30000;
     function updateBackground(timestamp) {
-      const hue = ((timestamp % CYCLE_DURATION_MS) / CYCLE_DURATION_MS) * 360;
-      document.body.style.backgroundColor = `hsl(${hue}, 35%, 25%)`;
+      const { cycleDurationMs, saturation, lightness } = settings.background;
+      const hue = ((timestamp % cycleDurationMs) / cycleDurationMs) * 360;
+      document.body.style.backgroundColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
       requestAnimationFrame(updateBackground);
     }
     requestAnimationFrame(updateBackground);
@@ -174,23 +182,19 @@
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
 
-    const CELL_SIZE = 50;
-    const SQUARE_SIZE = 45;
-    const GRID_SPEED_X = 6;
-    const GRID_SPEED_Y = 4;
-
     function updateSquares(timestamp) {
+      const { cellSize, squareSize, speedX, speedY, opacity } = settings.grid;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.fillStyle = "#ffffff";
-      ctx.globalAlpha = 0.12;
+      ctx.globalAlpha = opacity;
 
       const seconds = timestamp / 1000;
-      const offsetX = ((seconds * GRID_SPEED_X) % CELL_SIZE + CELL_SIZE) % CELL_SIZE;
-      const offsetY = ((seconds * GRID_SPEED_Y) % CELL_SIZE + CELL_SIZE) % CELL_SIZE;
+      const offsetX = ((seconds * speedX) % cellSize + cellSize) % cellSize;
+      const offsetY = ((seconds * speedY) % cellSize + cellSize) % cellSize;
 
-      for (let x = -CELL_SIZE + offsetX; x < canvas.width + CELL_SIZE; x += CELL_SIZE) {
-        for (let y = -CELL_SIZE + offsetY; y < canvas.height + CELL_SIZE; y += CELL_SIZE) {
-          ctx.fillRect(x, y, SQUARE_SIZE, SQUARE_SIZE);
+      for (let x = -cellSize + offsetX; x < canvas.width + cellSize; x += cellSize) {
+        for (let y = -cellSize + offsetY; y < canvas.height + cellSize; y += cellSize) {
+          ctx.fillRect(x, y, squareSize, squareSize);
         }
       }
 
