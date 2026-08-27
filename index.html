@@ -141,6 +141,11 @@
     flex: 1;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, var(--event-border-opacity));
+    background: rgba(255, 255, 255, var(--event-bg-opacity));
+    -webkit-backdrop-filter: blur(var(--event-blur)) brightness(var(--event-darken));
+    backdrop-filter: blur(var(--event-blur)) brightness(var(--event-darken));
   }
   .schedule-table {
     border-collapse: collapse;
@@ -162,8 +167,10 @@
   .schedule-table td:first-child {
     position: sticky;
     left: 0;
-    background: var(--page-bg);
     text-align: left;
+    background: rgba(255, 255, 255, var(--event-bg-opacity));
+    -webkit-backdrop-filter: blur(var(--event-blur)) brightness(var(--event-darken));
+    backdrop-filter: blur(var(--event-blur)) brightness(var(--event-darken));
   }
   .event-card {
     position: fixed;
@@ -280,9 +287,7 @@
 
     function setBackgroundForTab(tab) {
       const { hue, saturation, lightness } = settings.background[tab];
-      const color = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
-      document.body.style.backgroundColor = color;
-      root.setProperty("--page-bg", color);
+      document.body.style.backgroundColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
     }
 
     function updateClock() {
@@ -312,7 +317,11 @@
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
 
+    let squaresRunning = true;
+    let squaresFrameScheduled = false;
+
     function updateSquares(timestamp) {
+      squaresFrameScheduled = false;
       const { cellSize, squareSize, speedX, speedY, opacity } = settings.grid;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.fillStyle = "#ffffff";
@@ -328,9 +337,21 @@
         }
       }
 
-      requestAnimationFrame(updateSquares);
+      if (squaresRunning) {
+        squaresFrameScheduled = true;
+        requestAnimationFrame(updateSquares);
+      }
     }
-    requestAnimationFrame(updateSquares);
+
+    function setSquaresRunning(running) {
+      squaresRunning = running;
+      if (running && !squaresFrameScheduled) {
+        squaresFrameScheduled = true;
+        requestAnimationFrame(updateSquares);
+      }
+    }
+
+    setSquaresRunning(true);
 
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("sw.js").then((registration) => {
@@ -416,6 +437,7 @@
         page.classList.toggle("active", page.id === `page-${target}`);
       });
       setBackgroundForTab(target);
+      setSquaresRunning(target !== "train");
       try {
         localStorage.setItem(TAB_STORAGE_KEY, target);
       } catch (e) {}
