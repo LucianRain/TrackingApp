@@ -788,12 +788,34 @@
     const MAX_STARRED_TRAINS = 3;
     const STARRED_STORAGE_KEY = "starredTrains";
 
+    function emptyStarredState() {
+      return { northbound: [], southbound: [] };
+    }
+
+    function directionOfKey(key) {
+      return key.startsWith("northbound-") ? "northbound" : "southbound";
+    }
+
     function loadStarredTrains() {
+      const result = emptyStarredState();
       try {
         const stored = JSON.parse(localStorage.getItem(STARRED_STORAGE_KEY));
-        if (Array.isArray(stored)) return stored.filter((k) => typeof k === "string").slice(-MAX_STARRED_TRAINS);
+        if (Array.isArray(stored)) {
+          // Migrate from the old single-list format.
+          stored.forEach((key) => {
+            if (typeof key === "string") result[directionOfKey(key)].push(key);
+          });
+        } else if (stored && typeof stored === "object") {
+          ["northbound", "southbound"].forEach((dir) => {
+            if (Array.isArray(stored[dir])) {
+              result[dir] = stored[dir].filter((k) => typeof k === "string");
+            }
+          });
+        }
       } catch (e) {}
-      return [];
+      result.northbound = result.northbound.slice(-MAX_STARRED_TRAINS);
+      result.southbound = result.southbound.slice(-MAX_STARRED_TRAINS);
+      return result;
     }
 
     function saveStarredTrains() {
@@ -805,7 +827,7 @@
     let starredTrains = loadStarredTrains();
 
     function updateStarElement(key) {
-      const isStarred = starredTrains.includes(key);
+      const isStarred = starredTrains[directionOfKey(key)].includes(key);
       trainsRowEl.querySelectorAll(`.train-star[data-train-key="${key}"]`).forEach((el) => {
         el.classList.toggle("starred", isStarred);
         el.textContent = isStarred ? "★" : "☆";
@@ -813,13 +835,14 @@
     }
 
     function toggleStar(key) {
-      const idx = starredTrains.indexOf(key);
+      const list = starredTrains[directionOfKey(key)];
+      const idx = list.indexOf(key);
       let evictedKey = null;
       if (idx !== -1) {
-        starredTrains.splice(idx, 1);
+        list.splice(idx, 1);
       } else {
-        starredTrains.push(key);
-        if (starredTrains.length > MAX_STARRED_TRAINS) evictedKey = starredTrains.shift();
+        list.push(key);
+        if (list.length > MAX_STARRED_TRAINS) evictedKey = list.shift();
       }
       updateStarElement(key);
       if (evictedKey) updateStarElement(evictedKey);
@@ -868,13 +891,14 @@
     }
 
     function renderFavoritesPanel() {
-      const shouldShow = stopsHidden && starredTrains.length > 0;
+      const currentStars = starredTrains[currentDirection] || [];
+      const shouldShow = stopsHidden && currentStars.length > 0;
       favoritesPanelEl.classList.toggle("visible", shouldShow);
       if (!shouldShow) {
         favoritesPanelEl.innerHTML = "";
         return;
       }
-      favoritesPanelEl.innerHTML = starredTrains
+      favoritesPanelEl.innerHTML = currentStars
         .map((key) => getFavoriteTrainInfo(key))
         .filter(Boolean)
         .map(
@@ -990,7 +1014,7 @@
           const skipCount = stations.length - train.stops.length;
           const skipClass = skipCount >= 12 ? "skip-red" : skipCount >= 7 ? "skip-blue" : "";
           const trainKey = `${direction}-${train.train}`;
-          const isStarred = starredTrains.includes(trainKey);
+          const isStarred = starredTrains[direction].includes(trainKey);
           const starHtml = `<span class="train-star ${isStarred ? "starred" : ""}" data-train-key="${trainKey}">${isStarred ? "★" : "☆"}</span>`;
           const headerContent = skipClass
             ? `<div class="train-type-label">${train.type}</div><div class="train-number">${train.train}${starHtml}</div>`
