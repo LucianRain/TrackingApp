@@ -8,7 +8,13 @@
 <link rel="apple-touch-icon" href="icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#2b3a55">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
 <style>
+  :root {
+    --font-main: "PT Sans", sans-serif;
+  }
   html, body {
     margin: 0;
     height: 100%;
@@ -21,6 +27,7 @@
     justify-content: center;
     padding-top: 3rem;
     box-sizing: border-box;
+    font-family: var(--font-main);
   }
   #squares {
     position: fixed;
@@ -32,16 +39,15 @@
     z-index: 1;
     text-align: center;
     color: #ffffff;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   }
   #clock {
     font-size: 4rem;
-    font-weight: 300;
+    font-weight: 400;
     letter-spacing: 0.05em;
   }
   #date {
     font-size: 1.25rem;
-    font-weight: 300;
+    font-weight: 400;
     letter-spacing: 0.05em;
     margin-top: 0.5rem;
   }
@@ -55,7 +61,6 @@
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.1);
     color: #ffffff;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     font-size: 0.85rem;
     -webkit-tap-highlight-color: transparent;
   }
