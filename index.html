@@ -8,7 +8,6 @@
   html, body {
     margin: 0;
     height: 100%;
-    background-color: #2b3a55;
   }
   body {
     display: flex;
@@ -36,6 +35,14 @@
     }
     updateClock();
     setInterval(updateClock, 1000);
+
+    const CYCLE_DURATION_MS = 30000;
+    function updateBackground(timestamp) {
+      const hue = ((timestamp % CYCLE_DURATION_MS) / CYCLE_DURATION_MS) * 360;
+      document.body.style.backgroundColor = `hsl(${hue}, 35%, 25%)`;
+      requestAnimationFrame(updateBackground);
+    }
+    requestAnimationFrame(updateBackground);
   </script>
 </body>
 </html>
