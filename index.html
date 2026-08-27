@@ -226,6 +226,10 @@
   .train-card.departed .train-box {
     background: rgba(60, 60, 60, 0.65);
   }
+  .train-card.imminent .train-box {
+    border-color: #ff0000;
+    border-width: 2px;
+  }
   .train-status-label {
     text-align: center;
     font-size: 0.65rem;
@@ -585,16 +589,19 @@
       return entries;
     }
 
+    const IMMINENT_THRESHOLD_MINUTES = 20;
+
     function getStatusInfo(departureMinutes, nowMinutes) {
       if (departureMinutes <= nowMinutes) {
-        return { text: "Departed", departed: true };
+        return { text: "Departed", departed: true, imminent: false };
       }
       const minsAway = Math.max(1, Math.ceil(departureMinutes - nowMinutes));
+      const imminent = minsAway <= IMMINENT_THRESHOLD_MINUTES;
       if (minsAway > 120) {
         const hoursAway = Math.round(minsAway / 60);
-        return { text: `Departing in ${hoursAway}+ hours`, departed: false };
+        return { text: `Departing in ${hoursAway}+ hours`, departed: false, imminent: false };
       }
-      return { text: `Departing in ${minsAway} min`, departed: false };
+      return { text: `Departing in ${minsAway} min`, departed: false, imminent };
     }
 
     function updateStatusLabels() {
@@ -608,6 +615,7 @@
         const status = getStatusInfo(entry.adjustedDeparture, nowMinutes);
         labels[idx].textContent = status.text;
         cards[idx].classList.toggle("departed", status.departed);
+        cards[idx].classList.toggle("imminent", status.imminent);
       });
     }
 
@@ -632,7 +640,7 @@
 
           const status = getStatusInfo(adjustedDeparture, nowMinutes);
           const statusLabel = `<div class="train-status-label">${status.text}</div>`;
-          const departedClass = status.departed ? "departed" : "";
+          const stateClass = `${status.departed ? "departed" : ""} ${status.imminent ? "imminent" : ""}`.trim();
 
           if (stopsHidden) {
             const sjStop = train.stops.find((s) => s.station === "San Jose Diridon");
@@ -642,7 +650,7 @@
             const durationMinutes = Math.abs(
               timeToScheduleMinutes(sfStop.time) - timeToScheduleMinutes(sjStop.time)
             );
-            return `<div class="train-card split ${departedClass}">
+            return `<div class="train-card split ${stateClass}">
               <div class="train-box split-part split-header ${skipClass}">${statusLabel}<div class="train-card-header">${headerContent}</div></div>
               ${stopBox(sjStop)}
               <div class="split-connector"><div class="split-arrow"></div><div class="split-duration">${durationMinutes} min</div></div>
@@ -653,7 +661,7 @@
           const stopsHtml = train.stops
             .map((s) => `<div class="train-stop-row"><span>${stationLabel(s.station)}</span><span>${s.time}</span></div>`)
             .join("");
-          return `<div class="train-card ${departedClass}">
+          return `<div class="train-card ${stateClass}">
             <div class="train-box full ${skipClass}">
               ${statusLabel}
               <div class="train-card-header">${headerContent}</div>
