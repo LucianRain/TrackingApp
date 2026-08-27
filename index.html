@@ -104,6 +104,67 @@
   .page.active {
     display: block;
   }
+  #page-train.active {
+    position: fixed;
+    left: var(--sidebar-width);
+    top: 0;
+    width: calc(100% - var(--sidebar-width));
+    height: 100%;
+    box-sizing: border-box;
+    padding: 2.5rem 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+  }
+  .direction-toggle {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    flex-shrink: 0;
+  }
+  .dir-btn {
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    font-family: var(--font-main);
+    font-size: 0.85rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .dir-btn.active {
+    background: #ffffff;
+    color: #14213d;
+    border-color: #ffffff;
+  }
+  .schedule-scroll {
+    flex: 1;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .schedule-table {
+    border-collapse: collapse;
+    color: #ffffff;
+    font-family: var(--font-main);
+    font-size: 0.8rem;
+  }
+  .schedule-table th,
+  .schedule-table td {
+    padding: 0.35rem 0.6rem;
+    white-space: nowrap;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  .schedule-table thead th {
+    font-weight: 700;
+  }
+  .schedule-table th:first-child,
+  .schedule-table td:first-child {
+    position: sticky;
+    left: 0;
+    background: var(--page-bg);
+    text-align: left;
+  }
   .event-card {
     position: fixed;
     top: 50%;
@@ -198,7 +259,15 @@
       </div>
     </div>
   </div>
-  <div class="page" id="page-train"></div>
+  <div class="page" id="page-train">
+    <div class="direction-toggle">
+      <button class="dir-btn active" data-dir="northbound">Northbound</button>
+      <button class="dir-btn" data-dir="southbound">Southbound</button>
+    </div>
+    <div class="schedule-scroll">
+      <table class="schedule-table" id="schedule-table"></table>
+    </div>
+  </div>
   <button id="update-button">Update</button>
   <script>
     const settings = window.VisualSettings;
@@ -211,7 +280,9 @@
 
     function setBackgroundForTab(tab) {
       const { hue, saturation, lightness } = settings.background[tab];
-      document.body.style.backgroundColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+      const color = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+      document.body.style.backgroundColor = color;
+      root.setProperty("--page-bg", color);
     }
 
     function updateClock() {
@@ -284,6 +355,56 @@
     document.getElementById("event-minus").addEventListener("click", () => {
       eventCount -= 1;
       eventCountEl.textContent = eventCount;
+    });
+
+    const NORTHBOUND_STATIONS = [
+      "San Jose Diridon", "College Park", "Santa Clara", "Lawrence", "Sunnyvale",
+      "Mountain View", "San Antonio", "California Avenue", "Palo Alto", "Menlo Park",
+      "Redwood City", "San Carlos", "Belmont", "Hillsdale", "Hayward Park", "San Mateo",
+      "Burlingame", "Millbrae", "San Bruno", "S. San Francisco", "Bayshore",
+      "22nd Street", "San Francisco",
+    ];
+    const SOUTHBOUND_STATIONS = [...NORTHBOUND_STATIONS].reverse();
+
+    let trainSchedule = null;
+    const scheduleTableEl = document.getElementById("schedule-table");
+    const dirButtons = document.querySelectorAll(".dir-btn");
+
+    function renderSchedule(direction) {
+      if (!trainSchedule) return;
+      const trains = trainSchedule[direction];
+      const stations = direction === "northbound" ? NORTHBOUND_STATIONS : SOUTHBOUND_STATIONS;
+
+      let html = "<thead><tr><th></th>";
+      for (const train of trains) {
+        html += `<th>${train.train}</th>`;
+      }
+      html += "</tr></thead><tbody>";
+
+      for (const station of stations) {
+        html += `<tr><th scope="row">${station}</th>`;
+        for (const train of trains) {
+          const stop = train.stops.find((s) => s.station === station);
+          html += `<td>${stop ? stop.time : "–"}</td>`;
+        }
+        html += "</tr>";
+      }
+      html += "</tbody>";
+      scheduleTableEl.innerHTML = html;
+    }
+
+    fetch("trainSchedule.json")
+      .then((res) => res.json())
+      .then((data) => {
+        trainSchedule = data;
+        renderSchedule("northbound");
+      });
+
+    dirButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        dirButtons.forEach((b) => b.classList.toggle("active", b === button));
+        renderSchedule(button.dataset.dir);
+      });
     });
 
     const TAB_STORAGE_KEY = "activeTab";
