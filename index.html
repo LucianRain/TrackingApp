@@ -29,6 +29,47 @@
     padding-top: 3rem;
     box-sizing: border-box;
     font-family: var(--font-main);
+    transition: background-color 250ms ease;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+  @keyframes pageFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes cardIn {
+    from {
+      opacity: 0;
+      transform: translateY(8px) scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  @keyframes countPulse {
+    0% {
+      transform: scale(1);
+    }
+    40% {
+      transform: scale(1.3);
+    }
+    100% {
+      transform: scale(1);
+    }
   }
   #squares {
     position: fixed;
@@ -91,6 +132,10 @@
     letter-spacing: 0.08em;
     text-transform: uppercase;
     -webkit-tap-highlight-color: transparent;
+    transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease, transform 100ms ease;
+  }
+  .tab:active {
+    transform: scale(0.94);
   }
   .tab.active {
     background: #ffffff;
@@ -102,6 +147,7 @@
   }
   .page.active {
     display: block;
+    animation: pageFadeIn 220ms ease-out;
   }
   #page-train.active {
     position: fixed;
@@ -130,6 +176,10 @@
     font-family: var(--font-main);
     font-size: 0.85rem;
     -webkit-tap-highlight-color: transparent;
+    transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease, transform 100ms ease;
+  }
+  .dir-btn:active {
+    transform: scale(0.94);
   }
   .dir-btn.active {
     background: #ffffff;
@@ -167,6 +217,10 @@
     font-size: 0.85rem;
     -webkit-tap-highlight-color: transparent;
     flex-shrink: 0;
+    transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease, transform 100ms ease;
+  }
+  .lock-toggle:active {
+    transform: scale(0.94);
   }
   .lock-toggle.active {
     background: #ffffff;
@@ -189,6 +243,7 @@
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
+    animation: cardIn 220ms ease-out both;
   }
   .train-card.split {
     justify-content: flex-start;
@@ -211,6 +266,7 @@
     font-family: var(--font-main);
     padding: 0.5rem;
     box-sizing: border-box;
+    transition: background-color 200ms ease, border-color 200ms ease;
   }
   .train-box.full {
     flex: 1;
@@ -311,6 +367,7 @@
     background: rgba(255, 255, 255, 0.85);
     pointer-events: none;
     z-index: -1;
+    transition: left 400ms ease-out;
   }
   .event-card {
     position: fixed;
@@ -355,9 +412,11 @@
     justify-content: center;
     line-height: 1;
     -webkit-tap-highlight-color: transparent;
+    transition: background-color 150ms ease, transform 100ms ease;
   }
   .event-btn:active {
     background: rgba(255, 255, 255, 0.25);
+    transform: scale(0.88);
   }
   .event-count {
     color: #ffffff;
@@ -365,6 +424,10 @@
     min-width: 2.5rem;
     text-align: center;
     font-variant-numeric: tabular-nums;
+    display: inline-block;
+  }
+  .event-count.pulse {
+    animation: countPulse 220ms ease-out;
   }
   #update-button {
     position: fixed;
@@ -379,9 +442,11 @@
     font-family: var(--font-main);
     font-size: 0.85rem;
     -webkit-tap-highlight-color: transparent;
+    transition: background-color 150ms ease, transform 100ms ease;
   }
   #update-button:active {
     background: rgba(255, 255, 255, 0.25);
+    transform: scale(0.94);
   }
 </style>
 </head>
@@ -513,13 +578,20 @@
 
     let eventCount = 0;
     const eventCountEl = document.getElementById("event-count");
+    function pulseEventCount() {
+      eventCountEl.classList.remove("pulse");
+      void eventCountEl.offsetWidth;
+      eventCountEl.classList.add("pulse");
+    }
     document.getElementById("event-plus").addEventListener("click", () => {
       eventCount += 1;
       eventCountEl.textContent = eventCount;
+      pulseEventCount();
     });
     document.getElementById("event-minus").addEventListener("click", () => {
       eventCount -= 1;
       eventCountEl.textContent = eventCount;
+      pulseEventCount();
     });
 
     const NORTHBOUND_STATIONS = [
@@ -630,7 +702,7 @@
       const nowMinutes = getEffectiveMinutes();
 
       const html = entries
-        .map(({ train, adjustedDeparture }) => {
+        .map(({ train, adjustedDeparture }, i) => {
           const skipCount = stations.length - train.stops.length;
           const skipClass = skipCount >= 12 ? "skip-red" : skipCount >= 7 ? "skip-blue" : "";
           const headerContent = skipClass
@@ -640,6 +712,7 @@
           const status = getStatusInfo(adjustedDeparture, nowMinutes);
           const statusLabel = `<div class="train-status-label">${status.text}</div>`;
           const stateClass = `${status.departed ? "departed" : ""} ${status.imminent ? "imminent" : ""}`.trim();
+          const cardStyle = `style="animation-delay: ${i * 40}ms"`;
 
           if (stopsHidden) {
             const sjStop = train.stops.find((s) => s.station === "San Jose Diridon");
@@ -649,7 +722,7 @@
             const durationMinutes = Math.abs(
               timeToScheduleMinutes(sfStop.time) - timeToScheduleMinutes(sjStop.time)
             );
-            return `<div class="train-card split ${stateClass}">
+            return `<div class="train-card split ${stateClass}" ${cardStyle}>
               <div class="train-box split-part split-header ${skipClass}">${statusLabel}<div class="train-card-header">${headerContent}</div></div>
               ${stopBox(sjStop)}
               <div class="split-connector"><div class="split-arrow"></div><div class="split-duration">${durationMinutes} min</div></div>
@@ -660,7 +733,7 @@
           const stopsHtml = train.stops
             .map((s) => `<div class="train-stop-row"><span>${stationLabel(s.station)}</span><span>${s.time}</span></div>`)
             .join("");
-          return `<div class="train-card ${stateClass}">
+          return `<div class="train-card ${stateClass}" ${cardStyle}>
             <div class="train-box full ${skipClass}">
               ${statusLabel}
               <div class="train-card-header">${headerContent}</div>
