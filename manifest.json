@@ -1,0 +1,15 @@
+{
+  "name": "Tracking App",
+  "short_name": "Tracker",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#2b3a55",
+  "theme_color": "#2b3a55",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}
