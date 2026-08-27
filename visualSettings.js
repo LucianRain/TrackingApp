@@ -43,7 +43,7 @@ window.VisualSettings = {
 
     // Opacity of the squares (0 = invisible, 1 = solid white).
     // Suggested range: 0.05 (subtle) to 0.3 (bold — may hurt clock readability above 0.2).
-    opacity: 0.12,
+    opacity: 0.01,
   },
 
   eventCard: {
