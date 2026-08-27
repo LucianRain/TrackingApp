@@ -270,9 +270,9 @@
   .split-arrow {
     position: absolute;
     left: 50%;
-    top: 0;
-    bottom: 14px;
-    width: 4px;
+    top: 15px;
+    bottom: 39px;
+    width: 12px;
     transform: translateX(-50%);
     background: rgba(255, 255, 255, 0.7);
   }
@@ -280,13 +280,25 @@
     content: "";
     position: absolute;
     left: 50%;
-    bottom: -14px;
+    bottom: -24px;
     transform: translateX(-50%);
     width: 0;
     height: 0;
-    border-left: 9px solid transparent;
-    border-right: 9px solid transparent;
-    border-top: 14px solid rgba(255, 255, 255, 0.7);
+    border-left: 18px solid transparent;
+    border-right: 18px solid transparent;
+    border-top: 24px solid rgba(255, 255, 255, 0.7);
+  }
+  .split-duration {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffffff;
+    font-family: var(--font-main);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+    white-space: nowrap;
   }
   .now-line {
     position: absolute;
@@ -623,10 +635,13 @@
             const sfStop = train.stops.find((s) => s.station === "San Francisco");
             const stopBox = (stop) =>
               `<div class="train-box split-part ${skipClass}"><div class="train-stop-row"><span>${stop.station}</span><span>${stop.time}</span></div></div>`;
+            const durationMinutes = Math.abs(
+              timeToScheduleMinutes(sfStop.time) - timeToScheduleMinutes(sjStop.time)
+            );
             return `<div class="train-card split ${departedClass}">
               <div class="train-box split-part split-header ${skipClass}">${statusLabel}<div class="train-card-header">${headerContent}</div></div>
               ${stopBox(sjStop)}
-              <div class="split-connector"><div class="split-arrow"></div></div>
+              <div class="split-connector"><div class="split-arrow"></div><div class="split-duration">${durationMinutes} min</div></div>
               ${stopBox(sfStop)}
             </div>`;
           }
