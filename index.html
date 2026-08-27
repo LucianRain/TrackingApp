@@ -138,6 +138,7 @@
     border-color: #ffffff;
   }
   .schedule-scroll {
+    position: relative;
     flex: 1;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
@@ -162,6 +163,15 @@
   }
   .schedule-table thead th {
     font-weight: 700;
+  }
+  .now-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.85);
+    pointer-events: none;
+    z-index: 3;
   }
   .schedule-table th:first-child,
   .schedule-table td:first-child {
@@ -273,6 +283,7 @@
     </div>
     <div class="schedule-scroll">
       <table class="schedule-table" id="schedule-table"></table>
+      <div class="now-line" id="now-line"></div>
     </div>
   </div>
   <button id="update-button">Update</button>
@@ -388,11 +399,14 @@
     const SOUTHBOUND_STATIONS = [...NORTHBOUND_STATIONS].reverse();
 
     let trainSchedule = null;
+    let currentDirection = "northbound";
     const scheduleTableEl = document.getElementById("schedule-table");
+    const nowLineEl = document.getElementById("now-line");
     const dirButtons = document.querySelectorAll(".dir-btn");
 
     function renderSchedule(direction) {
       if (!trainSchedule) return;
+      currentDirection = direction;
       const trains = trainSchedule[direction];
       const stations = direction === "northbound" ? NORTHBOUND_STATIONS : SOUTHBOUND_STATIONS;
 
@@ -412,7 +426,48 @@
       }
       html += "</tbody>";
       scheduleTableEl.innerHTML = html;
+      updateNowLine();
     }
+
+    function timeToScheduleMinutes(timeStr) {
+      const period = timeStr.slice(-1);
+      let [h, m] = timeStr.slice(0, -1).split(":").map(Number);
+      if (period === "a" && h === 12) h = 0;
+      if (period === "p" && h !== 12) h += 12;
+      let minutes = h * 60 + m;
+      if (h < 4) minutes += 24 * 60;
+      return minutes;
+    }
+
+    function updateNowLine() {
+      if (!trainSchedule) return;
+      const trains = trainSchedule[currentDirection];
+      const headerCells = Array.from(scheduleTableEl.querySelectorAll("thead th")).slice(1);
+      if (!trains.length || headerCells.length !== trains.length) return;
+
+      const now = new Date();
+      let nowMinutes = now.getHours() * 60 + now.getMinutes() + now.getSeconds() / 60;
+      if (now.getHours() < 4) nowMinutes += 24 * 60;
+
+      const departures = trains.map((t) => timeToScheduleMinutes(t.stops[0].time));
+      const centers = headerCells.map((cell) => cell.offsetLeft + cell.offsetWidth / 2);
+
+      let lineX;
+      if (nowMinutes <= departures[0]) {
+        lineX = centers[0];
+      } else if (nowMinutes >= departures[departures.length - 1]) {
+        lineX = centers[centers.length - 1];
+      } else {
+        let i = 0;
+        while (i < departures.length - 1 && departures[i + 1] <= nowMinutes) i++;
+        const frac = (nowMinutes - departures[i]) / (departures[i + 1] - departures[i]);
+        lineX = centers[i] + (centers[i + 1] - centers[i]) * frac;
+      }
+      nowLineEl.style.left = `${lineX}px`;
+    }
+
+    setInterval(updateNowLine, 1000);
+    window.addEventListener("resize", updateNowLine);
 
     fetch("trainSchedule.json")
       .then((res) => res.json())
@@ -438,6 +493,7 @@
       });
       setBackgroundForTab(target);
       setSquaresRunning(target !== "train");
+      if (target === "train") updateNowLine();
       try {
         localStorage.setItem(TAB_STORAGE_KEY, target);
       } catch (e) {}
