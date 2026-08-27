@@ -786,7 +786,23 @@
     });
 
     const MAX_STARRED_TRAINS = 3;
-    let starredTrains = [];
+    const STARRED_STORAGE_KEY = "starredTrains";
+
+    function loadStarredTrains() {
+      try {
+        const stored = JSON.parse(localStorage.getItem(STARRED_STORAGE_KEY));
+        if (Array.isArray(stored)) return stored.filter((k) => typeof k === "string").slice(-MAX_STARRED_TRAINS);
+      } catch (e) {}
+      return [];
+    }
+
+    function saveStarredTrains() {
+      try {
+        localStorage.setItem(STARRED_STORAGE_KEY, JSON.stringify(starredTrains));
+      } catch (e) {}
+    }
+
+    let starredTrains = loadStarredTrains();
 
     function updateStarElement(key) {
       const isStarred = starredTrains.includes(key);
@@ -807,6 +823,7 @@
       }
       updateStarElement(key);
       if (evictedKey) updateStarElement(evictedKey);
+      saveStarredTrains();
       renderFavoritesPanel();
     }
 
