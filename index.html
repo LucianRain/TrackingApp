@@ -189,6 +189,12 @@
     min-width: 0;
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
+  }
+  .train-card.split {
+    justify-content: space-between;
+  }
+  .train-box {
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, var(--event-border-opacity));
     background: rgba(255, 255, 255, var(--event-bg-opacity));
@@ -198,12 +204,15 @@
     font-family: var(--font-main);
     padding: 0.6rem;
     box-sizing: border-box;
+  }
+  .train-box.full {
+    flex: 1;
     overflow-y: auto;
   }
-  .train-card.skip-red {
+  .train-box.skip-red {
     background: rgba(220, 50, 50, 0.55);
   }
-  .train-card.skip-blue {
+  .train-box.skip-blue {
     background: rgba(50, 110, 220, 0.55);
   }
   .train-card-header {
@@ -212,6 +221,9 @@
     border-radius: 12px;
     margin-bottom: 0.5rem;
     flex-shrink: 0;
+  }
+  .train-box.split-part .train-card-header {
+    margin-bottom: 0;
   }
   .train-type-label {
     font-size: 0.65rem;
@@ -231,6 +243,9 @@
     padding: 0.25rem 0.3rem;
     font-size: 0.75rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  .train-stop-row:last-child {
+    border-bottom: none;
   }
   .now-line {
     position: absolute;
@@ -468,7 +483,6 @@
     nowLineEl.className = "now-line";
     const dirButtons = document.querySelectorAll(".dir-btn");
 
-    const INTERMEDIATE_STATIONS = NORTHBOUND_STATIONS.slice(1, -1);
     let stopsHidden = false;
     const stopToggleEl = document.getElementById("stop-toggle");
 
@@ -476,14 +490,8 @@
       stopsHidden = !stopsHidden;
       stopToggleEl.classList.toggle("active", stopsHidden);
       stopToggleEl.textContent = stopsHidden ? "Show Stops" : "Hide Stops";
-      applyStopFilter();
+      renderSchedule(currentDirection);
     });
-
-    function applyStopFilter() {
-      trainsRowEl.querySelectorAll(".train-stop-row").forEach((row) => {
-        row.style.display = stopsHidden && INTERMEDIATE_STATIONS.includes(row.dataset.station) ? "none" : "";
-      });
-    }
 
     function renderSchedule(direction) {
       if (!trainSchedule) return;
@@ -498,15 +506,27 @@
           const headerContent = skipClass
             ? `<div class="train-type-label">${train.type}</div><div class="train-number">${train.train}</div>`
             : `<div class="train-number">${train.train}</div>`;
+
+          if (stopsHidden) {
+            const sjStop = train.stops.find((s) => s.station === "San Jose Diridon");
+            const sfStop = train.stops.find((s) => s.station === "San Francisco");
+            const stopBox = (stop) =>
+              `<div class="train-box split-part ${skipClass}"><div class="train-stop-row"><span>${stop.station}</span><span>${stop.time}</span></div></div>`;
+            return `<div class="train-card split" data-col="${i}">
+              <div class="train-box split-part ${skipClass}"><div class="train-card-header">${headerContent}</div></div>
+              ${stopBox(sjStop)}
+              ${stopBox(sfStop)}
+            </div>`;
+          }
+
           const stopsHtml = train.stops
-            .map(
-              (s) =>
-                `<div class="train-stop-row" data-station="${s.station}"><span>${s.station}</span><span>${s.time}</span></div>`
-            )
+            .map((s) => `<div class="train-stop-row"><span>${s.station}</span><span>${s.time}</span></div>`)
             .join("");
-          return `<div class="train-card ${skipClass}" data-col="${i}">
-            <div class="train-card-header">${headerContent}</div>
-            ${stopsHtml}
+          return `<div class="train-card" data-col="${i}">
+            <div class="train-box full ${skipClass}">
+              <div class="train-card-header">${headerContent}</div>
+              ${stopsHtml}
+            </div>
           </div>`;
         })
         .join("");
