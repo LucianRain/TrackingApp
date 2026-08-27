@@ -213,7 +213,6 @@
       const { hue, saturation, lightness } = settings.background[tab];
       document.body.style.backgroundColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
     }
-    setBackgroundForTab("events");
 
     function updateClock() {
       const now = new Date();
@@ -287,17 +286,32 @@
       eventCountEl.textContent = eventCount;
     });
 
+    const TAB_STORAGE_KEY = "activeTab";
     const tabButtons = document.querySelectorAll(".tab");
-    tabButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        const target = button.dataset.tab;
-        tabButtons.forEach((b) => b.classList.toggle("active", b === button));
-        document.querySelectorAll(".page").forEach((page) => {
-          page.classList.toggle("active", page.id === `page-${target}`);
-        });
-        setBackgroundForTab(target);
+
+    function selectTab(target) {
+      tabButtons.forEach((b) => b.classList.toggle("active", b.dataset.tab === target));
+      document.querySelectorAll(".page").forEach((page) => {
+        page.classList.toggle("active", page.id === `page-${target}`);
       });
+      setBackgroundForTab(target);
+      try {
+        localStorage.setItem(TAB_STORAGE_KEY, target);
+      } catch (e) {}
+    }
+
+    tabButtons.forEach((button) => {
+      button.addEventListener("click", () => selectTab(button.dataset.tab));
     });
+
+    let initialTab = "events";
+    try {
+      const stored = localStorage.getItem(TAB_STORAGE_KEY);
+      if (stored && document.getElementById(`page-${stored}`)) {
+        initialTab = stored;
+      }
+    } catch (e) {}
+    selectTab(initialTab);
 
     document.getElementById("update-button").addEventListener("click", async () => {
       if ("serviceWorker" in navigator) {
