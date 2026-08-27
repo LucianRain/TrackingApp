@@ -1033,11 +1033,13 @@
             const durationMinutes = Math.abs(
               timeToScheduleMinutes(sfStop.time) - timeToScheduleMinutes(sjStop.time)
             );
+            const topStop = direction === "southbound" ? sfStop : sjStop;
+            const bottomStop = direction === "southbound" ? sjStop : sfStop;
             return `<div class="train-card split ${stateClass}" ${cardStyle}>
               <div class="train-box split-part split-header ${skipClass}">${statusLabel}<div class="train-card-header">${headerContent}</div></div>
-              ${stopBox(sjStop)}
+              ${stopBox(topStop)}
               <div class="split-connector"><div class="split-arrow"></div><div class="split-duration">${durationMinutes} min</div></div>
-              ${stopBox(sfStop)}
+              ${stopBox(bottomStop)}
             </div>`;
           }
 
