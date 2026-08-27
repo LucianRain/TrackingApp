@@ -411,22 +411,23 @@
       const stations = direction === "northbound" ? NORTHBOUND_STATIONS : SOUTHBOUND_STATIONS;
 
       let html = "<thead><tr><th></th>";
-      for (const train of trains) {
-        html += `<th>${train.train}</th>`;
-      }
+      trains.forEach((train, i) => {
+        html += `<th data-col="${i}">${train.train}</th>`;
+      });
       html += "</tr></thead><tbody>";
 
       for (const station of stations) {
         html += `<tr><th scope="row">${station}</th>`;
-        for (const train of trains) {
+        trains.forEach((train, i) => {
           const stop = train.stops.find((s) => s.station === station);
-          html += `<td>${stop ? stop.time : "–"}</td>`;
-        }
+          html += `<td data-col="${i}">${stop ? stop.time : "–"}</td>`;
+        });
         html += "</tr>";
       }
       html += "</tbody>";
       scheduleTableEl.innerHTML = html;
       updateNowLine();
+      applyDepartedClipping();
     }
 
     function timeToScheduleMinutes(timeStr) {
@@ -439,16 +440,20 @@
       return minutes;
     }
 
+    function getNowMinutes() {
+      const now = new Date();
+      let nowMinutes = now.getHours() * 60 + now.getMinutes() + now.getSeconds() / 60;
+      if (now.getHours() < 4) nowMinutes += 24 * 60;
+      return nowMinutes;
+    }
+
     function updateNowLine() {
       if (!trainSchedule) return;
       const trains = trainSchedule[currentDirection];
       const headerCells = Array.from(scheduleTableEl.querySelectorAll("thead th")).slice(1);
       if (!trains.length || headerCells.length !== trains.length) return;
 
-      const now = new Date();
-      let nowMinutes = now.getHours() * 60 + now.getMinutes() + now.getSeconds() / 60;
-      if (now.getHours() < 4) nowMinutes += 24 * 60;
-
+      const nowMinutes = getNowMinutes();
       const departures = trains.map((t) => timeToScheduleMinutes(t.stops[0].time));
       const centers = headerCells.map((cell) => cell.offsetLeft + cell.offsetWidth / 2);
 
@@ -466,7 +471,30 @@
       nowLineEl.style.left = `${lineX}px`;
     }
 
-    setInterval(updateNowLine, 1000);
+    function applyDepartedClipping() {
+      if (!trainSchedule) return;
+      const trains = trainSchedule[currentDirection];
+      if (!trains.length) return;
+
+      const nowMinutes = getNowMinutes();
+      const departures = trains.map((t) => timeToScheduleMinutes(t.stops[0].time));
+
+      let cutoffIndex = -1;
+      for (let i = 0; i < departures.length; i++) {
+        if (departures[i] <= nowMinutes) cutoffIndex = i;
+        else break;
+      }
+      const visibleFrom = Math.max(cutoffIndex, 0);
+
+      scheduleTableEl.querySelectorAll("[data-col]").forEach((cell) => {
+        cell.style.display = Number(cell.dataset.col) < visibleFrom ? "none" : "";
+      });
+    }
+
+    setInterval(() => {
+      updateNowLine();
+      applyDepartedClipping();
+    }, 1000);
     window.addEventListener("resize", updateNowLine);
 
     fetch("trainSchedule.json")
@@ -493,7 +521,10 @@
       });
       setBackgroundForTab(target);
       setSquaresRunning(target !== "train");
-      if (target === "train") updateNowLine();
+      if (target === "train") {
+        updateNowLine();
+        applyDepartedClipping();
+      }
       try {
         localStorage.setItem(TAB_STORAGE_KEY, target);
       } catch (e) {}
