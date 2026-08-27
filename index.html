@@ -201,7 +201,7 @@
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    margin-bottom: 0.75rem;
+    margin-top: 0.75rem;
     flex-shrink: 0;
   }
   #time-slider {
@@ -493,12 +493,12 @@
       <button class="dir-btn" data-dir="southbound">Southbound</button>
       <button id="stop-toggle" class="lock-toggle active">Show Stops</button>
     </div>
+    <div class="trains-row" id="trains-row"></div>
     <div class="time-control">
-      <input type="range" id="time-slider" min="240" max="1560" step="15" />
+      <input type="range" id="time-slider" min="330" max="1440" step="10" />
       <span id="time-slider-label"></span>
       <button id="lock-toggle" class="lock-toggle active">Live</button>
     </div>
-    <div class="trains-row" id="trains-row"></div>
   </div>
   <button id="update-button">Update</button>
   <script>
@@ -855,6 +855,10 @@
       }
     }
 
+    const SLIDER_MIN_MINUTES = 330;
+    const SLIDER_MAX_MINUTES = 1440;
+    const SLIDER_STEP_MINUTES = 10;
+
     function setLive(live) {
       isLive = live;
       lockToggle.classList.toggle("active", live);
@@ -864,7 +868,8 @@
       if (live) {
         previewMinutes = getRealNowMinutes();
       } else {
-        previewMinutes = Math.round(getRealNowMinutes() / 15) * 15;
+        const rounded = Math.round(getRealNowMinutes() / SLIDER_STEP_MINUTES) * SLIDER_STEP_MINUTES;
+        previewMinutes = Math.min(SLIDER_MAX_MINUTES, Math.max(SLIDER_MIN_MINUTES, rounded));
       }
       tick();
     }
