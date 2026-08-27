@@ -51,6 +51,58 @@
     letter-spacing: 0.05em;
     margin-top: 0.5rem;
   }
+  .event-card {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    min-width: 220px;
+    padding: 1rem 1.25rem 1.25rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.08);
+    box-sizing: border-box;
+  }
+  .event-label {
+    color: #ffffff;
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.75;
+    margin-bottom: 1rem;
+  }
+  .event-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+  .event-btn {
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-family: var(--font-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .event-btn:active {
+    background: rgba(255, 255, 255, 0.25);
+  }
+  .event-count {
+    color: #ffffff;
+    font-size: 2rem;
+    min-width: 2.5rem;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
   #update-button {
     position: fixed;
     bottom: 1.25rem;
@@ -74,6 +126,14 @@
   <div id="container">
     <div id="clock"></div>
     <div id="date"></div>
+  </div>
+  <div class="event-card">
+    <div class="event-label">Event</div>
+    <div class="event-controls">
+      <button class="event-btn" id="event-minus">−</button>
+      <span class="event-count" id="event-count">0</span>
+      <button class="event-btn" id="event-plus">+</button>
+    </div>
   </div>
   <button id="update-button">Update</button>
   <script>
@@ -149,6 +209,17 @@
         location.reload();
       });
     }
+
+    let eventCount = 0;
+    const eventCountEl = document.getElementById("event-count");
+    document.getElementById("event-plus").addEventListener("click", () => {
+      eventCount += 1;
+      eventCountEl.textContent = eventCount;
+    });
+    document.getElementById("event-minus").addEventListener("click", () => {
+      eventCount -= 1;
+      eventCountEl.textContent = eventCount;
+    });
 
     document.getElementById("update-button").addEventListener("click", async () => {
       if ("serviceWorker" in navigator) {
