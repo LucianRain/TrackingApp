@@ -302,6 +302,54 @@
     overflow: hidden;
     min-height: 0;
   }
+  .favorites-panel {
+    display: none;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    max-width: 320px;
+    margin: 0.75rem auto 0;
+    flex-shrink: 0;
+  }
+  .favorites-panel.visible {
+    display: flex;
+  }
+  .favorite-row {
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, var(--event-border-opacity));
+    background: rgba(255, 255, 255, var(--event-bg-opacity));
+    -webkit-backdrop-filter: blur(var(--event-blur)) brightness(var(--event-darken));
+    backdrop-filter: blur(var(--event-blur)) brightness(var(--event-darken));
+    color: #ffffff;
+    font-family: var(--font-main);
+    padding: 0.5rem 0.75rem;
+    box-sizing: border-box;
+  }
+  .favorite-row-header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 0.3rem;
+  }
+  .favorite-train-number {
+    font-weight: 700;
+    font-size: 1rem;
+  }
+  .favorite-direction {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.75;
+  }
+  .favorite-detail {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    padding: 0.1rem 0;
+  }
+  .favorite-detail span:first-child {
+    opacity: 0.7;
+  }
   .train-card {
     position: relative;
     z-index: 1;
@@ -569,6 +617,7 @@
       <button id="stop-toggle" class="lock-toggle active">Show Stops</button>
     </div>
     <div class="trains-row" id="trains-row"></div>
+    <div class="favorites-panel" id="favorites-panel"></div>
     <div class="time-shift-row">
       <button id="time-back-btn" class="time-shift-btn time-shift-left" aria-label="Rewind 30 minutes"></button>
       <button id="time-forward-btn" class="time-shift-btn time-shift-right" aria-label="Advance 30 minutes"></button>
@@ -703,6 +752,7 @@
     let trainSchedule = null;
     let currentDirection = "northbound";
     const trainsRowEl = document.getElementById("trains-row");
+    const favoritesPanelEl = document.getElementById("favorites-panel");
     const nowLineEl = document.createElement("div");
     nowLineEl.id = "now-line";
     nowLineEl.className = "now-line";
@@ -740,6 +790,63 @@
       }
       updateStarElement(key);
       if (evictedKey) updateStarElement(evictedKey);
+      renderFavoritesPanel();
+    }
+
+    function getFavoriteTrainInfo(key) {
+      const sep = key.indexOf("-");
+      const direction = key.slice(0, sep);
+      const trainNum = key.slice(sep + 1);
+      const trains = trainSchedule && trainSchedule[direction];
+      const train = trains && trains.find((t) => t.train === trainNum);
+      if (!train) return null;
+
+      const leaveStop = train.stops[0];
+      const arriveStop = train.stops[train.stops.length - 1];
+      const leaveMinutes = timeToScheduleMinutes(leaveStop.time);
+      const arriveMinutes = timeToScheduleMinutes(arriveStop.time);
+      const duration = Math.abs(arriveMinutes - leaveMinutes);
+
+      const nowReal = getRealNowMinutes();
+      let minsAway = leaveMinutes - nowReal;
+      while (minsAway <= 0) minsAway += 24 * 60;
+      minsAway = Math.ceil(minsAway);
+
+      return {
+        direction,
+        trainNum,
+        leaveLabel: minutesToLabel(leaveMinutes),
+        arriveLabel: minutesToLabel(arriveMinutes),
+        duration,
+        departsInText: formatMinutesAway(minsAway),
+      };
+    }
+
+    function renderFavoritesPanel() {
+      const shouldShow = stopsHidden && starredTrains.length > 0;
+      favoritesPanelEl.classList.toggle("visible", shouldShow);
+      if (!shouldShow) {
+        favoritesPanelEl.innerHTML = "";
+        return;
+      }
+      favoritesPanelEl.innerHTML = starredTrains
+        .map((key) => getFavoriteTrainInfo(key))
+        .filter(Boolean)
+        .map(
+          (info) => `
+            <div class="favorite-row">
+              <div class="favorite-row-header">
+                <span class="favorite-train-number">${info.trainNum}</span>
+                <span class="favorite-direction">${info.direction === "northbound" ? "Northbound" : "Southbound"}</span>
+              </div>
+              <div class="favorite-detail"><span>Leaves</span><span>${info.leaveLabel}</span></div>
+              <div class="favorite-detail"><span>Arrives</span><span>${info.arriveLabel}</span></div>
+              <div class="favorite-detail"><span>Duration</span><span>${info.duration} min</span></div>
+              <div class="favorite-detail"><span>Departs in</span><span>${info.departsInText}</span></div>
+            </div>
+          `
+        )
+        .join("");
     }
 
     trainsRowEl.addEventListener("click", (e) => {
@@ -790,17 +897,21 @@
 
     const IMMINENT_THRESHOLD_MINUTES = 20;
 
+    function formatMinutesAway(minsAway) {
+      if (minsAway > 120) {
+        const hoursAway = Math.round(minsAway / 60);
+        return `${hoursAway}+ hours`;
+      }
+      return `${minsAway} min`;
+    }
+
     function getStatusInfo(departureMinutes, nowMinutes) {
       if (departureMinutes <= nowMinutes) {
         return { text: "Departed", departed: true, imminent: false };
       }
       const minsAway = Math.max(1, Math.ceil(departureMinutes - nowMinutes));
       const imminent = minsAway <= IMMINENT_THRESHOLD_MINUTES;
-      if (minsAway > 120) {
-        const hoursAway = Math.round(minsAway / 60);
-        return { text: `Departing in ${hoursAway}+ hours`, departed: false, imminent: false };
-      }
-      return { text: `Departing in ${minsAway} min`, departed: false, imminent };
+      return { text: `Departing in ${formatMinutesAway(minsAway)}`, departed: false, imminent };
     }
 
     function updateStatusLabels() {
@@ -878,6 +989,7 @@
       trainsRowEl.appendChild(nowLineEl);
       updateSliderDisplay();
       updateNowLine();
+      renderFavoritesPanel();
     }
 
     const STATION_ABBREVIATIONS = {
@@ -1035,6 +1147,7 @@
 
     setInterval(() => {
       if (isLive) tick();
+      renderFavoritesPanel();
     }, 1000);
     window.addEventListener("resize", updateNowLine);
 
