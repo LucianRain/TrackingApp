@@ -38,15 +38,15 @@ window.VisualSettings = {
   eventCard: {
     // Blur radius (px) applied to whatever passes behind the card.
     // Suggested range: 0 (no blur) to 24 (very blurred).
-    blurPx: 12,
+    blurPx: 5,
 
     // Brightness multiplier applied behind the card (1 = unchanged, 0 = black).
     // Suggested range: 0.3 (very dark) to 1 (no darkening).
-    darken: 0.6,
+    darken: 0.9,
 
     // Card background tint opacity, layered on top of the blur.
     // Suggested range: 0.03 (barely visible) to 0.2 (solid-ish card).
-    backgroundOpacity: 0.08,
+    backgroundOpacity: 0.02,
 
     // Card border opacity.
     // Suggested range: 0.1 (subtle) to 0.5 (strong outline).
