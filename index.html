@@ -475,11 +475,14 @@
     font-family: var(--font-main);
     font-size: 0.85rem;
     -webkit-tap-highlight-color: transparent;
-    transition: background-color 150ms ease, transform 100ms ease;
+    transition: background-color 150ms ease, transform 100ms ease, bottom 200ms ease;
   }
   #update-button:active {
     background: rgba(255, 255, 255, 0.25);
     transform: scale(0.94);
+  }
+  #page-train.active ~ #update-button {
+    bottom: calc(var(--tab-bar-height) + 1.25rem + 3rem);
   }
 </style>
 </head>
