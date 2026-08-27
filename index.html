@@ -174,40 +174,54 @@
     color: #14213d;
     border-color: #ffffff;
   }
-  .schedule-scroll {
+  .trains-row {
     position: relative;
     flex: 1;
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-evenly;
+    gap: 0.75rem;
+    overflow: hidden;
+    min-height: 0;
+  }
+  .train-card {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, var(--event-border-opacity));
     background: rgba(255, 255, 255, var(--event-bg-opacity));
     -webkit-backdrop-filter: blur(var(--event-blur)) brightness(var(--event-darken));
     backdrop-filter: blur(var(--event-blur)) brightness(var(--event-darken));
-  }
-  .schedule-table {
-    border-collapse: collapse;
     color: #ffffff;
     font-family: var(--font-main);
-    font-size: 0.8rem;
+    padding: 0.6rem;
+    box-sizing: border-box;
+    overflow-y: auto;
   }
-  .schedule-table th,
-  .schedule-table td {
-    padding: 0.35rem 0.6rem;
-    white-space: nowrap;
+  .train-card-header {
     text-align: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  }
-  .schedule-table thead th {
+    font-size: 1.1rem;
     font-weight: 700;
+    padding: 0.4rem;
+    border-radius: 12px;
+    margin-bottom: 0.5rem;
+    flex-shrink: 0;
   }
-  .schedule-table th.skip-red,
-  .schedule-table td.skip-red {
+  .train-card-header.skip-red {
     background: rgba(220, 50, 50, 0.55);
   }
-  .schedule-table th.skip-blue,
-  .schedule-table td.skip-blue {
+  .train-card-header.skip-blue {
     background: rgba(50, 110, 220, 0.55);
+  }
+  .train-stop-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.25rem 0.3rem;
+    font-size: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   }
   .now-line {
     position: absolute;
@@ -217,15 +231,6 @@
     background: rgba(255, 255, 255, 0.85);
     pointer-events: none;
     z-index: 3;
-  }
-  .schedule-table th:first-child,
-  .schedule-table td:first-child {
-    position: sticky;
-    left: 0;
-    text-align: left;
-    background: rgba(255, 255, 255, var(--event-bg-opacity));
-    -webkit-backdrop-filter: blur(var(--event-blur)) brightness(var(--event-darken));
-    backdrop-filter: blur(var(--event-blur)) brightness(var(--event-darken));
   }
   .event-card {
     position: fixed;
@@ -332,10 +337,7 @@
       <span id="time-slider-label"></span>
       <button id="lock-toggle" class="lock-toggle active">Live</button>
     </div>
-    <div class="schedule-scroll">
-      <table class="schedule-table" id="schedule-table"></table>
-      <div class="now-line" id="now-line"></div>
-    </div>
+    <div class="trains-row" id="trains-row"></div>
   </div>
   <button id="update-button">Update</button>
   <script>
@@ -451,8 +453,10 @@
 
     let trainSchedule = null;
     let currentDirection = "northbound";
-    const scheduleTableEl = document.getElementById("schedule-table");
-    const nowLineEl = document.getElementById("now-line");
+    const trainsRowEl = document.getElementById("trains-row");
+    const nowLineEl = document.createElement("div");
+    nowLineEl.id = "now-line";
+    nowLineEl.className = "now-line";
     const dirButtons = document.querySelectorAll(".dir-btn");
 
     const INTERMEDIATE_STATIONS = NORTHBOUND_STATIONS.slice(1, -1);
@@ -467,7 +471,7 @@
     });
 
     function applyStopFilter() {
-      scheduleTableEl.querySelectorAll("tr[data-station]").forEach((row) => {
+      trainsRowEl.querySelectorAll(".train-stop-row").forEach((row) => {
         row.style.display = stopsHidden && INTERMEDIATE_STATIONS.includes(row.dataset.station) ? "none" : "";
       });
     }
@@ -478,29 +482,25 @@
       const trains = trainSchedule[direction];
       const stations = direction === "northbound" ? NORTHBOUND_STATIONS : SOUTHBOUND_STATIONS;
 
-      const skipClasses = trains.map((train) => {
-        const skipCount = stations.length - train.stops.length;
-        if (skipCount >= 12) return "skip-red";
-        if (skipCount >= 7) return "skip-blue";
-        return "";
-      });
+      const html = trains
+        .map((train, i) => {
+          const skipCount = stations.length - train.stops.length;
+          const skipClass = skipCount >= 12 ? "skip-red" : skipCount >= 7 ? "skip-blue" : "";
+          const stopsHtml = train.stops
+            .map(
+              (s) =>
+                `<div class="train-stop-row" data-station="${s.station}"><span>${s.station}</span><span>${s.time}</span></div>`
+            )
+            .join("");
+          return `<div class="train-card" data-col="${i}">
+            <div class="train-card-header ${skipClass}">${train.train}</div>
+            ${stopsHtml}
+          </div>`;
+        })
+        .join("");
 
-      let html = "<thead><tr><th></th>";
-      trains.forEach((train, i) => {
-        html += `<th data-col="${i}" class="${skipClasses[i]}">${train.train}</th>`;
-      });
-      html += "</tr></thead><tbody>";
-
-      for (const station of stations) {
-        html += `<tr data-station="${station}"><th scope="row">${station}</th>`;
-        trains.forEach((train, i) => {
-          const stop = train.stops.find((s) => s.station === station);
-          html += `<td data-col="${i}" class="${skipClasses[i]}">${stop ? stop.time : "–"}</td>`;
-        });
-        html += "</tr>";
-      }
-      html += "</tbody>";
-      scheduleTableEl.innerHTML = html;
+      trainsRowEl.innerHTML = html;
+      trainsRowEl.appendChild(nowLineEl);
       applyStopFilter();
       refreshSchedule();
     }
@@ -580,12 +580,12 @@
     function updateNowLine() {
       if (!trainSchedule) return;
       const trains = trainSchedule[currentDirection];
-      const headerCells = Array.from(scheduleTableEl.querySelectorAll("thead th")).slice(1);
-      if (!trains.length || headerCells.length !== trains.length) return;
+      const cards = Array.from(trainsRowEl.querySelectorAll(".train-card"));
+      if (!trains.length || cards.length !== trains.length) return;
 
       const nowMinutes = getEffectiveMinutes();
       const departures = trains.map((t) => timeToScheduleMinutes(t.stops[0].time));
-      const centers = headerCells.map((cell) => cell.offsetLeft + cell.offsetWidth / 2);
+      const centers = cards.map((card) => card.offsetLeft + card.offsetWidth / 2);
 
       let lineX;
       if (nowMinutes <= departures[0]) {
@@ -617,9 +617,9 @@
       const visibleFrom = Math.max(cutoffIndex, 0);
       const visibleTo = visibleFrom + UPCOMING_TRAIN_COUNT;
 
-      scheduleTableEl.querySelectorAll("[data-col]").forEach((cell) => {
-        const col = Number(cell.dataset.col);
-        cell.style.display = col < visibleFrom || col > visibleTo ? "none" : "";
+      trainsRowEl.querySelectorAll(".train-card[data-col]").forEach((card) => {
+        const col = Number(card.dataset.col);
+        card.style.display = col < visibleFrom || col > visibleTo ? "none" : "";
       });
     }
 
