@@ -74,9 +74,11 @@
   <script>
     function updateClock() {
       const now = new Date();
-      const hours = String(now.getHours()).padStart(2, "0");
+      const hours24 = now.getHours();
+      const period = hours24 >= 12 ? "PM" : "AM";
+      const hours = String(hours24 % 12 || 12).padStart(2, "0");
       const minutes = String(now.getMinutes()).padStart(2, "0");
-      document.getElementById("clock").textContent = `${hours}:${minutes}`;
+      document.getElementById("clock").textContent = `${hours}:${minutes} ${period}`;
       document.getElementById("date").textContent = now.toLocaleDateString(undefined, {
         weekday: "long",
         year: "numeric",
