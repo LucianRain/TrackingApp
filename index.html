@@ -610,6 +610,26 @@
     justify-content: space-between;
     gap: 1.5rem;
   }
+  .worktime-row.hidden {
+    display: none;
+  }
+  .worktime-btn {
+    margin-top: 0.35rem;
+    align-self: center;
+    padding: 0.4rem 1.1rem;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    font-family: var(--font-main);
+    font-size: 0.8rem;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color 150ms ease, transform 100ms ease;
+  }
+  .worktime-btn:active {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(0.94);
+  }
   .worktime-key {
     color: #ffffff;
     font-size: 0.85rem;
@@ -681,14 +701,15 @@
             <span class="worktime-key">Clock in</span>
             <input type="time" id="clockin-input" class="worktime-input" step="60" />
           </div>
-          <div class="worktime-row">
+          <div class="worktime-row" id="time-at-work-row">
             <span class="worktime-key">Time at work</span>
             <span class="worktime-value" id="time-at-work">—</span>
           </div>
-          <div class="worktime-row">
+          <div class="worktime-row" id="clockout-row">
             <span class="worktime-key">Clock out</span>
             <span class="worktime-value" id="clockout-time">—</span>
           </div>
+          <button id="clockout-btn" class="worktime-btn">Clock out</button>
         </div>
       </div>
     </div>
@@ -825,8 +846,16 @@
 
     const CLOCKIN_STORAGE_KEY = "worktime-clockin";
     const clockinInput = document.getElementById("clockin-input");
+    const timeAtWorkRowEl = document.getElementById("time-at-work-row");
+    const clockoutRowEl = document.getElementById("clockout-row");
     const timeAtWorkEl = document.getElementById("time-at-work");
     const clockoutTimeEl = document.getElementById("clockout-time");
+    const clockoutBtnEl = document.getElementById("clockout-btn");
+
+    function todayStr() {
+      const now = new Date();
+      return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+    }
 
     function formatClockTime(date) {
       const hours24 = date.getHours();
@@ -836,28 +865,49 @@
       return `${hours}:${minutes} ${period}`;
     }
 
-    const storedClockIn = localStorage.getItem(CLOCKIN_STORAGE_KEY);
-    if (storedClockIn && /^\d{2}:\d{2}$/.test(storedClockIn)) {
-      clockinInput.value = storedClockIn;
-    } else {
-      const now = new Date();
-      clockinInput.value = `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
-      localStorage.setItem(CLOCKIN_STORAGE_KEY, clockinInput.value);
+    let clockInDateStr = null;
+    const storedRaw = localStorage.getItem(CLOCKIN_STORAGE_KEY);
+    if (storedRaw) {
+      try {
+        const stored = JSON.parse(storedRaw);
+        if (stored && /^\d{2}:\d{2}$/.test(stored.value) && stored.date === todayStr()) {
+          clockinInput.value = stored.value;
+          clockInDateStr = stored.date;
+        } else {
+          localStorage.removeItem(CLOCKIN_STORAGE_KEY);
+        }
+      } catch (e) {
+        localStorage.removeItem(CLOCKIN_STORAGE_KEY);
+      }
+    }
+
+    function resetClockIn() {
+      clockinInput.value = "";
+      clockInDateStr = null;
+      localStorage.removeItem(CLOCKIN_STORAGE_KEY);
+      updateWorktime();
     }
 
     function updateWorktime() {
-      const match = /^(\d{2}):(\d{2})$/.exec(clockinInput.value);
-      if (!match) {
-        timeAtWorkEl.textContent = "—";
-        clockoutTimeEl.textContent = "—";
+      if (clockInDateStr && clockInDateStr !== todayStr()) {
+        resetClockIn();
         return;
       }
+
+      const match = /^(\d{2}):(\d{2})$/.exec(clockinInput.value);
+      if (!match) {
+        timeAtWorkRowEl.classList.add("hidden");
+        clockoutRowEl.classList.add("hidden");
+        return;
+      }
+      timeAtWorkRowEl.classList.remove("hidden");
+      clockoutRowEl.classList.remove("hidden");
+
       const clockIn = new Date();
       clockIn.setHours(Number(match[1]), Number(match[2]), 0, 0);
 
       const now = new Date();
-      let diffMinutes = Math.floor((now - clockIn) / 60000);
-      if (diffMinutes < 0) diffMinutes += 24 * 60;
+      const diffMinutes = Math.max(0, Math.floor((now - clockIn) / 60000));
       const diffHours = Math.floor(diffMinutes / 60);
       const remainderMinutes = diffMinutes % 60;
       timeAtWorkEl.textContent = `${diffHours}h ${remainderMinutes}m`;
@@ -868,9 +918,17 @@
 
     clockinInput.addEventListener("change", () => {
       if (/^\d{2}:\d{2}$/.test(clockinInput.value)) {
-        localStorage.setItem(CLOCKIN_STORAGE_KEY, clockinInput.value);
+        clockInDateStr = todayStr();
+        localStorage.setItem(CLOCKIN_STORAGE_KEY, JSON.stringify({ value: clockinInput.value, date: clockInDateStr }));
+      } else {
+        clockInDateStr = null;
+        localStorage.removeItem(CLOCKIN_STORAGE_KEY);
       }
       updateWorktime();
+    });
+
+    clockoutBtnEl.addEventListener("click", () => {
+      resetClockIn();
     });
 
     updateWorktime();
