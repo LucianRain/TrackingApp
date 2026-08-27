@@ -506,10 +506,14 @@
       renderSchedule(currentDirection);
     });
 
-    let lastVisibleFrom = 0;
-    let lastVisibleTo = 0;
+    let lastVisibleEntries = [];
+    let lastVisibleSignature = "";
 
-    function getVisibleRange(trains) {
+    function entrySignature(entries) {
+      return entries.map((e) => (e.wrapped ? "w" : "") + e.index).join(",");
+    }
+
+    function getVisibleEntries(trains) {
       const nowMinutes = getEffectiveMinutes();
       const departures = trains.map((t) => timeToScheduleMinutes(t.stops[0].time));
       let cutoffIndex = -1;
@@ -517,9 +521,28 @@
         if (departures[i] <= nowMinutes) cutoffIndex = i;
         else break;
       }
-      const visibleFrom = Math.max(cutoffIndex, 0);
-      const visibleTo = Math.min(visibleFrom + UPCOMING_TRAIN_COUNT, trains.length - 1);
-      return { visibleFrom, visibleTo };
+
+      const entries = [];
+      if (cutoffIndex >= 0) {
+        entries.push({
+          index: cutoffIndex,
+          train: trains[cutoffIndex],
+          wrapped: false,
+          adjustedDeparture: departures[cutoffIndex],
+        });
+      }
+      for (let k = 1; k <= UPCOMING_TRAIN_COUNT; k++) {
+        const rawIndex = cutoffIndex + k;
+        const wrapped = rawIndex >= trains.length;
+        const index = ((rawIndex % trains.length) + trains.length) % trains.length;
+        entries.push({
+          index,
+          train: trains[index],
+          wrapped,
+          adjustedDeparture: departures[index] + (wrapped ? 24 * 60 : 0),
+        });
+      }
+      return entries;
     }
 
     function getStatusInfo(departureMinutes, nowMinutes) {
@@ -531,16 +554,14 @@
     }
 
     function updateStatusLabels() {
-      if (!trainSchedule) return;
-      const trains = trainSchedule[currentDirection];
-      const visibleTrains = trains.slice(lastVisibleFrom, lastVisibleTo + 1);
+      if (!trainSchedule || !lastVisibleEntries.length) return;
       const cards = Array.from(trainsRowEl.querySelectorAll(".train-card"));
       const labels = Array.from(trainsRowEl.querySelectorAll(".train-status-label"));
-      if (!visibleTrains.length || cards.length !== visibleTrains.length || labels.length !== visibleTrains.length) return;
+      if (cards.length !== lastVisibleEntries.length || labels.length !== lastVisibleEntries.length) return;
 
       const nowMinutes = getEffectiveMinutes();
-      visibleTrains.forEach((train, idx) => {
-        const status = getStatusInfo(timeToScheduleMinutes(train.stops[0].time), nowMinutes);
+      lastVisibleEntries.forEach((entry, idx) => {
+        const status = getStatusInfo(entry.adjustedDeparture, nowMinutes);
         labels[idx].textContent = status.text;
         cards[idx].classList.toggle("departed", status.departed);
       });
@@ -552,21 +573,20 @@
       const trains = trainSchedule[direction];
       const stations = direction === "northbound" ? NORTHBOUND_STATIONS : SOUTHBOUND_STATIONS;
 
-      const { visibleFrom, visibleTo } = getVisibleRange(trains);
-      lastVisibleFrom = visibleFrom;
-      lastVisibleTo = visibleTo;
-      const visibleTrains = trains.slice(visibleFrom, visibleTo + 1);
+      const entries = getVisibleEntries(trains);
+      lastVisibleEntries = entries;
+      lastVisibleSignature = entrySignature(entries);
       const nowMinutes = getEffectiveMinutes();
 
-      const html = visibleTrains
-        .map((train) => {
+      const html = entries
+        .map(({ train, adjustedDeparture }) => {
           const skipCount = stations.length - train.stops.length;
           const skipClass = skipCount >= 12 ? "skip-red" : skipCount >= 7 ? "skip-blue" : "";
           const headerContent = skipClass
             ? `<div class="train-type-label">${train.type}</div><div class="train-number">${train.train}</div>`
             : `<div class="train-number">${train.train}</div>`;
 
-          const status = getStatusInfo(timeToScheduleMinutes(train.stops[0].time), nowMinutes);
+          const status = getStatusInfo(adjustedDeparture, nowMinutes);
           const statusLabel = `<div class="train-status-label">${status.text}</div>`;
           const departedClass = status.departed ? "departed" : "";
 
@@ -646,14 +666,12 @@
     }
 
     function updateNowLine() {
-      if (!trainSchedule) return;
-      const trains = trainSchedule[currentDirection];
-      const visibleTrains = trains.slice(lastVisibleFrom, lastVisibleTo + 1);
+      if (!trainSchedule || !lastVisibleEntries.length) return;
       const cards = Array.from(trainsRowEl.querySelectorAll(".train-card"));
-      if (!visibleTrains.length || cards.length !== visibleTrains.length) return;
+      if (cards.length !== lastVisibleEntries.length) return;
 
       const nowMinutes = getEffectiveMinutes();
-      const departures = visibleTrains.map((t) => timeToScheduleMinutes(t.stops[0].time));
+      const departures = lastVisibleEntries.map((e) => e.adjustedDeparture);
       const centers = cards.map((card) => card.offsetLeft + card.offsetWidth / 2);
 
       let lineX;
@@ -675,8 +693,8 @@
       if (!trainSchedule) return;
       const trains = trainSchedule[currentDirection];
       if (!trains.length) return;
-      const { visibleFrom, visibleTo } = getVisibleRange(trains);
-      if (visibleFrom !== lastVisibleFrom || visibleTo !== lastVisibleTo) {
+      const entries = getVisibleEntries(trains);
+      if (entrySignature(entries) !== lastVisibleSignature) {
         renderSchedule(currentDirection);
       } else {
         updateNowLine();
