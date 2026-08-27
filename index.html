@@ -638,7 +638,7 @@
             const sjStop = train.stops.find((s) => s.station === "San Jose Diridon");
             const sfStop = train.stops.find((s) => s.station === "San Francisco");
             const stopBox = (stop) =>
-              `<div class="train-box split-part ${skipClass}"><div class="train-stop-row"><span>${stop.station}</span><span>${stop.time}</span></div></div>`;
+              `<div class="train-box split-part ${skipClass}"><div class="train-stop-row"><span>${stationLabel(stop.station)}</span><span>${stop.time}</span></div></div>`;
             const durationMinutes = Math.abs(
               timeToScheduleMinutes(sfStop.time) - timeToScheduleMinutes(sjStop.time)
             );
@@ -651,7 +651,7 @@
           }
 
           const stopsHtml = train.stops
-            .map((s) => `<div class="train-stop-row"><span>${s.station}</span><span>${s.time}</span></div>`)
+            .map((s) => `<div class="train-stop-row"><span>${stationLabel(s.station)}</span><span>${s.time}</span></div>`)
             .join("");
           return `<div class="train-card ${departedClass}">
             <div class="train-box full ${skipClass}">
@@ -667,6 +667,15 @@
       trainsRowEl.appendChild(nowLineEl);
       updateSliderDisplay();
       updateNowLine();
+    }
+
+    const STATION_ABBREVIATIONS = {
+      "San Jose Diridon": "Diridon",
+      "San Francisco": "SF",
+    };
+
+    function stationLabel(station) {
+      return STATION_ABBREVIATIONS[station] || station;
     }
 
     function timeToScheduleMinutes(timeStr) {
