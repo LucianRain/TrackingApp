@@ -137,6 +137,40 @@
     color: #14213d;
     border-color: #ffffff;
   }
+  .time-control {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    flex-shrink: 0;
+  }
+  #time-slider {
+    flex: 1;
+    min-width: 0;
+  }
+  #time-slider-label {
+    color: #ffffff;
+    font-family: var(--font-main);
+    font-size: 0.85rem;
+    min-width: 4.5rem;
+    text-align: right;
+  }
+  .lock-toggle {
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    font-family: var(--font-main);
+    font-size: 0.85rem;
+    -webkit-tap-highlight-color: transparent;
+    flex-shrink: 0;
+  }
+  .lock-toggle.active {
+    background: #ffffff;
+    color: #14213d;
+    border-color: #ffffff;
+  }
   .schedule-scroll {
     position: relative;
     flex: 1;
@@ -280,6 +314,11 @@
     <div class="direction-toggle">
       <button class="dir-btn active" data-dir="northbound">Northbound</button>
       <button class="dir-btn" data-dir="southbound">Southbound</button>
+    </div>
+    <div class="time-control">
+      <input type="range" id="time-slider" min="240" max="1560" step="1" />
+      <span id="time-slider-label"></span>
+      <button id="lock-toggle" class="lock-toggle active">Live</button>
     </div>
     <div class="schedule-scroll">
       <table class="schedule-table" id="schedule-table"></table>
@@ -426,8 +465,7 @@
       }
       html += "</tbody>";
       scheduleTableEl.innerHTML = html;
-      updateNowLine();
-      applyDepartedClipping();
+      refreshSchedule();
     }
 
     function timeToScheduleMinutes(timeStr) {
@@ -440,12 +478,62 @@
       return minutes;
     }
 
-    function getNowMinutes() {
+    function getRealNowMinutes() {
       const now = new Date();
       let nowMinutes = now.getHours() * 60 + now.getMinutes() + now.getSeconds() / 60;
       if (now.getHours() < 4) nowMinutes += 24 * 60;
       return nowMinutes;
     }
+
+    const UPCOMING_TRAIN_COUNT = 3;
+    let isLive = true;
+    let previewMinutes = getRealNowMinutes();
+    const timeSlider = document.getElementById("time-slider");
+    const timeSliderLabel = document.getElementById("time-slider-label");
+    const lockToggle = document.getElementById("lock-toggle");
+
+    function getEffectiveMinutes() {
+      return isLive ? getRealNowMinutes() : previewMinutes;
+    }
+
+    function minutesToLabel(mins) {
+      const m = ((mins % 1440) + 1440) % 1440;
+      const h = Math.floor(m / 60);
+      const mm = Math.floor(m % 60);
+      const period = h >= 12 ? "PM" : "AM";
+      let h12 = h % 12;
+      if (h12 === 0) h12 = 12;
+      return `${h12}:${String(mm).padStart(2, "0")} ${period}`;
+    }
+
+    function updateSliderDisplay() {
+      const mins = getEffectiveMinutes();
+      timeSlider.value = mins;
+      timeSliderLabel.textContent = minutesToLabel(mins);
+    }
+
+    function refreshSchedule() {
+      updateSliderDisplay();
+      updateNowLine();
+      applyDepartedClipping();
+    }
+
+    function setLive(live) {
+      isLive = live;
+      lockToggle.classList.toggle("active", live);
+      lockToggle.textContent = live ? "Live" : "Preview";
+      timeSlider.disabled = live;
+      if (live) previewMinutes = getRealNowMinutes();
+      refreshSchedule();
+    }
+
+    lockToggle.addEventListener("click", () => setLive(!isLive));
+    timeSlider.addEventListener("input", () => {
+      if (isLive) return;
+      previewMinutes = Number(timeSlider.value);
+      refreshSchedule();
+    });
+    setLive(true);
 
     function updateNowLine() {
       if (!trainSchedule) return;
@@ -453,7 +541,7 @@
       const headerCells = Array.from(scheduleTableEl.querySelectorAll("thead th")).slice(1);
       if (!trains.length || headerCells.length !== trains.length) return;
 
-      const nowMinutes = getNowMinutes();
+      const nowMinutes = getEffectiveMinutes();
       const departures = trains.map((t) => timeToScheduleMinutes(t.stops[0].time));
       const centers = headerCells.map((cell) => cell.offsetLeft + cell.offsetWidth / 2);
 
@@ -476,7 +564,7 @@
       const trains = trainSchedule[currentDirection];
       if (!trains.length) return;
 
-      const nowMinutes = getNowMinutes();
+      const nowMinutes = getEffectiveMinutes();
       const departures = trains.map((t) => timeToScheduleMinutes(t.stops[0].time));
 
       let cutoffIndex = -1;
@@ -485,15 +573,16 @@
         else break;
       }
       const visibleFrom = Math.max(cutoffIndex, 0);
+      const visibleTo = visibleFrom + UPCOMING_TRAIN_COUNT;
 
       scheduleTableEl.querySelectorAll("[data-col]").forEach((cell) => {
-        cell.style.display = Number(cell.dataset.col) < visibleFrom ? "none" : "";
+        const col = Number(cell.dataset.col);
+        cell.style.display = col < visibleFrom || col > visibleTo ? "none" : "";
       });
     }
 
     setInterval(() => {
-      updateNowLine();
-      applyDepartedClipping();
+      if (isLive) refreshSchedule();
     }, 1000);
     window.addEventListener("resize", updateNowLine);
 
@@ -521,10 +610,7 @@
       });
       setBackgroundForTab(target);
       setSquaresRunning(target !== "train");
-      if (target === "train") {
-        updateNowLine();
-        applyDepartedClipping();
-      }
+      if (target === "train") refreshSchedule();
       try {
         localStorage.setItem(TAB_STORAGE_KEY, target);
       } catch (e) {}
