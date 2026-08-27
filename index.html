@@ -407,7 +407,7 @@
     <div class="direction-toggle">
       <button class="dir-btn active" data-dir="northbound">Northbound</button>
       <button class="dir-btn" data-dir="southbound">Southbound</button>
-      <button id="stop-toggle" class="lock-toggle">Hide Stops</button>
+      <button id="stop-toggle" class="lock-toggle active">Show Stops</button>
     </div>
     <div class="time-control">
       <input type="range" id="time-slider" min="240" max="1560" step="15" />
@@ -536,7 +536,7 @@
     nowLineEl.className = "now-line";
     const dirButtons = document.querySelectorAll(".dir-btn");
 
-    let stopsHidden = false;
+    let stopsHidden = true;
     const stopToggleEl = document.getElementById("stop-toggle");
 
     stopToggleEl.addEventListener("click", () => {
