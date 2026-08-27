@@ -203,7 +203,7 @@
     backdrop-filter: blur(var(--event-blur)) brightness(var(--event-darken));
     color: #ffffff;
     font-family: var(--font-main);
-    padding: 0.6rem;
+    padding: 0.5rem;
     box-sizing: border-box;
   }
   .train-box.full {
@@ -216,11 +216,23 @@
   .train-box.skip-blue {
     background: rgba(50, 110, 220, 0.55);
   }
+  .train-card.departed .train-box {
+    background: rgba(140, 140, 140, 0.55);
+  }
+  .train-status-label {
+    text-align: center;
+    font-size: 0.65rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.85;
+    margin-bottom: 0.2rem;
+  }
   .train-card-header {
     text-align: center;
-    padding: 0.4rem;
+    padding: 0.3rem;
     border-radius: 12px;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.3rem;
     flex-shrink: 0;
   }
   .train-box.split-part .train-card-header {
@@ -241,7 +253,7 @@
     display: flex;
     justify-content: space-between;
     gap: 0.5rem;
-    padding: 0.25rem 0.3rem;
+    padding: 0.15rem 0.3rem;
     font-size: 0.75rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   }
@@ -510,6 +522,30 @@
       return { visibleFrom, visibleTo };
     }
 
+    function getStatusInfo(departureMinutes, nowMinutes) {
+      if (departureMinutes <= nowMinutes) {
+        return { text: "Departed", departed: true };
+      }
+      const minsAway = Math.max(1, Math.ceil(departureMinutes - nowMinutes));
+      return { text: `Departing in ${minsAway} min`, departed: false };
+    }
+
+    function updateStatusLabels() {
+      if (!trainSchedule) return;
+      const trains = trainSchedule[currentDirection];
+      const visibleTrains = trains.slice(lastVisibleFrom, lastVisibleTo + 1);
+      const cards = Array.from(trainsRowEl.querySelectorAll(".train-card"));
+      const labels = Array.from(trainsRowEl.querySelectorAll(".train-status-label"));
+      if (!visibleTrains.length || cards.length !== visibleTrains.length || labels.length !== visibleTrains.length) return;
+
+      const nowMinutes = getEffectiveMinutes();
+      visibleTrains.forEach((train, idx) => {
+        const status = getStatusInfo(timeToScheduleMinutes(train.stops[0].time), nowMinutes);
+        labels[idx].textContent = status.text;
+        cards[idx].classList.toggle("departed", status.departed);
+      });
+    }
+
     function renderSchedule(direction) {
       if (!trainSchedule) return;
       currentDirection = direction;
@@ -520,6 +556,7 @@
       lastVisibleFrom = visibleFrom;
       lastVisibleTo = visibleTo;
       const visibleTrains = trains.slice(visibleFrom, visibleTo + 1);
+      const nowMinutes = getEffectiveMinutes();
 
       const html = visibleTrains
         .map((train) => {
@@ -529,13 +566,17 @@
             ? `<div class="train-type-label">${train.type}</div><div class="train-number">${train.train}</div>`
             : `<div class="train-number">${train.train}</div>`;
 
+          const status = getStatusInfo(timeToScheduleMinutes(train.stops[0].time), nowMinutes);
+          const statusLabel = `<div class="train-status-label">${status.text}</div>`;
+          const departedClass = status.departed ? "departed" : "";
+
           if (stopsHidden) {
             const sjStop = train.stops.find((s) => s.station === "San Jose Diridon");
             const sfStop = train.stops.find((s) => s.station === "San Francisco");
             const stopBox = (stop) =>
               `<div class="train-box split-part ${skipClass}"><div class="train-stop-row"><span>${stop.station}</span><span>${stop.time}</span></div></div>`;
-            return `<div class="train-card split">
-              <div class="train-box split-part ${skipClass}"><div class="train-card-header">${headerContent}</div></div>
+            return `<div class="train-card split ${departedClass}">
+              <div class="train-box split-part ${skipClass}">${statusLabel}<div class="train-card-header">${headerContent}</div></div>
               ${stopBox(sjStop)}
               ${stopBox(sfStop)}
             </div>`;
@@ -544,8 +585,9 @@
           const stopsHtml = train.stops
             .map((s) => `<div class="train-stop-row"><span>${s.station}</span><span>${s.time}</span></div>`)
             .join("");
-          return `<div class="train-card">
+          return `<div class="train-card ${departedClass}">
             <div class="train-box full ${skipClass}">
+              ${statusLabel}
               <div class="train-card-header">${headerContent}</div>
               ${stopsHtml}
             </div>
@@ -638,6 +680,7 @@
         renderSchedule(currentDirection);
       } else {
         updateNowLine();
+        updateStatusLabels();
       }
     }
 
