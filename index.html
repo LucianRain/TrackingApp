@@ -193,7 +193,14 @@
   }
   .train-card.split {
     justify-content: flex-start;
-    gap: 100px;
+  }
+  .train-box.split-header {
+    margin-bottom: 100px;
+  }
+  .split-connector {
+    position: relative;
+    height: 100px;
+    flex-shrink: 0;
   }
   .train-box {
     border-radius: 20px;
@@ -232,7 +239,7 @@
     text-align: center;
     padding: 0.3rem;
     border-radius: 12px;
-    margin-bottom: 0.3rem;
+    margin-bottom: 15px;
     flex-shrink: 0;
   }
   .train-box.split-part .train-card-header {
@@ -259,6 +266,27 @@
   }
   .train-stop-row:last-child {
     border-bottom: none;
+  }
+  .split-arrow {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 14px;
+    width: 4px;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.7);
+  }
+  .split-arrow::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -14px;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-top: 14px solid rgba(255, 255, 255, 0.7);
   }
   .now-line {
     position: absolute;
@@ -596,8 +624,9 @@
             const stopBox = (stop) =>
               `<div class="train-box split-part ${skipClass}"><div class="train-stop-row"><span>${stop.station}</span><span>${stop.time}</span></div></div>`;
             return `<div class="train-card split ${departedClass}">
-              <div class="train-box split-part ${skipClass}">${statusLabel}<div class="train-card-header">${headerContent}</div></div>
+              <div class="train-box split-part split-header ${skipClass}">${statusLabel}<div class="train-card-header">${headerContent}</div></div>
               ${stopBox(sjStop)}
+              <div class="split-connector"><div class="split-arrow"></div></div>
               ${stopBox(sfStop)}
             </div>`;
           }
