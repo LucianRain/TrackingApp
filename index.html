@@ -842,9 +842,19 @@
       const duration = Math.abs(arriveMinutes - leaveMinutes);
 
       const nowReal = getRealNowMinutes();
-      let minsAway = leaveMinutes - nowReal;
-      while (minsAway <= 0) minsAway += 24 * 60;
-      minsAway = Math.ceil(minsAway);
+      let statusLabel;
+      let minsRemaining;
+      if (nowReal < leaveMinutes) {
+        statusLabel = "Departs in";
+        minsRemaining = leaveMinutes - nowReal;
+      } else if (nowReal < arriveMinutes) {
+        statusLabel = "Arrives in";
+        minsRemaining = arriveMinutes - nowReal;
+      } else {
+        statusLabel = "Departs in";
+        minsRemaining = leaveMinutes + 24 * 60 - nowReal;
+      }
+      minsRemaining = Math.max(1, Math.ceil(minsRemaining));
 
       return {
         direction,
@@ -852,7 +862,8 @@
         leaveLabel: minutesToLabel(leaveMinutes),
         arriveLabel: minutesToLabel(arriveMinutes),
         duration,
-        departsInText: formatMinutesAway(minsAway),
+        statusLabel,
+        statusValue: formatMinutesAway(minsRemaining),
       };
     }
 
@@ -876,7 +887,7 @@
               <div class="favorite-detail"><span>Leaves</span><span>${info.leaveLabel}</span></div>
               <div class="favorite-detail"><span>Arrives</span><span>${info.arriveLabel}</span></div>
               <div class="favorite-detail"><span>Duration</span><span>${info.duration} min</span></div>
-              <div class="favorite-detail"><span>Departs in</span><span>${info.departsInText}</span></div>
+              <div class="favorite-detail"><span>${info.statusLabel}</span><span>${info.statusValue}</span></div>
             </div>
           `
         )
