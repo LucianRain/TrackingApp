@@ -274,7 +274,7 @@
     bottom: 39px;
     width: 12px;
     transform: translateX(-50%);
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.18);
   }
   .split-arrow::after {
     content: "";
@@ -286,7 +286,7 @@
     height: 0;
     border-left: 18px solid transparent;
     border-right: 18px solid transparent;
-    border-top: 24px solid rgba(255, 255, 255, 0.7);
+    border-top: 24px solid rgba(255, 255, 255, 0.18);
   }
   .split-duration {
     position: absolute;
@@ -590,6 +590,10 @@
         return { text: "Departed", departed: true };
       }
       const minsAway = Math.max(1, Math.ceil(departureMinutes - nowMinutes));
+      if (minsAway > 120) {
+        const hoursAway = Math.round(minsAway / 60);
+        return { text: `Departing in ${hoursAway}+ hours`, departed: false };
+      }
       return { text: `Departing in ${minsAway} min`, departed: false };
     }
 
