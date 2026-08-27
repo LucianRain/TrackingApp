@@ -32,18 +32,18 @@
   }
   #squares {
     position: fixed;
-    left: var(--sidebar-width);
+    left: 0;
     top: 0;
-    width: calc(100% - var(--sidebar-width));
-    height: 100%;
+    width: 100%;
+    height: calc(100% - var(--tab-bar-height));
     z-index: 0;
   }
   #divider {
     position: fixed;
-    left: var(--sidebar-width);
-    top: 0;
-    bottom: 0;
-    width: 1px;
+    left: 0;
+    right: 0;
+    bottom: var(--tab-bar-height);
+    height: 1px;
     background: rgba(255, 255, 255, 0.25);
     z-index: 2;
   }
@@ -67,24 +67,23 @@
   #tabs {
     position: fixed;
     left: 0;
-    top: 50%;
-    transform: translateY(-50%);
+    right: 0;
+    bottom: 0;
     z-index: 2;
-    width: var(--sidebar-width);
+    height: var(--tab-bar-height);
+    box-sizing: border-box;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: center;
     gap: 0.5rem;
   }
   .tab {
-    width: 100%;
     box-sizing: border-box;
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-    padding: 0.9rem 0.5rem;
+    padding: 0 1.5rem;
     border: 1px solid rgba(255, 255, 255, 0.35);
-    border-left: none;
-    border-radius: 0 14px 14px 0;
+    border-bottom: none;
+    border-radius: 14px 14px 0 0;
     background: rgba(0, 0, 0, 0.35);
     color: #ffffff;
     font-family: var(--font-main);
@@ -106,10 +105,10 @@
   }
   #page-train.active {
     position: fixed;
-    left: var(--sidebar-width);
+    left: 0;
     top: 0;
-    width: calc(100% - var(--sidebar-width));
-    height: 100%;
+    width: 100%;
+    height: calc(100% - var(--tab-bar-height));
     box-sizing: border-box;
     padding: 2.5rem 1rem 1rem;
     display: flex;
@@ -369,7 +368,7 @@
   }
   #update-button {
     position: fixed;
-    bottom: 1.25rem;
+    bottom: calc(var(--tab-bar-height) + 1.25rem);
     right: 1.25rem;
     z-index: 2;
     padding: 0.6rem 1rem;
@@ -428,7 +427,7 @@
     root.setProperty("--event-darken", settings.eventCard.darken);
     root.setProperty("--event-bg-opacity", settings.eventCard.backgroundOpacity);
     root.setProperty("--event-border-opacity", settings.eventCard.borderOpacity);
-    root.setProperty("--sidebar-width", settings.layout.sidebarWidth + "px");
+    root.setProperty("--tab-bar-height", settings.layout.tabBarHeight + "px");
 
     function setBackgroundForTab(tab) {
       const { hue, saturation, lightness } = settings.background[tab];

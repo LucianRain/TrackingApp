@@ -3,10 +3,10 @@
 
 window.VisualSettings = {
   layout: {
-    // Width (px) of the left tab sidebar. The divider line and the
-    // content area (including the square grid) start right after it.
+    // Height (px) of the bottom tab bar. The divider line and the
+    // content area (including the square grid) sit just above it.
     // Suggested range: 40 (compact) to 80 (roomy).
-    sidebarWidth: 56,
+    tabBarHeight: 56,
   },
 
   // Each tab has its own solid background color (hue/saturation/lightness).
