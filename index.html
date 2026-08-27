@@ -197,6 +197,38 @@
   #stop-toggle {
     margin-left: auto;
   }
+  .time-shift-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.75rem;
+    flex-shrink: 0;
+  }
+  .time-shift-btn {
+    width: 0;
+    height: 0;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    opacity: 0.75;
+    transition: opacity 150ms ease, transform 100ms ease;
+  }
+  .time-shift-btn:active {
+    opacity: 1;
+    transform: scale(0.9);
+  }
+  .time-shift-left {
+    border-top: 25px solid transparent;
+    border-bottom: 25px solid transparent;
+    border-right: 38px solid rgba(255, 255, 255, 0.6);
+  }
+  .time-shift-right {
+    border-top: 25px solid transparent;
+    border-bottom: 25px solid transparent;
+    border-left: 38px solid rgba(255, 255, 255, 0.6);
+  }
   .time-control {
     display: flex;
     align-items: center;
@@ -514,6 +546,10 @@
       <button id="stop-toggle" class="lock-toggle active">Show Stops</button>
     </div>
     <div class="trains-row" id="trains-row"></div>
+    <div class="time-shift-row">
+      <button id="time-back-btn" class="time-shift-btn time-shift-left" aria-label="Rewind 30 minutes"></button>
+      <button id="time-forward-btn" class="time-shift-btn time-shift-right" aria-label="Advance 30 minutes"></button>
+    </div>
     <div class="time-control">
       <input type="range" id="time-slider" min="330" max="1440" step="10" />
       <span class="time-label-wrap">
@@ -928,6 +964,16 @@
       if (minutes === 0) minutes = SLIDER_MAX_MINUTES;
       applyManualTime(minutes);
     });
+
+    const timeBackBtn = document.getElementById("time-back-btn");
+    const timeForwardBtn = document.getElementById("time-forward-btn");
+
+    function shiftPreviewTime(deltaMinutes) {
+      applyManualTime(getEffectiveMinutes() + deltaMinutes);
+    }
+
+    timeBackBtn.addEventListener("click", () => shiftPreviewTime(-30));
+    timeForwardBtn.addEventListener("click", () => shiftPreviewTime(30));
 
     setLive(true);
 
