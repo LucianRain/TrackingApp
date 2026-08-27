@@ -316,7 +316,7 @@
       <button class="dir-btn" data-dir="southbound">Southbound</button>
     </div>
     <div class="time-control">
-      <input type="range" id="time-slider" min="240" max="1560" step="1" />
+      <input type="range" id="time-slider" min="240" max="1560" step="15" />
       <span id="time-slider-label"></span>
       <button id="lock-toggle" class="lock-toggle active">Live</button>
     </div>
@@ -523,7 +523,12 @@
       lockToggle.classList.toggle("active", live);
       lockToggle.textContent = live ? "Live" : "Preview";
       timeSlider.disabled = live;
-      if (live) previewMinutes = getRealNowMinutes();
+      timeSlider.style.display = live ? "none" : "";
+      if (live) {
+        previewMinutes = getRealNowMinutes();
+      } else {
+        previewMinutes = Math.round(getRealNowMinutes() / 15) * 15;
+      }
       refreshSchedule();
     }
 
