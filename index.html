@@ -200,20 +200,29 @@
     box-sizing: border-box;
     overflow-y: auto;
   }
+  .train-card.skip-red {
+    background: rgba(220, 50, 50, 0.55);
+  }
+  .train-card.skip-blue {
+    background: rgba(50, 110, 220, 0.55);
+  }
   .train-card-header {
     text-align: center;
-    font-size: 1.1rem;
-    font-weight: 700;
     padding: 0.4rem;
     border-radius: 12px;
     margin-bottom: 0.5rem;
     flex-shrink: 0;
   }
-  .train-card-header.skip-red {
-    background: rgba(220, 50, 50, 0.55);
+  .train-type-label {
+    font-size: 0.65rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.85;
   }
-  .train-card-header.skip-blue {
-    background: rgba(50, 110, 220, 0.55);
+  .train-number {
+    font-size: 1.1rem;
+    font-weight: 700;
   }
   .train-stop-row {
     display: flex;
@@ -486,14 +495,17 @@
         .map((train, i) => {
           const skipCount = stations.length - train.stops.length;
           const skipClass = skipCount >= 12 ? "skip-red" : skipCount >= 7 ? "skip-blue" : "";
+          const headerContent = skipClass
+            ? `<div class="train-type-label">${train.type}</div><div class="train-number">${train.train}</div>`
+            : `<div class="train-number">${train.train}</div>`;
           const stopsHtml = train.stops
             .map(
               (s) =>
                 `<div class="train-stop-row" data-station="${s.station}"><span>${s.station}</span><span>${s.time}</span></div>`
             )
             .join("");
-          return `<div class="train-card" data-col="${i}">
-            <div class="train-card-header ${skipClass}">${train.train}</div>
+          return `<div class="train-card ${skipClass}" data-col="${i}">
+            <div class="train-card-header">${headerContent}</div>
             ${stopsHtml}
           </div>`;
         })
