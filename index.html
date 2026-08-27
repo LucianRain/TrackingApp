@@ -875,18 +875,24 @@
     }, 1000);
     window.addEventListener("resize", updateNowLine);
 
+    function getDefaultDirection() {
+      return new Date().getHours() < 12 ? "northbound" : "southbound";
+    }
+
+    function setDirection(direction) {
+      dirButtons.forEach((b) => b.classList.toggle("active", b.dataset.dir === direction));
+      renderSchedule(direction);
+    }
+
     fetch("trainSchedule.json")
       .then((res) => res.json())
       .then((data) => {
         trainSchedule = data;
-        renderSchedule("northbound");
+        setDirection(getDefaultDirection());
       });
 
     dirButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        dirButtons.forEach((b) => b.classList.toggle("active", b === button));
-        renderSchedule(button.dataset.dir);
-      });
+      button.addEventListener("click", () => setDirection(button.dataset.dir));
     });
 
     const TAB_STORAGE_KEY = "activeTab";
@@ -899,7 +905,13 @@
       });
       setBackgroundForTab(target);
       setSquaresRunning(target !== "train");
-      if (target === "train") tick();
+      if (target === "train") {
+        if (trainSchedule && getDefaultDirection() !== currentDirection) {
+          setDirection(getDefaultDirection());
+        } else {
+          tick();
+        }
+      }
       try {
         localStorage.setItem(TAB_STORAGE_KEY, target);
       } catch (e) {}
