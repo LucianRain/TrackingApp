@@ -2,18 +2,29 @@
 // Edit values here to change the look of the app — index.html reads from this file.
 
 window.VisualSettings = {
+  layout: {
+    // Width (px) of the left tab sidebar. The divider line and the
+    // content area (including the square grid) start right after it.
+    // Suggested range: 40 (compact) to 80 (roomy).
+    sidebarWidth: 56,
+  },
+
+  // Each tab has its own solid background color (hue/saturation/lightness).
   background: {
-    // How long (ms) one full rainbow hue cycle takes. Lower = faster color change.
-    // Suggested range: 10000 (fast) to 120000 (~2 min, very slow).
-    cycleDurationMs: 30000,
-
-    // Saturation % of the background color. Higher = more vivid/colorful.
-    // Suggested range: 15 (nearly gray) to 60 (vivid). Keep low so white text stays readable.
-    saturation: 35,
-
-    // Lightness % of the background color. Higher = brighter background.
-    // Suggested range: 15 (near-black) to 40 (medium). Keep low for contrast with white text.
-    lightness: 25,
+    events: {
+      // Hue 0-360. ~210-230 = blue.
+      hue: 215,
+      // Saturation % — lower is more desaturated/grey. Suggested range: 10-35.
+      saturation: 22,
+      // Lightness % — lower is darker. Suggested range: 15-35.
+      lightness: 28,
+    },
+    train: {
+      // Hue 0-360. ~345-15 = red.
+      hue: 355,
+      saturation: 30,
+      lightness: 20,
+    },
   },
 
   grid: {

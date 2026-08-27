@@ -32,8 +32,20 @@
   }
   #squares {
     position: fixed;
-    inset: 0;
+    left: var(--sidebar-width);
+    top: 0;
+    right: 0;
+    bottom: 0;
     z-index: 0;
+  }
+  #divider {
+    position: fixed;
+    left: var(--sidebar-width);
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.25);
+    z-index: 2;
   }
   #container {
     position: relative;
@@ -58,11 +70,15 @@
     top: 50%;
     transform: translateY(-50%);
     z-index: 2;
+    width: var(--sidebar-width);
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 0.5rem;
   }
   .tab {
+    width: 100%;
+    box-sizing: border-box;
     writing-mode: vertical-rl;
     transform: rotate(180deg);
     padding: 0.9rem 0.5rem;
@@ -163,6 +179,7 @@
 </head>
 <body>
   <canvas id="squares"></canvas>
+  <div id="divider"></div>
   <div id="container">
     <div id="clock"></div>
     <div id="date"></div>
@@ -190,6 +207,13 @@
     root.setProperty("--event-darken", settings.eventCard.darken);
     root.setProperty("--event-bg-opacity", settings.eventCard.backgroundOpacity);
     root.setProperty("--event-border-opacity", settings.eventCard.borderOpacity);
+    root.setProperty("--sidebar-width", settings.layout.sidebarWidth + "px");
+
+    function setBackgroundForTab(tab) {
+      const { hue, saturation, lightness } = settings.background[tab];
+      document.body.style.backgroundColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+    }
+    setBackgroundForTab("events");
 
     function updateClock() {
       const now = new Date();
@@ -208,20 +232,12 @@
     updateClock();
     setInterval(updateClock, 1000);
 
-    function updateBackground(timestamp) {
-      const { cycleDurationMs, saturation, lightness } = settings.background;
-      const hue = ((timestamp % cycleDurationMs) / cycleDurationMs) * 360;
-      document.body.style.backgroundColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
-      requestAnimationFrame(updateBackground);
-    }
-    requestAnimationFrame(updateBackground);
-
     const canvas = document.getElementById("squares");
     const ctx = canvas.getContext("2d");
 
     function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      canvas.width = canvas.clientWidth;
+      canvas.height = canvas.clientHeight;
     }
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
@@ -279,6 +295,7 @@
         document.querySelectorAll(".page").forEach((page) => {
           page.classList.toggle("active", page.id === `page-${target}`);
         });
+        setBackgroundForTab(target);
       });
     });
 
