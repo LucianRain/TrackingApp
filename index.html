@@ -208,12 +208,29 @@
     flex: 1;
     min-width: 0;
   }
+  .time-label-wrap {
+    position: relative;
+    display: inline-block;
+    min-width: 4.5rem;
+    flex-shrink: 0;
+  }
   #time-slider-label {
+    display: block;
     color: #ffffff;
     font-family: var(--font-main);
     font-size: 0.85rem;
-    min-width: 4.5rem;
     text-align: right;
+  }
+  #time-input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
   }
   .lock-toggle {
     padding: 0.4rem 0.9rem;
@@ -496,7 +513,10 @@
     <div class="trains-row" id="trains-row"></div>
     <div class="time-control">
       <input type="range" id="time-slider" min="330" max="1440" step="10" />
-      <span id="time-slider-label"></span>
+      <span class="time-label-wrap">
+        <span id="time-slider-label"></span>
+        <input type="time" id="time-input" step="600" />
+      </span>
       <button id="lock-toggle" class="lock-toggle active">Live</button>
     </div>
   </div>
@@ -796,6 +816,7 @@
     let previewMinutes = getRealNowMinutes();
     const timeSlider = document.getElementById("time-slider");
     const timeSliderLabel = document.getElementById("time-slider-label");
+    const timeInput = document.getElementById("time-input");
     const lockToggle = document.getElementById("lock-toggle");
 
     function getEffectiveMinutes() {
@@ -812,10 +833,18 @@
       return `${h12}:${String(mm).padStart(2, "0")} ${period}`;
     }
 
+    function minutesToTimeInputValue(mins) {
+      const m = ((mins % 1440) + 1440) % 1440;
+      const h = Math.floor(m / 60);
+      const mm = Math.floor(m % 60);
+      return `${String(h).padStart(2, "0")}:${String(mm).padStart(2, "0")}`;
+    }
+
     function updateSliderDisplay() {
       const mins = getEffectiveMinutes();
       timeSlider.value = mins;
       timeSliderLabel.textContent = minutesToLabel(mins);
+      timeInput.value = minutesToTimeInputValue(mins);
     }
 
     function updateNowLine() {
@@ -880,6 +909,23 @@
       previewMinutes = Number(timeSlider.value);
       tick();
     });
+
+    function applyManualTime(rawMinutes) {
+      const rounded = Math.round(rawMinutes / SLIDER_STEP_MINUTES) * SLIDER_STEP_MINUTES;
+      const clamped = Math.min(SLIDER_MAX_MINUTES, Math.max(SLIDER_MIN_MINUTES, rounded));
+      if (isLive) setLive(false);
+      previewMinutes = clamped;
+      tick();
+    }
+
+    timeInput.addEventListener("change", () => {
+      if (!timeInput.value) return;
+      const [h, m] = timeInput.value.split(":").map(Number);
+      let minutes = h * 60 + m;
+      if (minutes === 0) minutes = SLIDER_MAX_MINUTES;
+      applyManualTime(minutes);
+    });
+
     setLive(true);
 
     setInterval(() => {
