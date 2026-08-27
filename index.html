@@ -137,53 +137,8 @@
     color: #14213d;
     border-color: #ffffff;
   }
-  .stop-filter {
-    position: relative;
+  #stop-toggle {
     margin-left: auto;
-  }
-  .stop-filter summary {
-    list-style: none;
-    cursor: pointer;
-    padding: 0.4rem 0.9rem;
-    border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    background: rgba(255, 255, 255, 0.1);
-    color: #ffffff;
-    font-family: var(--font-main);
-    font-size: 0.85rem;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .stop-filter summary::-webkit-details-marker {
-    display: none;
-  }
-  .stop-filter[open] summary {
-    background: #ffffff;
-    color: #14213d;
-    border-color: #ffffff;
-  }
-  .stop-filter-list {
-    position: absolute;
-    top: calc(100% + 0.4rem);
-    right: 0;
-    z-index: 5;
-    background: rgba(20, 20, 30, 0.95);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 12px;
-    padding: 0.5rem;
-    max-height: 14rem;
-    overflow-y: auto;
-    min-width: 12rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  }
-  .stop-filter-list label {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.3rem 0.4rem;
-    color: #ffffff;
-    font-family: var(--font-main);
-    font-size: 0.85rem;
-    white-space: nowrap;
   }
   .time-control {
     display: flex;
@@ -370,10 +325,7 @@
     <div class="direction-toggle">
       <button class="dir-btn active" data-dir="northbound">Northbound</button>
       <button class="dir-btn" data-dir="southbound">Southbound</button>
-      <details class="stop-filter" id="stop-filter">
-        <summary>Hide Stops</summary>
-        <div class="stop-filter-list" id="stop-filter-list"></div>
-      </details>
+      <button id="stop-toggle" class="lock-toggle">Hide Stops</button>
     </div>
     <div class="time-control">
       <input type="range" id="time-slider" min="240" max="1560" step="15" />
@@ -504,30 +456,19 @@
     const dirButtons = document.querySelectorAll(".dir-btn");
 
     const INTERMEDIATE_STATIONS = NORTHBOUND_STATIONS.slice(1, -1);
-    const hiddenStations = new Set();
-    const stopFilterListEl = document.getElementById("stop-filter-list");
+    let stopsHidden = false;
+    const stopToggleEl = document.getElementById("stop-toggle");
 
-    INTERMEDIATE_STATIONS.forEach((station) => {
-      const label = document.createElement("label");
-      const checkbox = document.createElement("input");
-      checkbox.type = "checkbox";
-      checkbox.value = station;
-      checkbox.addEventListener("change", () => {
-        if (checkbox.checked) {
-          hiddenStations.add(station);
-        } else {
-          hiddenStations.delete(station);
-        }
-        applyStopFilter();
-      });
-      label.appendChild(checkbox);
-      label.appendChild(document.createTextNode(station));
-      stopFilterListEl.appendChild(label);
+    stopToggleEl.addEventListener("click", () => {
+      stopsHidden = !stopsHidden;
+      stopToggleEl.classList.toggle("active", stopsHidden);
+      stopToggleEl.textContent = stopsHidden ? "Show Stops" : "Hide Stops";
+      applyStopFilter();
     });
 
     function applyStopFilter() {
       scheduleTableEl.querySelectorAll("tr[data-station]").forEach((row) => {
-        row.style.display = hiddenStations.has(row.dataset.station) ? "none" : "";
+        row.style.display = stopsHidden && INTERMEDIATE_STATIONS.includes(row.dataset.station) ? "none" : "";
       });
     }
 
