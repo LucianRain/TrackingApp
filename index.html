@@ -382,6 +382,22 @@
     font-size: 1.1rem;
     font-weight: 700;
   }
+  .train-star {
+    display: inline-block;
+    margin-left: 0.4rem;
+    font-size: 1rem;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.55);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: color 150ms ease, transform 100ms ease;
+  }
+  .train-star:active {
+    transform: scale(0.85);
+  }
+  .train-star.starred {
+    color: #ffd700;
+  }
   .train-stop-row {
     display: flex;
     justify-content: space-between;
@@ -702,6 +718,27 @@
       renderSchedule(currentDirection);
     });
 
+    const MAX_STARRED_TRAINS = 3;
+    let starredTrains = [];
+
+    function toggleStar(key) {
+      const idx = starredTrains.indexOf(key);
+      if (idx !== -1) {
+        starredTrains.splice(idx, 1);
+      } else {
+        starredTrains.push(key);
+        if (starredTrains.length > MAX_STARRED_TRAINS) starredTrains.shift();
+      }
+      renderSchedule(currentDirection);
+    }
+
+    trainsRowEl.addEventListener("click", (e) => {
+      const starEl = e.target.closest(".train-star");
+      if (!starEl) return;
+      e.stopPropagation();
+      toggleStar(starEl.dataset.trainKey);
+    });
+
     let lastVisibleEntries = [];
     let lastVisibleSignature = "";
 
@@ -786,9 +823,12 @@
         .map(({ train, adjustedDeparture }, i) => {
           const skipCount = stations.length - train.stops.length;
           const skipClass = skipCount >= 12 ? "skip-red" : skipCount >= 7 ? "skip-blue" : "";
+          const trainKey = `${direction}-${train.train}`;
+          const isStarred = starredTrains.includes(trainKey);
+          const starHtml = `<span class="train-star ${isStarred ? "starred" : ""}" data-train-key="${trainKey}">${isStarred ? "★" : "☆"}</span>`;
           const headerContent = skipClass
-            ? `<div class="train-type-label">${train.type}</div><div class="train-number">${train.train}</div>`
-            : `<div class="train-number">${train.train}</div>`;
+            ? `<div class="train-type-label">${train.type}</div><div class="train-number">${train.train}${starHtml}</div>`
+            : `<div class="train-number">${train.train}${starHtml}</div>`;
 
           const status = getStatusInfo(adjustedDeparture, nowMinutes);
           const statusLabel = `<div class="train-status-label">${status.text}</div>`;
