@@ -87,50 +87,24 @@
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
 
-    const SQUARE_COUNT = 14;
-    const squares = Array.from({ length: SQUARE_COUNT }, () => ({
-      x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight,
-      size: 15 + Math.random() * 35,
-      vx: (Math.random() - 0.5) * 0.6,
-      vy: (Math.random() - 0.5) * 0.6,
-      angle: Math.random() * 360,
-      spin: (Math.random() - 0.5) * 0.6,
-      opacity: 0.08 + Math.random() * 0.12,
-    }));
+    const CELL_SIZE = 60;
+    const SQUARE_SIZE = 30;
+    const GRID_SPEED_X = 6;
+    const GRID_SPEED_Y = 4;
 
-    function wanderVelocity(square) {
-      square.vx += (Math.random() - 0.5) * 0.05;
-      square.vy += (Math.random() - 0.5) * 0.05;
-      const speed = Math.hypot(square.vx, square.vy);
-      const maxSpeed = 0.6;
-      if (speed > maxSpeed) {
-        square.vx = (square.vx / speed) * maxSpeed;
-        square.vy = (square.vy / speed) * maxSpeed;
-      }
-    }
-
-    function updateSquares() {
+    function updateSquares(timestamp) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.fillStyle = "#ffffff";
+      ctx.globalAlpha = 0.12;
 
-      for (const square of squares) {
-        wanderVelocity(square);
-        square.x += square.vx;
-        square.y += square.vy;
-        square.angle += square.spin;
+      const seconds = timestamp / 1000;
+      const offsetX = ((seconds * GRID_SPEED_X) % CELL_SIZE + CELL_SIZE) % CELL_SIZE;
+      const offsetY = ((seconds * GRID_SPEED_Y) % CELL_SIZE + CELL_SIZE) % CELL_SIZE;
 
-        if (square.x < -square.size) square.x = canvas.width + square.size;
-        if (square.x > canvas.width + square.size) square.x = -square.size;
-        if (square.y < -square.size) square.y = canvas.height + square.size;
-        if (square.y > canvas.height + square.size) square.y = -square.size;
-
-        ctx.save();
-        ctx.globalAlpha = square.opacity;
-        ctx.translate(square.x, square.y);
-        ctx.rotate((square.angle * Math.PI) / 180);
-        ctx.fillRect(-square.size / 2, -square.size / 2, square.size, square.size);
-        ctx.restore();
+      for (let x = -CELL_SIZE + offsetX; x < canvas.width + CELL_SIZE; x += CELL_SIZE) {
+        for (let y = -CELL_SIZE + offsetY; y < canvas.height + CELL_SIZE; y += CELL_SIZE) {
+          ctx.fillRect(x, y, SQUARE_SIZE, SQUARE_SIZE);
+        }
       }
 
       requestAnimationFrame(updateSquares);
