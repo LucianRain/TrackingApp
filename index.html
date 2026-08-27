@@ -192,7 +192,8 @@
     box-sizing: border-box;
   }
   .train-card.split {
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 100px;
   }
   .train-box {
     border-radius: 20px;
@@ -493,14 +494,35 @@
       renderSchedule(currentDirection);
     });
 
+    let lastVisibleFrom = 0;
+    let lastVisibleTo = 0;
+
+    function getVisibleRange(trains) {
+      const nowMinutes = getEffectiveMinutes();
+      const departures = trains.map((t) => timeToScheduleMinutes(t.stops[0].time));
+      let cutoffIndex = -1;
+      for (let i = 0; i < departures.length; i++) {
+        if (departures[i] <= nowMinutes) cutoffIndex = i;
+        else break;
+      }
+      const visibleFrom = Math.max(cutoffIndex, 0);
+      const visibleTo = Math.min(visibleFrom + UPCOMING_TRAIN_COUNT, trains.length - 1);
+      return { visibleFrom, visibleTo };
+    }
+
     function renderSchedule(direction) {
       if (!trainSchedule) return;
       currentDirection = direction;
       const trains = trainSchedule[direction];
       const stations = direction === "northbound" ? NORTHBOUND_STATIONS : SOUTHBOUND_STATIONS;
 
-      const html = trains
-        .map((train, i) => {
+      const { visibleFrom, visibleTo } = getVisibleRange(trains);
+      lastVisibleFrom = visibleFrom;
+      lastVisibleTo = visibleTo;
+      const visibleTrains = trains.slice(visibleFrom, visibleTo + 1);
+
+      const html = visibleTrains
+        .map((train) => {
           const skipCount = stations.length - train.stops.length;
           const skipClass = skipCount >= 12 ? "skip-red" : skipCount >= 7 ? "skip-blue" : "";
           const headerContent = skipClass
@@ -512,7 +534,7 @@
             const sfStop = train.stops.find((s) => s.station === "San Francisco");
             const stopBox = (stop) =>
               `<div class="train-box split-part ${skipClass}"><div class="train-stop-row"><span>${stop.station}</span><span>${stop.time}</span></div></div>`;
-            return `<div class="train-card split" data-col="${i}">
+            return `<div class="train-card split">
               <div class="train-box split-part ${skipClass}"><div class="train-card-header">${headerContent}</div></div>
               ${stopBox(sjStop)}
               ${stopBox(sfStop)}
@@ -522,7 +544,7 @@
           const stopsHtml = train.stops
             .map((s) => `<div class="train-stop-row"><span>${s.station}</span><span>${s.time}</span></div>`)
             .join("");
-          return `<div class="train-card" data-col="${i}">
+          return `<div class="train-card">
             <div class="train-box full ${skipClass}">
               <div class="train-card-header">${headerContent}</div>
               ${stopsHtml}
@@ -533,8 +555,8 @@
 
       trainsRowEl.innerHTML = html;
       trainsRowEl.appendChild(nowLineEl);
-      applyStopFilter();
-      refreshSchedule();
+      updateSliderDisplay();
+      updateNowLine();
     }
 
     function timeToScheduleMinutes(timeStr) {
@@ -581,42 +603,15 @@
       timeSliderLabel.textContent = minutesToLabel(mins);
     }
 
-    function refreshSchedule() {
-      updateSliderDisplay();
-      updateNowLine();
-      applyDepartedClipping();
-    }
-
-    function setLive(live) {
-      isLive = live;
-      lockToggle.classList.toggle("active", live);
-      lockToggle.textContent = live ? "Live" : "Preview";
-      timeSlider.disabled = live;
-      timeSlider.style.display = live ? "none" : "";
-      if (live) {
-        previewMinutes = getRealNowMinutes();
-      } else {
-        previewMinutes = Math.round(getRealNowMinutes() / 15) * 15;
-      }
-      refreshSchedule();
-    }
-
-    lockToggle.addEventListener("click", () => setLive(!isLive));
-    timeSlider.addEventListener("input", () => {
-      if (isLive) return;
-      previewMinutes = Number(timeSlider.value);
-      refreshSchedule();
-    });
-    setLive(true);
-
     function updateNowLine() {
       if (!trainSchedule) return;
       const trains = trainSchedule[currentDirection];
+      const visibleTrains = trains.slice(lastVisibleFrom, lastVisibleTo + 1);
       const cards = Array.from(trainsRowEl.querySelectorAll(".train-card"));
-      if (!trains.length || cards.length !== trains.length) return;
+      if (!visibleTrains.length || cards.length !== visibleTrains.length) return;
 
       const nowMinutes = getEffectiveMinutes();
-      const departures = trains.map((t) => timeToScheduleMinutes(t.stops[0].time));
+      const departures = visibleTrains.map((t) => timeToScheduleMinutes(t.stops[0].time));
       const centers = cards.map((card) => card.offsetLeft + card.offsetWidth / 2);
 
       let lineX;
@@ -633,30 +628,43 @@
       nowLineEl.style.left = `${lineX}px`;
     }
 
-    function applyDepartedClipping() {
+    function tick() {
+      updateSliderDisplay();
       if (!trainSchedule) return;
       const trains = trainSchedule[currentDirection];
       if (!trains.length) return;
-
-      const nowMinutes = getEffectiveMinutes();
-      const departures = trains.map((t) => timeToScheduleMinutes(t.stops[0].time));
-
-      let cutoffIndex = -1;
-      for (let i = 0; i < departures.length; i++) {
-        if (departures[i] <= nowMinutes) cutoffIndex = i;
-        else break;
+      const { visibleFrom, visibleTo } = getVisibleRange(trains);
+      if (visibleFrom !== lastVisibleFrom || visibleTo !== lastVisibleTo) {
+        renderSchedule(currentDirection);
+      } else {
+        updateNowLine();
       }
-      const visibleFrom = Math.max(cutoffIndex, 0);
-      const visibleTo = visibleFrom + UPCOMING_TRAIN_COUNT;
-
-      trainsRowEl.querySelectorAll(".train-card[data-col]").forEach((card) => {
-        const col = Number(card.dataset.col);
-        card.style.display = col < visibleFrom || col > visibleTo ? "none" : "";
-      });
     }
 
+    function setLive(live) {
+      isLive = live;
+      lockToggle.classList.toggle("active", live);
+      lockToggle.textContent = live ? "Live" : "Preview";
+      timeSlider.disabled = live;
+      timeSlider.style.display = live ? "none" : "";
+      if (live) {
+        previewMinutes = getRealNowMinutes();
+      } else {
+        previewMinutes = Math.round(getRealNowMinutes() / 15) * 15;
+      }
+      tick();
+    }
+
+    lockToggle.addEventListener("click", () => setLive(!isLive));
+    timeSlider.addEventListener("input", () => {
+      if (isLive) return;
+      previewMinutes = Number(timeSlider.value);
+      tick();
+    });
+    setLive(true);
+
     setInterval(() => {
-      if (isLive) refreshSchedule();
+      if (isLive) tick();
     }, 1000);
     window.addEventListener("resize", updateNowLine);
 
@@ -684,7 +692,7 @@
       });
       setBackgroundForTab(target);
       setSquaresRunning(target !== "train");
-      if (target === "train") refreshSchedule();
+      if (target === "train") tick();
       try {
         localStorage.setItem(TAB_STORAGE_KEY, target);
       } catch (e) {}
