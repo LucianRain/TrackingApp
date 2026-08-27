@@ -331,15 +331,25 @@
     gap: 0.5rem;
     margin-bottom: 0.3rem;
   }
+  .favorite-row.collapsed .favorite-row-header {
+    margin-bottom: 0;
+    justify-content: space-between;
+  }
   .favorite-train-number {
     font-weight: 700;
     font-size: 1rem;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
   }
   .favorite-direction {
     font-size: 0.65rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     opacity: 0.75;
+  }
+  .favorite-collapsed-times {
+    font-size: 0.8rem;
+    opacity: 0.85;
   }
   .favorite-detail {
     display: flex;
@@ -880,6 +890,7 @@
       minsRemaining = Math.max(1, Math.ceil(minsRemaining));
 
       return {
+        key,
         direction,
         trainNum,
         leaveLabel: minutesToLabel(leaveMinutes),
@@ -889,6 +900,20 @@
         statusValue: formatMinutesAway(minsRemaining),
       };
     }
+
+    const collapsedFavorites = new Set();
+
+    favoritesPanelEl.addEventListener("click", (e) => {
+      const nameEl = e.target.closest(".favorite-train-number");
+      if (!nameEl) return;
+      const key = nameEl.dataset.favoriteKey;
+      if (collapsedFavorites.has(key)) {
+        collapsedFavorites.delete(key);
+      } else {
+        collapsedFavorites.add(key);
+      }
+      renderFavoritesPanel();
+    });
 
     function renderFavoritesPanel() {
       const currentStars = starredTrains[currentDirection] || [];
@@ -901,20 +926,29 @@
       favoritesPanelEl.innerHTML = currentStars
         .map((key) => getFavoriteTrainInfo(key))
         .filter(Boolean)
-        .map(
-          (info) => `
+        .map((info) => {
+          const isCollapsed = collapsedFavorites.has(info.key);
+          if (isCollapsed) {
+            return `
+            <div class="favorite-row collapsed">
+              <div class="favorite-row-header">
+                <span class="favorite-train-number" data-favorite-key="${info.key}">${info.trainNum}</span>
+                <span class="favorite-collapsed-times">${info.leaveLabel} → ${info.arriveLabel}</span>
+              </div>
+            </div>`;
+          }
+          return `
             <div class="favorite-row">
               <div class="favorite-row-header">
-                <span class="favorite-train-number">${info.trainNum}</span>
+                <span class="favorite-train-number" data-favorite-key="${info.key}">${info.trainNum}</span>
                 <span class="favorite-direction">${info.direction === "northbound" ? "Northbound" : "Southbound"}</span>
               </div>
               <div class="favorite-detail"><span>Leaves</span><span>${info.leaveLabel}</span></div>
               <div class="favorite-detail"><span>Arrives</span><span>${info.arriveLabel}</span></div>
               <div class="favorite-detail"><span>Duration</span><span>${info.duration} min</span></div>
               <div class="favorite-detail"><span>${info.statusLabel}</span><span>${info.statusValue}</span></div>
-            </div>
-          `
-        )
+            </div>`;
+        })
         .join("");
     }
 
