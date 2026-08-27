@@ -198,6 +198,12 @@
   .schedule-table thead th {
     font-weight: 700;
   }
+  .schedule-table thead th.skip-red {
+    background: rgba(220, 50, 50, 0.55);
+  }
+  .schedule-table thead th.skip-blue {
+    background: rgba(50, 110, 220, 0.55);
+  }
   .now-line {
     position: absolute;
     top: 0;
@@ -451,7 +457,9 @@
 
       let html = "<thead><tr><th></th>";
       trains.forEach((train, i) => {
-        html += `<th data-col="${i}">${train.train}</th>`;
+        const skipCount = stations.length - train.stops.length;
+        const skipClass = skipCount >= 12 ? "skip-red" : "skip-blue";
+        html += `<th data-col="${i}" class="${skipClass}">${train.train}</th>`;
       });
       html += "</tr></thead><tbody>";
 
