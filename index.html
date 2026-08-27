@@ -198,10 +198,12 @@
   .schedule-table thead th {
     font-weight: 700;
   }
-  .schedule-table thead th.skip-red {
+  .schedule-table th.skip-red,
+  .schedule-table td.skip-red {
     background: rgba(220, 50, 50, 0.55);
   }
-  .schedule-table thead th.skip-blue {
+  .schedule-table th.skip-blue,
+  .schedule-table td.skip-blue {
     background: rgba(50, 110, 220, 0.55);
   }
   .now-line {
@@ -455,11 +457,16 @@
       const trains = trainSchedule[direction];
       const stations = direction === "northbound" ? NORTHBOUND_STATIONS : SOUTHBOUND_STATIONS;
 
+      const skipClasses = trains.map((train) => {
+        const skipCount = stations.length - train.stops.length;
+        if (skipCount >= 12) return "skip-red";
+        if (skipCount >= 7) return "skip-blue";
+        return "";
+      });
+
       let html = "<thead><tr><th></th>";
       trains.forEach((train, i) => {
-        const skipCount = stations.length - train.stops.length;
-        const skipClass = skipCount >= 12 ? "skip-red" : "skip-blue";
-        html += `<th data-col="${i}" class="${skipClass}">${train.train}</th>`;
+        html += `<th data-col="${i}" class="${skipClasses[i]}">${train.train}</th>`;
       });
       html += "</tr></thead><tbody>";
 
@@ -467,7 +474,7 @@
         html += `<tr><th scope="row">${station}</th>`;
         trains.forEach((train, i) => {
           const stop = train.stops.find((s) => s.station === station);
-          html += `<td data-col="${i}">${stop ? stop.time : "–"}</td>`;
+          html += `<td data-col="${i}" class="${skipClasses[i]}">${stop ? stop.time : "–"}</td>`;
         });
         html += "</tr>";
       }
