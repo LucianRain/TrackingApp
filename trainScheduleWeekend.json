@@ -1,0 +1,6619 @@
+{
+  "source": "https://www.caltrain.com/schedules/pdfs?active_tab=route_explorer_tab",
+  "sourceDocument": "Weekend Printer-Friendly Caltrain Schedule",
+  "effectiveDate": "2026-01-31",
+  "serviceType": "weekend",
+  "route": {
+    "origin": "San Francisco",
+    "destination": "San Jose Diridon"
+  },
+  "note": "Static snapshot, extracted from PDF word coordinates. All 6XX trains run as Local (all-stop) service. Tamien is served by every other train (roughly hourly); all other stations from San Jose Diridon to San Francisco are served by every train.",
+  "northbound": [
+    {
+      "train": "601",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "Tamien",
+          "time": "6:51a"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "6:56a"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "7:02a"
+        },
+        {
+          "station": "Lawrence",
+          "time": "7:07a"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "7:11a"
+        },
+        {
+          "station": "Mountain View",
+          "time": "7:15a"
+        },
+        {
+          "station": "San Antonio",
+          "time": "7:18a"
+        },
+        {
+          "station": "California Avenue",
+          "time": "7:21a"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "7:24a"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "7:26a"
+        },
+        {
+          "station": "Redwood City",
+          "time": "7:32a"
+        },
+        {
+          "station": "San Carlos",
+          "time": "7:35a"
+        },
+        {
+          "station": "Belmont",
+          "time": "7:38a"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "7:41a"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "7:43a"
+        },
+        {
+          "station": "San Mateo",
+          "time": "7:46a"
+        },
+        {
+          "station": "Burlingame",
+          "time": "7:48a"
+        },
+        {
+          "station": "Broadway",
+          "time": "7:51a"
+        },
+        {
+          "station": "Millbrae",
+          "time": "7:54a"
+        },
+        {
+          "station": "San Bruno",
+          "time": "7:57a"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "8:00a"
+        },
+        {
+          "station": "Bayshore",
+          "time": "8:05a"
+        },
+        {
+          "station": "22nd Street",
+          "time": "8:10a"
+        },
+        {
+          "station": "San Francisco",
+          "time": "8:16a"
+        }
+      ]
+    },
+    {
+      "train": "603",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Jose Diridon",
+          "time": "7:26a"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "7:32a"
+        },
+        {
+          "station": "Lawrence",
+          "time": "7:37a"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "7:41a"
+        },
+        {
+          "station": "Mountain View",
+          "time": "7:45a"
+        },
+        {
+          "station": "San Antonio",
+          "time": "7:48a"
+        },
+        {
+          "station": "California Avenue",
+          "time": "7:51a"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "7:54a"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "7:56a"
+        },
+        {
+          "station": "Redwood City",
+          "time": "8:02a"
+        },
+        {
+          "station": "San Carlos",
+          "time": "8:05a"
+        },
+        {
+          "station": "Belmont",
+          "time": "8:08a"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "8:11a"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "8:13a"
+        },
+        {
+          "station": "San Mateo",
+          "time": "8:16a"
+        },
+        {
+          "station": "Burlingame",
+          "time": "8:18a"
+        },
+        {
+          "station": "Broadway",
+          "time": "8:21a"
+        },
+        {
+          "station": "Millbrae",
+          "time": "8:24a"
+        },
+        {
+          "station": "San Bruno",
+          "time": "8:27a"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "8:30a"
+        },
+        {
+          "station": "Bayshore",
+          "time": "8:35a"
+        },
+        {
+          "station": "22nd Street",
+          "time": "8:40a"
+        },
+        {
+          "station": "San Francisco",
+          "time": "8:46a"
+        }
+      ]
+    },
+    {
+      "train": "605",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "Tamien",
+          "time": "7:51a"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "7:56a"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "8:02a"
+        },
+        {
+          "station": "Lawrence",
+          "time": "8:07a"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "8:11a"
+        },
+        {
+          "station": "Mountain View",
+          "time": "8:15a"
+        },
+        {
+          "station": "San Antonio",
+          "time": "8:18a"
+        },
+        {
+          "station": "California Avenue",
+          "time": "8:21a"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "8:24a"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "8:26a"
+        },
+        {
+          "station": "Redwood City",
+          "time": "8:32a"
+        },
+        {
+          "station": "San Carlos",
+          "time": "8:35a"
+        },
+        {
+          "station": "Belmont",
+          "time": "8:38a"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "8:41a"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "8:43a"
+        },
+        {
+          "station": "San Mateo",
+          "time": "8:46a"
+        },
+        {
+          "station": "Burlingame",
+          "time": "8:48a"
+        },
+        {
+          "station": "Broadway",
+          "time": "8:51a"
+        },
+        {
+          "station": "Millbrae",
+          "time": "8:54a"
+        },
+        {
+          "station": "San Bruno",
+          "time": "8:57a"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "9:00a"
+        },
+        {
+          "station": "Bayshore",
+          "time": "9:05a"
+        },
+        {
+          "station": "22nd Street",
+          "time": "9:10a"
+        },
+        {
+          "station": "San Francisco",
+          "time": "9:16a"
+        }
+      ]
+    },
+    {
+      "train": "607",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Jose Diridon",
+          "time": "8:26a"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "8:32a"
+        },
+        {
+          "station": "Lawrence",
+          "time": "8:37a"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "8:41a"
+        },
+        {
+          "station": "Mountain View",
+          "time": "8:45a"
+        },
+        {
+          "station": "San Antonio",
+          "time": "8:48a"
+        },
+        {
+          "station": "California Avenue",
+          "time": "8:51a"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "8:54a"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "8:56a"
+        },
+        {
+          "station": "Redwood City",
+          "time": "9:02a"
+        },
+        {
+          "station": "San Carlos",
+          "time": "9:05a"
+        },
+        {
+          "station": "Belmont",
+          "time": "9:08a"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "9:11a"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "9:13a"
+        },
+        {
+          "station": "San Mateo",
+          "time": "9:16a"
+        },
+        {
+          "station": "Burlingame",
+          "time": "9:18a"
+        },
+        {
+          "station": "Broadway",
+          "time": "9:21a"
+        },
+        {
+          "station": "Millbrae",
+          "time": "9:24a"
+        },
+        {
+          "station": "San Bruno",
+          "time": "9:27a"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "9:30a"
+        },
+        {
+          "station": "Bayshore",
+          "time": "9:35a"
+        },
+        {
+          "station": "22nd Street",
+          "time": "9:40a"
+        },
+        {
+          "station": "San Francisco",
+          "time": "9:46a"
+        }
+      ]
+    },
+    {
+      "train": "609",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "Tamien",
+          "time": "8:51a"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "8:56a"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "9:02a"
+        },
+        {
+          "station": "Lawrence",
+          "time": "9:07a"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "9:11a"
+        },
+        {
+          "station": "Mountain View",
+          "time": "9:15a"
+        },
+        {
+          "station": "San Antonio",
+          "time": "9:18a"
+        },
+        {
+          "station": "California Avenue",
+          "time": "9:21a"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "9:24a"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "9:26a"
+        },
+        {
+          "station": "Redwood City",
+          "time": "9:32a"
+        },
+        {
+          "station": "San Carlos",
+          "time": "9:35a"
+        },
+        {
+          "station": "Belmont",
+          "time": "9:38a"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "9:41a"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "9:43a"
+        },
+        {
+          "station": "San Mateo",
+          "time": "9:46a"
+        },
+        {
+          "station": "Burlingame",
+          "time": "9:48a"
+        },
+        {
+          "station": "Broadway",
+          "time": "9:51a"
+        },
+        {
+          "station": "Millbrae",
+          "time": "9:54a"
+        },
+        {
+          "station": "San Bruno",
+          "time": "9:57a"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "10:00a"
+        },
+        {
+          "station": "Bayshore",
+          "time": "10:05a"
+        },
+        {
+          "station": "22nd Street",
+          "time": "10:10a"
+        },
+        {
+          "station": "San Francisco",
+          "time": "10:16a"
+        }
+      ]
+    },
+    {
+      "train": "611",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Jose Diridon",
+          "time": "9:26a"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "9:32a"
+        },
+        {
+          "station": "Lawrence",
+          "time": "9:37a"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "9:41a"
+        },
+        {
+          "station": "Mountain View",
+          "time": "9:45a"
+        },
+        {
+          "station": "San Antonio",
+          "time": "9:48a"
+        },
+        {
+          "station": "California Avenue",
+          "time": "9:51a"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "9:54a"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "9:56a"
+        },
+        {
+          "station": "Redwood City",
+          "time": "10:02a"
+        },
+        {
+          "station": "San Carlos",
+          "time": "10:05a"
+        },
+        {
+          "station": "Belmont",
+          "time": "10:08a"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "10:11a"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "10:13a"
+        },
+        {
+          "station": "San Mateo",
+          "time": "10:16a"
+        },
+        {
+          "station": "Burlingame",
+          "time": "10:18a"
+        },
+        {
+          "station": "Broadway",
+          "time": "10:21a"
+        },
+        {
+          "station": "Millbrae",
+          "time": "10:24a"
+        },
+        {
+          "station": "San Bruno",
+          "time": "10:27a"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "10:30a"
+        },
+        {
+          "station": "Bayshore",
+          "time": "10:35a"
+        },
+        {
+          "station": "22nd Street",
+          "time": "10:40a"
+        },
+        {
+          "station": "San Francisco",
+          "time": "10:46a"
+        }
+      ]
+    },
+    {
+      "train": "613",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "Tamien",
+          "time": "9:51a"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "9:56a"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "10:02a"
+        },
+        {
+          "station": "Lawrence",
+          "time": "10:07a"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "10:11a"
+        },
+        {
+          "station": "Mountain View",
+          "time": "10:15a"
+        },
+        {
+          "station": "San Antonio",
+          "time": "10:18a"
+        },
+        {
+          "station": "California Avenue",
+          "time": "10:21a"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "10:24a"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "10:26a"
+        },
+        {
+          "station": "Redwood City",
+          "time": "10:32a"
+        },
+        {
+          "station": "San Carlos",
+          "time": "10:35a"
+        },
+        {
+          "station": "Belmont",
+          "time": "10:38a"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "10:41a"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "10:43a"
+        },
+        {
+          "station": "San Mateo",
+          "time": "10:46a"
+        },
+        {
+          "station": "Burlingame",
+          "time": "10:48a"
+        },
+        {
+          "station": "Broadway",
+          "time": "10:51a"
+        },
+        {
+          "station": "Millbrae",
+          "time": "10:54a"
+        },
+        {
+          "station": "San Bruno",
+          "time": "10:57a"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "11:00a"
+        },
+        {
+          "station": "Bayshore",
+          "time": "11:05a"
+        },
+        {
+          "station": "22nd Street",
+          "time": "11:10a"
+        },
+        {
+          "station": "San Francisco",
+          "time": "11:16a"
+        }
+      ]
+    },
+    {
+      "train": "615",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Jose Diridon",
+          "time": "10:26a"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "10:32a"
+        },
+        {
+          "station": "Lawrence",
+          "time": "10:37a"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "10:41a"
+        },
+        {
+          "station": "Mountain View",
+          "time": "10:45a"
+        },
+        {
+          "station": "San Antonio",
+          "time": "10:48a"
+        },
+        {
+          "station": "California Avenue",
+          "time": "10:51a"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "10:54a"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "10:56a"
+        },
+        {
+          "station": "Redwood City",
+          "time": "11:02a"
+        },
+        {
+          "station": "San Carlos",
+          "time": "11:05a"
+        },
+        {
+          "station": "Belmont",
+          "time": "11:08a"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "11:11a"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "11:13a"
+        },
+        {
+          "station": "San Mateo",
+          "time": "11:16a"
+        },
+        {
+          "station": "Burlingame",
+          "time": "11:18a"
+        },
+        {
+          "station": "Broadway",
+          "time": "11:21a"
+        },
+        {
+          "station": "Millbrae",
+          "time": "11:24a"
+        },
+        {
+          "station": "San Bruno",
+          "time": "11:27a"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "11:30a"
+        },
+        {
+          "station": "Bayshore",
+          "time": "11:35a"
+        },
+        {
+          "station": "22nd Street",
+          "time": "11:40a"
+        },
+        {
+          "station": "San Francisco",
+          "time": "11:46a"
+        }
+      ]
+    },
+    {
+      "train": "617",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "Tamien",
+          "time": "10:51a"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "10:56a"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "11:02a"
+        },
+        {
+          "station": "Lawrence",
+          "time": "11:07a"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "11:11a"
+        },
+        {
+          "station": "Mountain View",
+          "time": "11:15a"
+        },
+        {
+          "station": "San Antonio",
+          "time": "11:18a"
+        },
+        {
+          "station": "California Avenue",
+          "time": "11:21a"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "11:24a"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "11:26a"
+        },
+        {
+          "station": "Redwood City",
+          "time": "11:32a"
+        },
+        {
+          "station": "San Carlos",
+          "time": "11:35a"
+        },
+        {
+          "station": "Belmont",
+          "time": "11:38a"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "11:41a"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "11:43a"
+        },
+        {
+          "station": "San Mateo",
+          "time": "11:46a"
+        },
+        {
+          "station": "Burlingame",
+          "time": "11:48a"
+        },
+        {
+          "station": "Broadway",
+          "time": "11:51a"
+        },
+        {
+          "station": "Millbrae",
+          "time": "11:54a"
+        },
+        {
+          "station": "San Bruno",
+          "time": "11:57a"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "12:00p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "12:05p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "12:10p"
+        },
+        {
+          "station": "San Francisco",
+          "time": "12:16p"
+        }
+      ]
+    },
+    {
+      "train": "619",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Jose Diridon",
+          "time": "11:26a"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "11:32a"
+        },
+        {
+          "station": "Lawrence",
+          "time": "11:37a"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "11:41a"
+        },
+        {
+          "station": "Mountain View",
+          "time": "11:45a"
+        },
+        {
+          "station": "San Antonio",
+          "time": "11:48a"
+        },
+        {
+          "station": "California Avenue",
+          "time": "11:51a"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "11:54a"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "11:56a"
+        },
+        {
+          "station": "Redwood City",
+          "time": "12:02p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "12:05p"
+        },
+        {
+          "station": "Belmont",
+          "time": "12:08p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "12:11p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "12:13p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "12:16p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "12:18p"
+        },
+        {
+          "station": "Broadway",
+          "time": "12:21p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "12:24p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "12:27p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "12:30p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "12:35p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "12:40p"
+        },
+        {
+          "station": "San Francisco",
+          "time": "12:46p"
+        }
+      ]
+    },
+    {
+      "train": "621",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "Tamien",
+          "time": "11:51a"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "11:56a"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "12:02p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "12:07p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "12:11p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "12:15p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "12:18p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "12:21p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "12:24p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "12:26p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "12:32p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "12:35p"
+        },
+        {
+          "station": "Belmont",
+          "time": "12:38p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "12:41p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "12:43p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "12:46p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "12:48p"
+        },
+        {
+          "station": "Broadway",
+          "time": "12:51p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "12:54p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "12:57p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "1:00p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "1:05p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "1:10p"
+        },
+        {
+          "station": "San Francisco",
+          "time": "1:16p"
+        }
+      ]
+    },
+    {
+      "train": "623",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Jose Diridon",
+          "time": "12:26p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "12:32p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "12:37p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "12:41p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "12:45p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "12:48p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "12:51p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "12:54p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "12:56p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "1:02p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "1:05p"
+        },
+        {
+          "station": "Belmont",
+          "time": "1:08p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "1:11p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "1:13p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "1:16p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "1:18p"
+        },
+        {
+          "station": "Broadway",
+          "time": "1:21p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "1:24p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "1:27p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "1:30p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "1:35p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "1:40p"
+        },
+        {
+          "station": "San Francisco",
+          "time": "1:46p"
+        }
+      ]
+    },
+    {
+      "train": "625",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "Tamien",
+          "time": "12:51p"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "12:56p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "1:02p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "1:07p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "1:11p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "1:15p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "1:18p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "1:21p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "1:24p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "1:26p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "1:32p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "1:35p"
+        },
+        {
+          "station": "Belmont",
+          "time": "1:38p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "1:41p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "1:43p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "1:46p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "1:48p"
+        },
+        {
+          "station": "Broadway",
+          "time": "1:51p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "1:54p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "1:57p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "2:00p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "2:05p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "2:10p"
+        },
+        {
+          "station": "San Francisco",
+          "time": "2:16p"
+        }
+      ]
+    },
+    {
+      "train": "627",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Jose Diridon",
+          "time": "1:26p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "1:32p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "1:37p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "1:41p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "1:45p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "1:48p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "1:51p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "1:54p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "1:56p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "2:02p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "2:05p"
+        },
+        {
+          "station": "Belmont",
+          "time": "2:08p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "2:11p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "2:13p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "2:16p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "2:18p"
+        },
+        {
+          "station": "Broadway",
+          "time": "2:21p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "2:24p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "2:27p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "2:30p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "2:35p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "2:40p"
+        },
+        {
+          "station": "San Francisco",
+          "time": "2:46p"
+        }
+      ]
+    },
+    {
+      "train": "629",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "Tamien",
+          "time": "1:51p"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "1:56p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "2:02p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "2:07p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "2:11p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "2:15p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "2:18p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "2:21p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "2:24p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "2:26p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "2:32p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "2:35p"
+        },
+        {
+          "station": "Belmont",
+          "time": "2:38p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "2:41p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "2:43p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "2:46p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "2:48p"
+        },
+        {
+          "station": "Broadway",
+          "time": "2:51p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "2:54p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "2:57p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "3:00p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "3:05p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "3:10p"
+        },
+        {
+          "station": "San Francisco",
+          "time": "3:16p"
+        }
+      ]
+    },
+    {
+      "train": "631",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Jose Diridon",
+          "time": "2:26p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "2:32p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "2:37p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "2:41p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "2:45p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "2:48p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "2:51p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "2:54p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "2:56p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "3:02p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "3:05p"
+        },
+        {
+          "station": "Belmont",
+          "time": "3:08p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "3:11p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "3:13p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "3:16p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "3:18p"
+        },
+        {
+          "station": "Broadway",
+          "time": "3:21p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "3:24p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "3:27p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "3:30p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "3:35p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "3:40p"
+        },
+        {
+          "station": "San Francisco",
+          "time": "3:46p"
+        }
+      ]
+    },
+    {
+      "train": "633",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "Tamien",
+          "time": "2:51p"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "2:56p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "3:02p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "3:07p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "3:11p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "3:15p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "3:18p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "3:21p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "3:24p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "3:26p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "3:32p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "3:35p"
+        },
+        {
+          "station": "Belmont",
+          "time": "3:38p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "3:41p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "3:43p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "3:46p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "3:48p"
+        },
+        {
+          "station": "Broadway",
+          "time": "3:51p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "3:54p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "3:57p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "4:00p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "4:05p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "4:10p"
+        },
+        {
+          "station": "San Francisco",
+          "time": "4:16p"
+        }
+      ]
+    },
+    {
+      "train": "635",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Jose Diridon",
+          "time": "3:26p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "3:32p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "3:37p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "3:41p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "3:45p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "3:48p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "3:51p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "3:54p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "3:56p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "4:02p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "4:05p"
+        },
+        {
+          "station": "Belmont",
+          "time": "4:08p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "4:11p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "4:13p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "4:16p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "4:18p"
+        },
+        {
+          "station": "Broadway",
+          "time": "4:21p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "4:24p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "4:27p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "4:30p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "4:35p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "4:40p"
+        },
+        {
+          "station": "San Francisco",
+          "time": "4:46p"
+        }
+      ]
+    },
+    {
+      "train": "637",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "Tamien",
+          "time": "3:51p"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "3:56p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "4:02p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "4:07p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "4:11p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "4:15p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "4:18p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "4:21p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "4:24p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "4:26p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "4:32p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "4:35p"
+        },
+        {
+          "station": "Belmont",
+          "time": "4:38p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "4:41p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "4:43p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "4:46p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "4:48p"
+        },
+        {
+          "station": "Broadway",
+          "time": "4:51p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "4:54p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "4:57p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "5:00p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "5:05p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "5:10p"
+        },
+        {
+          "station": "San Francisco",
+          "time": "5:16p"
+        }
+      ]
+    },
+    {
+      "train": "639",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Jose Diridon",
+          "time": "4:26p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "4:32p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "4:37p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "4:41p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "4:45p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "4:48p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "4:51p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "4:54p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "4:56p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "5:02p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "5:05p"
+        },
+        {
+          "station": "Belmont",
+          "time": "5:08p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "5:11p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "5:13p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "5:16p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "5:18p"
+        },
+        {
+          "station": "Broadway",
+          "time": "5:21p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "5:24p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "5:27p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "5:30p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "5:35p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "5:40p"
+        },
+        {
+          "station": "San Francisco",
+          "time": "5:46p"
+        }
+      ]
+    },
+    {
+      "train": "641",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "Tamien",
+          "time": "4:51p"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "4:56p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "5:02p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "5:07p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "5:11p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "5:15p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "5:18p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "5:21p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "5:24p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "5:26p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "5:32p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "5:35p"
+        },
+        {
+          "station": "Belmont",
+          "time": "5:38p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "5:41p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "5:43p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "5:46p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "5:48p"
+        },
+        {
+          "station": "Broadway",
+          "time": "5:51p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "5:54p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "5:57p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "6:00p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "6:05p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "6:10p"
+        },
+        {
+          "station": "San Francisco",
+          "time": "6:16p"
+        }
+      ]
+    },
+    {
+      "train": "643",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Jose Diridon",
+          "time": "5:26p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "5:32p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "5:37p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "5:41p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "5:45p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "5:48p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "5:51p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "5:54p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "5:56p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "6:02p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "6:05p"
+        },
+        {
+          "station": "Belmont",
+          "time": "6:08p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "6:11p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "6:13p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "6:16p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "6:18p"
+        },
+        {
+          "station": "Broadway",
+          "time": "6:21p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "6:24p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "6:27p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "6:30p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "6:35p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "6:40p"
+        },
+        {
+          "station": "San Francisco",
+          "time": "6:46p"
+        }
+      ]
+    },
+    {
+      "train": "645",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "Tamien",
+          "time": "5:51p"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "5:56p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "6:02p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "6:07p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "6:11p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "6:15p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "6:18p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "6:21p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "6:24p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "6:26p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "6:32p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "6:35p"
+        },
+        {
+          "station": "Belmont",
+          "time": "6:38p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "6:41p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "6:43p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "6:46p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "6:48p"
+        },
+        {
+          "station": "Broadway",
+          "time": "6:51p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "6:54p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "6:57p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "7:00p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "7:05p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "7:10p"
+        },
+        {
+          "station": "San Francisco",
+          "time": "7:16p"
+        }
+      ]
+    },
+    {
+      "train": "647",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Jose Diridon",
+          "time": "6:26p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "6:32p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "6:37p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "6:41p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "6:45p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "6:48p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "6:51p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "6:54p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "6:56p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "7:02p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "7:05p"
+        },
+        {
+          "station": "Belmont",
+          "time": "7:08p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "7:11p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "7:13p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "7:16p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "7:18p"
+        },
+        {
+          "station": "Broadway",
+          "time": "7:21p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "7:24p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "7:27p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "7:30p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "7:35p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "7:40p"
+        },
+        {
+          "station": "San Francisco",
+          "time": "7:46p"
+        }
+      ]
+    },
+    {
+      "train": "649",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "Tamien",
+          "time": "6:51p"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "6:56p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "7:02p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "7:07p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "7:11p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "7:15p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "7:18p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "7:21p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "7:24p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "7:26p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "7:32p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "7:35p"
+        },
+        {
+          "station": "Belmont",
+          "time": "7:38p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "7:41p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "7:43p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "7:46p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "7:48p"
+        },
+        {
+          "station": "Broadway",
+          "time": "7:51p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "7:54p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "7:57p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "8:00p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "8:05p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "8:10p"
+        },
+        {
+          "station": "San Francisco",
+          "time": "8:16p"
+        }
+      ]
+    },
+    {
+      "train": "651",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Jose Diridon",
+          "time": "7:26p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "7:32p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "7:37p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "7:41p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "7:45p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "7:48p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "7:51p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "7:54p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "7:56p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "8:02p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "8:05p"
+        },
+        {
+          "station": "Belmont",
+          "time": "8:08p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "8:11p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "8:13p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "8:16p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "8:18p"
+        },
+        {
+          "station": "Broadway",
+          "time": "8:21p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "8:24p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "8:27p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "8:30p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "8:35p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "8:40p"
+        },
+        {
+          "station": "San Francisco",
+          "time": "8:46p"
+        }
+      ]
+    },
+    {
+      "train": "653",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "Tamien",
+          "time": "7:51p"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "7:56p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "8:02p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "8:07p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "8:11p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "8:15p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "8:18p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "8:21p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "8:24p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "8:26p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "8:32p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "8:35p"
+        },
+        {
+          "station": "Belmont",
+          "time": "8:38p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "8:41p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "8:43p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "8:46p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "8:48p"
+        },
+        {
+          "station": "Broadway",
+          "time": "8:51p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "8:54p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "8:57p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "9:00p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "9:05p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "9:10p"
+        },
+        {
+          "station": "San Francisco",
+          "time": "9:16p"
+        }
+      ]
+    },
+    {
+      "train": "655",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Jose Diridon",
+          "time": "8:26p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "8:32p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "8:37p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "8:41p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "8:45p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "8:48p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "8:51p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "8:54p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "8:56p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "9:02p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "9:05p"
+        },
+        {
+          "station": "Belmont",
+          "time": "9:08p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "9:11p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "9:13p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "9:16p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "9:18p"
+        },
+        {
+          "station": "Broadway",
+          "time": "9:21p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "9:24p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "9:27p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "9:30p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "9:35p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "9:40p"
+        },
+        {
+          "station": "San Francisco",
+          "time": "9:46p"
+        }
+      ]
+    },
+    {
+      "train": "657",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "Tamien",
+          "time": "8:51p"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "8:56p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "9:02p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "9:07p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "9:11p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "9:15p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "9:18p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "9:21p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "9:24p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "9:26p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "9:32p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "9:35p"
+        },
+        {
+          "station": "Belmont",
+          "time": "9:38p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "9:41p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "9:43p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "9:46p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "9:48p"
+        },
+        {
+          "station": "Broadway",
+          "time": "9:51p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "9:54p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "9:57p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "10:00p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "10:05p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "10:10p"
+        },
+        {
+          "station": "San Francisco",
+          "time": "10:16p"
+        }
+      ]
+    },
+    {
+      "train": "659",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Jose Diridon",
+          "time": "9:26p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "9:32p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "9:37p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "9:41p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "9:45p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "9:48p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "9:51p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "9:54p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "9:56p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "10:02p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "10:05p"
+        },
+        {
+          "station": "Belmont",
+          "time": "10:08p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "10:11p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "10:13p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "10:16p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "10:18p"
+        },
+        {
+          "station": "Broadway",
+          "time": "10:21p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "10:24p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "10:27p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "10:30p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "10:35p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "10:40p"
+        },
+        {
+          "station": "San Francisco",
+          "time": "10:46p"
+        }
+      ]
+    },
+    {
+      "train": "661",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "Tamien",
+          "time": "9:51p"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "9:56p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "10:02p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "10:07p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "10:11p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "10:15p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "10:18p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "10:21p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "10:24p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "10:26p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "10:32p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "10:35p"
+        },
+        {
+          "station": "Belmont",
+          "time": "10:38p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "10:41p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "10:43p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "10:46p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "10:48p"
+        },
+        {
+          "station": "Broadway",
+          "time": "10:51p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "10:54p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "10:57p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "11:00p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "11:05p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "11:10p"
+        },
+        {
+          "station": "San Francisco",
+          "time": "11:16p"
+        }
+      ]
+    },
+    {
+      "train": "663",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Jose Diridon",
+          "time": "10:30p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "10:36p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "10:41p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "10:45p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "10:49p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "10:52p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "10:55p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "10:58p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "11:00p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "11:06p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "11:09p"
+        },
+        {
+          "station": "Belmont",
+          "time": "11:12p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "11:15p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "11:17p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "11:20p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "11:22p"
+        },
+        {
+          "station": "Broadway",
+          "time": "11:25p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "11:28p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "11:31p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "11:34p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "11:39p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "11:44p"
+        },
+        {
+          "station": "San Francisco",
+          "time": "11:50p"
+        }
+      ]
+    },
+    {
+      "train": "665",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "Tamien",
+          "time": "11:25p"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "11:30p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "11:36p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "11:41p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "11:45p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "11:49p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "11:52p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "11:55p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "11:58p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "12:00a"
+        },
+        {
+          "station": "Redwood City",
+          "time": "12:06a"
+        },
+        {
+          "station": "San Carlos",
+          "time": "12:09a"
+        },
+        {
+          "station": "Belmont",
+          "time": "12:12a"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "12:15a"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "12:17a"
+        },
+        {
+          "station": "San Mateo",
+          "time": "12:20a"
+        },
+        {
+          "station": "Burlingame",
+          "time": "12:22a"
+        },
+        {
+          "station": "Broadway",
+          "time": "12:25a"
+        },
+        {
+          "station": "Millbrae",
+          "time": "12:28a"
+        },
+        {
+          "station": "San Bruno",
+          "time": "12:31a"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "12:34a"
+        },
+        {
+          "station": "Bayshore",
+          "time": "12:39a"
+        },
+        {
+          "station": "22nd Street",
+          "time": "12:44a"
+        },
+        {
+          "station": "San Francisco",
+          "time": "12:50a"
+        }
+      ]
+    }
+  ],
+  "southbound": [
+    {
+      "train": "602",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Francisco",
+          "time": "7:55a"
+        },
+        {
+          "station": "22nd Street",
+          "time": "8:00a"
+        },
+        {
+          "station": "Bayshore",
+          "time": "8:04a"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "8:10a"
+        },
+        {
+          "station": "San Bruno",
+          "time": "8:13a"
+        },
+        {
+          "station": "Millbrae",
+          "time": "8:16a"
+        },
+        {
+          "station": "Broadway",
+          "time": "8:19a"
+        },
+        {
+          "station": "Burlingame",
+          "time": "8:21a"
+        },
+        {
+          "station": "San Mateo",
+          "time": "8:24a"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "8:26a"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "8:29a"
+        },
+        {
+          "station": "Belmont",
+          "time": "8:32a"
+        },
+        {
+          "station": "San Carlos",
+          "time": "8:34a"
+        },
+        {
+          "station": "Redwood City",
+          "time": "8:38a"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "8:42a"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "8:46a"
+        },
+        {
+          "station": "California Avenue",
+          "time": "8:49a"
+        },
+        {
+          "station": "San Antonio",
+          "time": "8:52a"
+        },
+        {
+          "station": "Mountain View",
+          "time": "8:55a"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "8:59a"
+        },
+        {
+          "station": "Lawrence",
+          "time": "9:03a"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "9:07a"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "9:15a"
+        },
+        {
+          "station": "Tamien",
+          "time": "9:19a"
+        }
+      ]
+    },
+    {
+      "train": "604",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Francisco",
+          "time": "8:25a"
+        },
+        {
+          "station": "22nd Street",
+          "time": "8:30a"
+        },
+        {
+          "station": "Bayshore",
+          "time": "8:34a"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "8:40a"
+        },
+        {
+          "station": "San Bruno",
+          "time": "8:43a"
+        },
+        {
+          "station": "Millbrae",
+          "time": "8:46a"
+        },
+        {
+          "station": "Broadway",
+          "time": "8:49a"
+        },
+        {
+          "station": "Burlingame",
+          "time": "8:51a"
+        },
+        {
+          "station": "San Mateo",
+          "time": "8:54a"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "8:56a"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "8:59a"
+        },
+        {
+          "station": "Belmont",
+          "time": "9:02a"
+        },
+        {
+          "station": "San Carlos",
+          "time": "9:04a"
+        },
+        {
+          "station": "Redwood City",
+          "time": "9:08a"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "9:12a"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "9:16a"
+        },
+        {
+          "station": "California Avenue",
+          "time": "9:19a"
+        },
+        {
+          "station": "San Antonio",
+          "time": "9:22a"
+        },
+        {
+          "station": "Mountain View",
+          "time": "9:25a"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "9:29a"
+        },
+        {
+          "station": "Lawrence",
+          "time": "9:33a"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "9:37a"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "9:44a"
+        }
+      ]
+    },
+    {
+      "train": "606",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Francisco",
+          "time": "8:55a"
+        },
+        {
+          "station": "22nd Street",
+          "time": "9:00a"
+        },
+        {
+          "station": "Bayshore",
+          "time": "9:04a"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "9:10a"
+        },
+        {
+          "station": "San Bruno",
+          "time": "9:13a"
+        },
+        {
+          "station": "Millbrae",
+          "time": "9:16a"
+        },
+        {
+          "station": "Broadway",
+          "time": "9:19a"
+        },
+        {
+          "station": "Burlingame",
+          "time": "9:21a"
+        },
+        {
+          "station": "San Mateo",
+          "time": "9:24a"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "9:26a"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "9:29a"
+        },
+        {
+          "station": "Belmont",
+          "time": "9:32a"
+        },
+        {
+          "station": "San Carlos",
+          "time": "9:34a"
+        },
+        {
+          "station": "Redwood City",
+          "time": "9:38a"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "9:42a"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "9:46a"
+        },
+        {
+          "station": "California Avenue",
+          "time": "9:49a"
+        },
+        {
+          "station": "San Antonio",
+          "time": "9:52a"
+        },
+        {
+          "station": "Mountain View",
+          "time": "9:55a"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "9:59a"
+        },
+        {
+          "station": "Lawrence",
+          "time": "10:03a"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "10:07a"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "10:15a"
+        },
+        {
+          "station": "Tamien",
+          "time": "10:19a"
+        }
+      ]
+    },
+    {
+      "train": "608",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Francisco",
+          "time": "9:25a"
+        },
+        {
+          "station": "22nd Street",
+          "time": "9:30a"
+        },
+        {
+          "station": "Bayshore",
+          "time": "9:34a"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "9:40a"
+        },
+        {
+          "station": "San Bruno",
+          "time": "9:43a"
+        },
+        {
+          "station": "Millbrae",
+          "time": "9:46a"
+        },
+        {
+          "station": "Broadway",
+          "time": "9:49a"
+        },
+        {
+          "station": "Burlingame",
+          "time": "9:51a"
+        },
+        {
+          "station": "San Mateo",
+          "time": "9:54a"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "9:56a"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "9:59a"
+        },
+        {
+          "station": "Belmont",
+          "time": "10:02a"
+        },
+        {
+          "station": "San Carlos",
+          "time": "10:04a"
+        },
+        {
+          "station": "Redwood City",
+          "time": "10:08a"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "10:12a"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "10:16a"
+        },
+        {
+          "station": "California Avenue",
+          "time": "10:19a"
+        },
+        {
+          "station": "San Antonio",
+          "time": "10:22a"
+        },
+        {
+          "station": "Mountain View",
+          "time": "10:25a"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "10:29a"
+        },
+        {
+          "station": "Lawrence",
+          "time": "10:33a"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "10:37a"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "10:44a"
+        }
+      ]
+    },
+    {
+      "train": "610",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Francisco",
+          "time": "9:55a"
+        },
+        {
+          "station": "22nd Street",
+          "time": "10:00a"
+        },
+        {
+          "station": "Bayshore",
+          "time": "10:04a"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "10:10a"
+        },
+        {
+          "station": "San Bruno",
+          "time": "10:13a"
+        },
+        {
+          "station": "Millbrae",
+          "time": "10:16a"
+        },
+        {
+          "station": "Broadway",
+          "time": "10:19a"
+        },
+        {
+          "station": "Burlingame",
+          "time": "10:21a"
+        },
+        {
+          "station": "San Mateo",
+          "time": "10:24a"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "10:26a"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "10:29a"
+        },
+        {
+          "station": "Belmont",
+          "time": "10:32a"
+        },
+        {
+          "station": "San Carlos",
+          "time": "10:34a"
+        },
+        {
+          "station": "Redwood City",
+          "time": "10:38a"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "10:42a"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "10:46a"
+        },
+        {
+          "station": "California Avenue",
+          "time": "10:49a"
+        },
+        {
+          "station": "San Antonio",
+          "time": "10:52a"
+        },
+        {
+          "station": "Mountain View",
+          "time": "10:55a"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "10:59a"
+        },
+        {
+          "station": "Lawrence",
+          "time": "11:03a"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "11:07a"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "11:15a"
+        },
+        {
+          "station": "Tamien",
+          "time": "11:19a"
+        }
+      ]
+    },
+    {
+      "train": "612",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Francisco",
+          "time": "10:25a"
+        },
+        {
+          "station": "22nd Street",
+          "time": "10:30a"
+        },
+        {
+          "station": "Bayshore",
+          "time": "10:34a"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "10:40a"
+        },
+        {
+          "station": "San Bruno",
+          "time": "10:43a"
+        },
+        {
+          "station": "Millbrae",
+          "time": "10:46a"
+        },
+        {
+          "station": "Broadway",
+          "time": "10:49a"
+        },
+        {
+          "station": "Burlingame",
+          "time": "10:51a"
+        },
+        {
+          "station": "San Mateo",
+          "time": "10:54a"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "10:56a"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "10:59a"
+        },
+        {
+          "station": "Belmont",
+          "time": "11:02a"
+        },
+        {
+          "station": "San Carlos",
+          "time": "11:04a"
+        },
+        {
+          "station": "Redwood City",
+          "time": "11:08a"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "11:12a"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "11:16a"
+        },
+        {
+          "station": "California Avenue",
+          "time": "11:19a"
+        },
+        {
+          "station": "San Antonio",
+          "time": "11:22a"
+        },
+        {
+          "station": "Mountain View",
+          "time": "11:25a"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "11:29a"
+        },
+        {
+          "station": "Lawrence",
+          "time": "11:33a"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "11:37a"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "11:44a"
+        }
+      ]
+    },
+    {
+      "train": "614",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Francisco",
+          "time": "10:55a"
+        },
+        {
+          "station": "22nd Street",
+          "time": "11:00a"
+        },
+        {
+          "station": "Bayshore",
+          "time": "11:04a"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "11:10a"
+        },
+        {
+          "station": "San Bruno",
+          "time": "11:13a"
+        },
+        {
+          "station": "Millbrae",
+          "time": "11:16a"
+        },
+        {
+          "station": "Broadway",
+          "time": "11:19a"
+        },
+        {
+          "station": "Burlingame",
+          "time": "11:21a"
+        },
+        {
+          "station": "San Mateo",
+          "time": "11:24a"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "11:26a"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "11:29a"
+        },
+        {
+          "station": "Belmont",
+          "time": "11:32a"
+        },
+        {
+          "station": "San Carlos",
+          "time": "11:34a"
+        },
+        {
+          "station": "Redwood City",
+          "time": "11:38a"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "11:42a"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "11:46a"
+        },
+        {
+          "station": "California Avenue",
+          "time": "11:49a"
+        },
+        {
+          "station": "San Antonio",
+          "time": "11:52a"
+        },
+        {
+          "station": "Mountain View",
+          "time": "11:55a"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "11:59a"
+        },
+        {
+          "station": "Lawrence",
+          "time": "12:03p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "12:07p"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "12:15p"
+        },
+        {
+          "station": "Tamien",
+          "time": "12:19p"
+        }
+      ]
+    },
+    {
+      "train": "616",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Francisco",
+          "time": "11:25a"
+        },
+        {
+          "station": "22nd Street",
+          "time": "11:30a"
+        },
+        {
+          "station": "Bayshore",
+          "time": "11:34a"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "11:40a"
+        },
+        {
+          "station": "San Bruno",
+          "time": "11:43a"
+        },
+        {
+          "station": "Millbrae",
+          "time": "11:46a"
+        },
+        {
+          "station": "Broadway",
+          "time": "11:49a"
+        },
+        {
+          "station": "Burlingame",
+          "time": "11:51a"
+        },
+        {
+          "station": "San Mateo",
+          "time": "11:54a"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "11:56a"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "11:59a"
+        },
+        {
+          "station": "Belmont",
+          "time": "12:02p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "12:04p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "12:08p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "12:12p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "12:16p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "12:19p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "12:22p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "12:25p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "12:29p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "12:33p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "12:37p"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "12:44p"
+        }
+      ]
+    },
+    {
+      "train": "618",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Francisco",
+          "time": "11:55a"
+        },
+        {
+          "station": "22nd Street",
+          "time": "12:00p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "12:04p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "12:10p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "12:13p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "12:16p"
+        },
+        {
+          "station": "Broadway",
+          "time": "12:19p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "12:21p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "12:24p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "12:26p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "12:29p"
+        },
+        {
+          "station": "Belmont",
+          "time": "12:32p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "12:34p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "12:38p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "12:42p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "12:46p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "12:49p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "12:52p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "12:55p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "12:59p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "1:03p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "1:07p"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "1:15p"
+        },
+        {
+          "station": "Tamien",
+          "time": "1:19p"
+        }
+      ]
+    },
+    {
+      "train": "620",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Francisco",
+          "time": "12:25p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "12:30p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "12:34p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "12:40p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "12:43p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "12:46p"
+        },
+        {
+          "station": "Broadway",
+          "time": "12:49p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "12:51p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "12:54p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "12:56p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "12:59p"
+        },
+        {
+          "station": "Belmont",
+          "time": "1:02p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "1:04p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "1:08p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "1:12p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "1:16p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "1:19p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "1:22p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "1:25p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "1:29p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "1:33p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "1:37p"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "1:44p"
+        }
+      ]
+    },
+    {
+      "train": "622",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Francisco",
+          "time": "12:55p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "1:00p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "1:04p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "1:10p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "1:13p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "1:16p"
+        },
+        {
+          "station": "Broadway",
+          "time": "1:19p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "1:21p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "1:24p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "1:26p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "1:29p"
+        },
+        {
+          "station": "Belmont",
+          "time": "1:32p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "1:34p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "1:38p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "1:42p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "1:46p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "1:49p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "1:52p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "1:55p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "1:59p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "2:03p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "2:07p"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "2:15p"
+        },
+        {
+          "station": "Tamien",
+          "time": "2:19p"
+        }
+      ]
+    },
+    {
+      "train": "624",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Francisco",
+          "time": "1:25p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "1:30p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "1:34p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "1:40p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "1:43p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "1:46p"
+        },
+        {
+          "station": "Broadway",
+          "time": "1:49p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "1:51p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "1:54p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "1:56p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "1:59p"
+        },
+        {
+          "station": "Belmont",
+          "time": "2:02p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "2:04p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "2:08p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "2:12p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "2:16p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "2:19p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "2:22p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "2:25p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "2:29p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "2:33p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "2:37p"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "2:44p"
+        }
+      ]
+    },
+    {
+      "train": "626",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Francisco",
+          "time": "1:55p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "2:00p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "2:04p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "2:10p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "2:13p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "2:16p"
+        },
+        {
+          "station": "Broadway",
+          "time": "2:19p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "2:21p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "2:24p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "2:26p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "2:29p"
+        },
+        {
+          "station": "Belmont",
+          "time": "2:32p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "2:34p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "2:38p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "2:42p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "2:46p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "2:49p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "2:52p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "2:55p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "2:59p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "3:03p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "3:07p"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "3:15p"
+        },
+        {
+          "station": "Tamien",
+          "time": "3:19p"
+        }
+      ]
+    },
+    {
+      "train": "628",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Francisco",
+          "time": "2:25p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "2:30p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "2:34p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "2:40p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "2:43p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "2:46p"
+        },
+        {
+          "station": "Broadway",
+          "time": "2:49p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "2:51p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "2:54p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "2:56p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "2:59p"
+        },
+        {
+          "station": "Belmont",
+          "time": "3:02p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "3:04p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "3:08p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "3:12p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "3:16p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "3:19p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "3:22p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "3:25p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "3:29p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "3:33p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "3:37p"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "3:44p"
+        }
+      ]
+    },
+    {
+      "train": "630",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Francisco",
+          "time": "2:55p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "3:00p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "3:04p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "3:10p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "3:13p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "3:16p"
+        },
+        {
+          "station": "Broadway",
+          "time": "3:19p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "3:21p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "3:24p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "3:26p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "3:29p"
+        },
+        {
+          "station": "Belmont",
+          "time": "3:32p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "3:34p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "3:38p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "3:42p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "3:46p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "3:49p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "3:52p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "3:55p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "3:59p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "4:03p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "4:07p"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "4:15p"
+        },
+        {
+          "station": "Tamien",
+          "time": "4:19p"
+        }
+      ]
+    },
+    {
+      "train": "632",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Francisco",
+          "time": "3:25p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "3:30p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "3:34p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "3:40p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "3:43p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "3:46p"
+        },
+        {
+          "station": "Broadway",
+          "time": "3:49p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "3:51p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "3:54p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "3:56p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "3:59p"
+        },
+        {
+          "station": "Belmont",
+          "time": "4:02p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "4:04p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "4:08p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "4:12p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "4:16p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "4:19p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "4:22p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "4:25p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "4:29p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "4:33p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "4:37p"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "4:44p"
+        }
+      ]
+    },
+    {
+      "train": "634",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Francisco",
+          "time": "3:55p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "4:00p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "4:04p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "4:10p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "4:13p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "4:16p"
+        },
+        {
+          "station": "Broadway",
+          "time": "4:19p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "4:21p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "4:24p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "4:26p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "4:29p"
+        },
+        {
+          "station": "Belmont",
+          "time": "4:32p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "4:34p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "4:38p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "4:42p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "4:46p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "4:49p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "4:52p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "4:55p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "4:59p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "5:03p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "5:07p"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "5:15p"
+        },
+        {
+          "station": "Tamien",
+          "time": "5:19p"
+        }
+      ]
+    },
+    {
+      "train": "636",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Francisco",
+          "time": "4:25p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "4:30p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "4:34p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "4:40p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "4:43p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "4:46p"
+        },
+        {
+          "station": "Broadway",
+          "time": "4:49p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "4:51p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "4:54p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "4:56p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "4:59p"
+        },
+        {
+          "station": "Belmont",
+          "time": "5:02p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "5:04p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "5:08p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "5:12p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "5:16p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "5:19p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "5:22p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "5:25p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "5:29p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "5:33p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "5:37p"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "5:44p"
+        }
+      ]
+    },
+    {
+      "train": "638",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Francisco",
+          "time": "4:55p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "5:00p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "5:04p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "5:10p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "5:13p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "5:16p"
+        },
+        {
+          "station": "Broadway",
+          "time": "5:19p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "5:21p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "5:24p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "5:26p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "5:29p"
+        },
+        {
+          "station": "Belmont",
+          "time": "5:32p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "5:34p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "5:38p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "5:42p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "5:46p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "5:49p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "5:52p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "5:55p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "5:59p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "6:03p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "6:07p"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "6:15p"
+        },
+        {
+          "station": "Tamien",
+          "time": "6:19p"
+        }
+      ]
+    },
+    {
+      "train": "640",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Francisco",
+          "time": "5:25p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "5:30p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "5:34p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "5:40p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "5:43p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "5:46p"
+        },
+        {
+          "station": "Broadway",
+          "time": "5:49p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "5:51p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "5:54p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "5:56p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "5:59p"
+        },
+        {
+          "station": "Belmont",
+          "time": "6:02p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "6:04p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "6:08p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "6:12p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "6:16p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "6:19p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "6:22p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "6:25p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "6:29p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "6:33p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "6:37p"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "6:44p"
+        }
+      ]
+    },
+    {
+      "train": "642",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Francisco",
+          "time": "5:55p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "6:00p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "6:04p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "6:10p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "6:13p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "6:16p"
+        },
+        {
+          "station": "Broadway",
+          "time": "6:19p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "6:21p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "6:24p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "6:26p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "6:29p"
+        },
+        {
+          "station": "Belmont",
+          "time": "6:32p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "6:34p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "6:38p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "6:42p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "6:46p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "6:49p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "6:52p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "6:55p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "6:59p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "7:03p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "7:07p"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "7:15p"
+        },
+        {
+          "station": "Tamien",
+          "time": "7:19p"
+        }
+      ]
+    },
+    {
+      "train": "644",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Francisco",
+          "time": "6:25p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "6:30p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "6:34p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "6:40p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "6:43p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "6:46p"
+        },
+        {
+          "station": "Broadway",
+          "time": "6:49p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "6:51p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "6:54p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "6:56p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "6:59p"
+        },
+        {
+          "station": "Belmont",
+          "time": "7:02p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "7:04p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "7:08p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "7:12p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "7:16p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "7:19p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "7:22p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "7:25p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "7:29p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "7:33p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "7:37p"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "7:44p"
+        }
+      ]
+    },
+    {
+      "train": "646",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Francisco",
+          "time": "6:55p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "7:00p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "7:04p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "7:10p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "7:13p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "7:16p"
+        },
+        {
+          "station": "Broadway",
+          "time": "7:19p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "7:21p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "7:24p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "7:26p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "7:29p"
+        },
+        {
+          "station": "Belmont",
+          "time": "7:32p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "7:34p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "7:38p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "7:42p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "7:46p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "7:49p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "7:52p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "7:55p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "7:59p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "8:03p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "8:07p"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "8:15p"
+        },
+        {
+          "station": "Tamien",
+          "time": "8:19p"
+        }
+      ]
+    },
+    {
+      "train": "648",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Francisco",
+          "time": "7:25p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "7:30p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "7:34p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "7:40p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "7:43p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "7:46p"
+        },
+        {
+          "station": "Broadway",
+          "time": "7:49p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "7:51p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "7:54p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "7:56p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "7:59p"
+        },
+        {
+          "station": "Belmont",
+          "time": "8:02p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "8:04p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "8:08p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "8:12p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "8:16p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "8:19p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "8:22p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "8:25p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "8:29p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "8:33p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "8:37p"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "8:44p"
+        }
+      ]
+    },
+    {
+      "train": "650",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Francisco",
+          "time": "7:55p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "8:00p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "8:04p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "8:10p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "8:13p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "8:16p"
+        },
+        {
+          "station": "Broadway",
+          "time": "8:19p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "8:21p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "8:24p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "8:26p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "8:29p"
+        },
+        {
+          "station": "Belmont",
+          "time": "8:32p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "8:34p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "8:38p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "8:42p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "8:46p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "8:49p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "8:52p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "8:55p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "8:59p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "9:03p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "9:07p"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "9:15p"
+        },
+        {
+          "station": "Tamien",
+          "time": "9:19p"
+        }
+      ]
+    },
+    {
+      "train": "652",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Francisco",
+          "time": "8:25p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "8:30p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "8:34p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "8:40p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "8:43p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "8:46p"
+        },
+        {
+          "station": "Broadway",
+          "time": "8:49p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "8:51p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "8:54p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "8:56p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "8:59p"
+        },
+        {
+          "station": "Belmont",
+          "time": "9:02p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "9:04p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "9:08p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "9:12p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "9:16p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "9:19p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "9:22p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "9:25p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "9:29p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "9:33p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "9:37p"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "9:44p"
+        }
+      ]
+    },
+    {
+      "train": "654",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Francisco",
+          "time": "8:55p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "9:00p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "9:04p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "9:10p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "9:13p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "9:16p"
+        },
+        {
+          "station": "Broadway",
+          "time": "9:19p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "9:21p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "9:24p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "9:26p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "9:29p"
+        },
+        {
+          "station": "Belmont",
+          "time": "9:32p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "9:34p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "9:38p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "9:42p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "9:46p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "9:49p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "9:52p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "9:55p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "9:59p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "10:03p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "10:07p"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "10:15p"
+        },
+        {
+          "station": "Tamien",
+          "time": "10:19p"
+        }
+      ]
+    },
+    {
+      "train": "656",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Francisco",
+          "time": "9:25p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "9:30p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "9:34p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "9:40p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "9:43p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "9:46p"
+        },
+        {
+          "station": "Broadway",
+          "time": "9:49p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "9:51p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "9:54p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "9:56p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "9:59p"
+        },
+        {
+          "station": "Belmont",
+          "time": "10:02p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "10:04p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "10:08p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "10:12p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "10:16p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "10:19p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "10:22p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "10:25p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "10:29p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "10:33p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "10:37p"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "10:44p"
+        }
+      ]
+    },
+    {
+      "train": "658",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Francisco",
+          "time": "9:55p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "10:00p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "10:04p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "10:10p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "10:13p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "10:16p"
+        },
+        {
+          "station": "Broadway",
+          "time": "10:19p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "10:21p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "10:24p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "10:26p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "10:29p"
+        },
+        {
+          "station": "Belmont",
+          "time": "10:32p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "10:34p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "10:38p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "10:42p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "10:46p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "10:49p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "10:52p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "10:55p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "10:59p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "11:03p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "11:07p"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "11:15p"
+        },
+        {
+          "station": "Tamien",
+          "time": "11:19p"
+        }
+      ]
+    },
+    {
+      "train": "660",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Francisco",
+          "time": "10:25p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "10:30p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "10:34p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "10:40p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "10:43p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "10:46p"
+        },
+        {
+          "station": "Broadway",
+          "time": "10:49p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "10:51p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "10:54p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "10:56p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "10:59p"
+        },
+        {
+          "station": "Belmont",
+          "time": "11:02p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "11:04p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "11:08p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "11:12p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "11:16p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "11:19p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "11:22p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "11:25p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "11:29p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "11:33p"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "11:37p"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "11:44p"
+        }
+      ]
+    },
+    {
+      "train": "662",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Francisco",
+          "time": "10:55p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "11:00p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "11:04p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "11:10p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "11:13p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "11:16p"
+        },
+        {
+          "station": "Broadway",
+          "time": "11:19p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "11:21p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "11:24p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "11:26p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "11:29p"
+        },
+        {
+          "station": "Belmont",
+          "time": "11:32p"
+        },
+        {
+          "station": "San Carlos",
+          "time": "11:34p"
+        },
+        {
+          "station": "Redwood City",
+          "time": "11:38p"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "11:42p"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "11:46p"
+        },
+        {
+          "station": "California Avenue",
+          "time": "11:49p"
+        },
+        {
+          "station": "San Antonio",
+          "time": "11:52p"
+        },
+        {
+          "station": "Mountain View",
+          "time": "11:55p"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "11:59p"
+        },
+        {
+          "station": "Lawrence",
+          "time": "12:03a"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "12:07a"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "12:15a"
+        },
+        {
+          "station": "Tamien",
+          "time": "12:19a"
+        }
+      ]
+    },
+    {
+      "train": "664",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Francisco",
+          "time": "11:25p"
+        },
+        {
+          "station": "22nd Street",
+          "time": "11:30p"
+        },
+        {
+          "station": "Bayshore",
+          "time": "11:34p"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "11:40p"
+        },
+        {
+          "station": "San Bruno",
+          "time": "11:43p"
+        },
+        {
+          "station": "Millbrae",
+          "time": "11:46p"
+        },
+        {
+          "station": "Broadway",
+          "time": "11:49p"
+        },
+        {
+          "station": "Burlingame",
+          "time": "11:51p"
+        },
+        {
+          "station": "San Mateo",
+          "time": "11:54p"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "11:56p"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "11:59p"
+        },
+        {
+          "station": "Belmont",
+          "time": "12:02a"
+        },
+        {
+          "station": "San Carlos",
+          "time": "12:04a"
+        },
+        {
+          "station": "Redwood City",
+          "time": "12:08a"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "12:12a"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "12:16a"
+        },
+        {
+          "station": "California Avenue",
+          "time": "12:19a"
+        },
+        {
+          "station": "San Antonio",
+          "time": "12:22a"
+        },
+        {
+          "station": "Mountain View",
+          "time": "12:25a"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "12:29a"
+        },
+        {
+          "station": "Lawrence",
+          "time": "12:33a"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "12:37a"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "12:44a"
+        }
+      ]
+    },
+    {
+      "train": "668",
+      "type": "Local",
+      "stops": [
+        {
+          "station": "San Francisco",
+          "time": "12:05a"
+        },
+        {
+          "station": "22nd Street",
+          "time": "12:10a"
+        },
+        {
+          "station": "Bayshore",
+          "time": "12:14a"
+        },
+        {
+          "station": "S. San Francisco",
+          "time": "12:20a"
+        },
+        {
+          "station": "San Bruno",
+          "time": "12:23a"
+        },
+        {
+          "station": "Millbrae",
+          "time": "12:26a"
+        },
+        {
+          "station": "Broadway",
+          "time": "12:29a"
+        },
+        {
+          "station": "Burlingame",
+          "time": "12:31a"
+        },
+        {
+          "station": "San Mateo",
+          "time": "12:34a"
+        },
+        {
+          "station": "Hayward Park",
+          "time": "12:36a"
+        },
+        {
+          "station": "Hillsdale",
+          "time": "12:39a"
+        },
+        {
+          "station": "Belmont",
+          "time": "12:42a"
+        },
+        {
+          "station": "San Carlos",
+          "time": "12:44a"
+        },
+        {
+          "station": "Redwood City",
+          "time": "12:48a"
+        },
+        {
+          "station": "Menlo Park",
+          "time": "12:52a"
+        },
+        {
+          "station": "Palo Alto",
+          "time": "12:56a"
+        },
+        {
+          "station": "California Avenue",
+          "time": "12:59a"
+        },
+        {
+          "station": "San Antonio",
+          "time": "1:02a"
+        },
+        {
+          "station": "Mountain View",
+          "time": "1:05a"
+        },
+        {
+          "station": "Sunnyvale",
+          "time": "1:09a"
+        },
+        {
+          "station": "Lawrence",
+          "time": "1:13a"
+        },
+        {
+          "station": "Santa Clara",
+          "time": "1:17a"
+        },
+        {
+          "station": "San Jose Diridon",
+          "time": "1:25a"
+        },
+        {
+          "station": "Tamien",
+          "time": "1:29a"
+        }
+      ]
+    }
+  ]
+}
