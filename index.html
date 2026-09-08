@@ -393,7 +393,9 @@
   }
   .favorite-row.collapsed .favorite-row-header {
     margin-bottom: 0;
-    justify-content: space-between;
+  }
+  .favorite-star {
+    margin-left: auto;
   }
   .favorite-train-number {
     font-weight: 700;
@@ -411,13 +413,28 @@
     font-size: 0.8rem;
     opacity: 0.85;
   }
-  .favorite-detail {
+  .favorite-detail-row {
     display: flex;
     justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.15rem 0;
+  }
+  .favorite-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 0.05rem;
     font-size: 0.8rem;
-    padding: 0.1rem 0;
+    flex: 1;
+    min-width: 0;
+  }
+  .favorite-detail-row .favorite-detail:last-child {
+    align-items: flex-end;
+    text-align: right;
   }
   .favorite-detail span:first-child {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     opacity: 0.7;
   }
   .train-card {
@@ -1179,6 +1196,12 @@
     const collapsedFavorites = new Set();
 
     favoritesPanelEl.addEventListener("click", (e) => {
+      const starEl = e.target.closest(".train-star");
+      if (starEl) {
+        e.stopPropagation();
+        toggleStar(starEl.dataset.trainKey);
+        return;
+      }
       const nameEl = e.target.closest(".favorite-train-number");
       if (!nameEl) return;
       const key = nameEl.dataset.favoriteKey;
@@ -1209,6 +1232,7 @@
               <div class="favorite-row-header">
                 <span class="favorite-train-number" data-favorite-key="${info.key}">${info.trainNum}</span>
                 <span class="favorite-collapsed-times">${info.leaveLabel} → ${info.arriveLabel}</span>
+                <span class="train-star starred favorite-star" data-train-key="${info.key}">★</span>
               </div>
             </div>`;
           }
@@ -1217,11 +1241,16 @@
               <div class="favorite-row-header">
                 <span class="favorite-train-number" data-favorite-key="${info.key}">${info.trainNum}</span>
                 <span class="favorite-direction">${info.direction === "northbound" ? "Northbound" : "Southbound"}</span>
+                <span class="train-star starred favorite-star" data-train-key="${info.key}">★</span>
               </div>
-              <div class="favorite-detail"><span>Leaves</span><span>${info.leaveLabel}</span></div>
-              <div class="favorite-detail"><span>Arrives</span><span>${info.arriveLabel}</span></div>
-              <div class="favorite-detail"><span>Duration</span><span>${info.duration} min</span></div>
-              <div class="favorite-detail"><span>${info.statusLabel}</span><span>${info.statusValue}</span></div>
+              <div class="favorite-detail-row">
+                <div class="favorite-detail"><span>Leaves</span><span>${info.leaveLabel}</span></div>
+                <div class="favorite-detail"><span>Arrives</span><span>${info.arriveLabel}</span></div>
+              </div>
+              <div class="favorite-detail-row">
+                <div class="favorite-detail"><span>Duration</span><span>${info.duration} min</span></div>
+                <div class="favorite-detail"><span>${info.statusLabel}</span><span>${info.statusValue}</span></div>
+              </div>
             </div>`;
         })
         .join("");
