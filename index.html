@@ -428,18 +428,11 @@
     box-sizing: border-box;
     animation: cardIn 220ms ease-out both;
   }
-  .train-card.split {
-    justify-content: flex-start;
-  }
-  .train-box.split-header {
-    margin-bottom: 15px;
-  }
-  .split-connector {
-    position: relative;
-    height: 100px;
-    flex-shrink: 0;
-  }
   .train-box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, var(--event-border-opacity));
     background: rgba(255, 255, 255, var(--event-bg-opacity));
@@ -450,10 +443,6 @@
     padding: 0.5rem;
     box-sizing: border-box;
     transition: background-color 200ms ease, border-color 200ms ease;
-  }
-  .train-box.full {
-    flex: 1;
-    overflow-y: auto;
   }
   .train-box.skip-red {
     background: rgba(220, 50, 50, 0.55);
@@ -475,8 +464,6 @@
     text-transform: uppercase;
     letter-spacing: 0.05em;
     opacity: 0.85;
-    margin-bottom: 0.2rem;
-    min-height: 1.6rem;
     line-height: 1.2;
     display: flex;
     align-items: center;
@@ -486,16 +473,11 @@
     text-align: center;
     padding: 0.3rem;
     border-radius: 12px;
-    margin-bottom: 15px;
     flex-shrink: 0;
-    min-height: 2.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-  }
-  .train-box.split-part .train-card-header {
-    margin-bottom: 0;
   }
   .train-type-label {
     font-size: 0.65rem;
@@ -526,53 +508,43 @@
   }
   .train-stop-row {
     display: flex;
-    justify-content: space-between;
-    gap: 0.5rem;
-    padding: 0.15rem 0.3rem;
-    font-size: 0.75rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  }
-  .train-stop-row:last-child {
-    border-bottom: none;
-  }
-  .train-box.split-part .train-stop-row {
     flex-direction: column;
     align-items: center;
     gap: 0.15rem;
+    padding: 0.3rem;
+    font-size: 0.75rem;
   }
-  .train-box.split-part:not(.split-header) {
-    min-height: 3.4rem;
+  .train-connector {
+    position: relative;
+    flex: 1;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
+    min-height: 2.5rem;
   }
-  .split-arrow {
+  .train-connector-arrow {
     position: absolute;
     left: 50%;
-    top: 15px;
-    bottom: 39px;
+    top: 0;
+    bottom: 12px;
     width: 12px;
     transform: translateX(-50%);
     background: rgba(255, 255, 255, 0.18);
   }
-  .split-arrow::after {
+  .train-connector-arrow::after {
     content: "";
     position: absolute;
     left: 50%;
-    bottom: -24px;
+    bottom: -12px;
     transform: translateX(-50%);
     width: 0;
     height: 0;
-    border-left: 18px solid transparent;
-    border-right: 18px solid transparent;
-    border-top: 24px solid rgba(255, 255, 255, 0.18);
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-top: 12px solid rgba(255, 255, 255, 0.18);
   }
-  .split-duration {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+  .train-connector-duration {
+    position: relative;
     color: #ffffff;
     font-family: var(--font-main);
     font-size: 0.85rem;
@@ -1367,19 +1339,22 @@
 
           const startStop = train.stops.find((s) => s.station === startStation);
           const endStop = train.stops.find((s) => s.station === endStation);
-          const stopBox = (stop) =>
-            `<div class="train-box split-part ${skipClass}"><div class="train-stop-row"><span>${stationLabel(stop.station)}</span><span>${stop.time}</span></div></div>`;
+          const stopRow = (stop) =>
+            `<div class="train-stop-row"><span>${stationLabel(stop.station)}</span><span>${stop.time}</span></div>`;
           const durationMinutes = Math.abs(
             timeToScheduleMinutes(endStop.time) - timeToScheduleMinutes(startStop.time)
           );
           const startIsFirst = train.stops.indexOf(startStop) < train.stops.indexOf(endStop);
           const topStop = startIsFirst ? startStop : endStop;
           const bottomStop = startIsFirst ? endStop : startStop;
-          return `<div class="train-card split ${stateClass}" ${cardStyle}>
-            <div class="train-box split-part split-header ${skipClass}">${statusLabel}<div class="train-card-header">${headerContent}</div></div>
-            ${stopBox(topStop)}
-            <div class="split-connector"><div class="split-arrow"></div><div class="split-duration">${durationMinutes} min</div></div>
-            ${stopBox(bottomStop)}
+          return `<div class="train-card ${stateClass}" ${cardStyle}>
+            <div class="train-box ${skipClass}">
+              ${statusLabel}
+              <div class="train-card-header">${headerContent}</div>
+              ${stopRow(topStop)}
+              <div class="train-connector"><div class="train-connector-arrow"></div><div class="train-connector-duration">${durationMinutes} min</div></div>
+              ${stopRow(bottomStop)}
+            </div>
           </div>`;
         })
         .join("");
