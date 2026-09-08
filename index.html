@@ -201,8 +201,66 @@
     color: #14213d;
     border-color: #ffffff;
   }
-  #stop-toggle {
+  #station-select-btn {
     margin-left: auto;
+  }
+  .station-panel-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    padding: 1.5rem;
+    box-sizing: border-box;
+  }
+  .station-panel-overlay.visible {
+    display: flex;
+  }
+  .station-panel {
+    width: 100%;
+    max-width: 320px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, var(--event-border-opacity));
+    background: rgba(255, 255, 255, var(--event-bg-opacity));
+    -webkit-backdrop-filter: blur(var(--event-blur)) brightness(var(--event-darken));
+    backdrop-filter: blur(var(--event-blur)) brightness(var(--event-darken));
+    color: #ffffff;
+    font-family: var(--font-main);
+    padding: 1rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .station-panel-title {
+    font-weight: 700;
+    font-size: 1rem;
+  }
+  .station-panel-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    font-size: 0.85rem;
+  }
+  .station-panel-row label {
+    opacity: 0.75;
+  }
+  .station-panel-row select {
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    padding: 0.4rem 0.6rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+  }
+  .station-panel-row select option {
+    color: #14213d;
+  }
+  #station-panel-done {
+    align-self: flex-end;
   }
   .time-shift-row {
     display: flex;
@@ -718,7 +776,7 @@
     <div class="direction-toggle">
       <button class="dir-btn active" data-dir="northbound">Northbound</button>
       <button class="dir-btn" data-dir="southbound">Southbound</button>
-      <button id="stop-toggle" class="lock-toggle active">Show Stops</button>
+      <button id="station-select-btn" class="lock-toggle">Stations</button>
     </div>
     <div class="trains-row" id="trains-row"></div>
     <div class="favorites-panel" id="favorites-panel"></div>
@@ -733,6 +791,20 @@
         <input type="time" id="time-input" step="600" />
       </span>
       <button id="lock-toggle" class="lock-toggle active">Live</button>
+    </div>
+  </div>
+  <div class="station-panel-overlay" id="station-panel-overlay">
+    <div class="station-panel">
+      <div class="station-panel-title">Select Stations</div>
+      <div class="station-panel-row">
+        <label for="start-station-select">Start</label>
+        <select id="start-station-select"></select>
+      </div>
+      <div class="station-panel-row">
+        <label for="end-station-select">End</label>
+        <select id="end-station-select"></select>
+      </div>
+      <button id="station-panel-done" class="lock-toggle active">Done</button>
     </div>
   </div>
   <script>
@@ -952,15 +1024,76 @@
     nowLineEl.className = "now-line";
     const dirButtons = document.querySelectorAll(".dir-btn");
 
-    let stopsHidden = true;
-    const stopToggleEl = document.getElementById("stop-toggle");
+    const STATION_PREFS_KEY = "stationPrefs";
+    const DEFAULT_START_STATION = "San Jose Diridon";
+    const DEFAULT_END_STATION = "San Francisco";
 
-    stopToggleEl.addEventListener("click", () => {
-      stopsHidden = !stopsHidden;
-      stopToggleEl.classList.toggle("active", stopsHidden);
-      stopToggleEl.textContent = stopsHidden ? "Show Stops" : "Hide Stops";
-      renderSchedule(currentDirection);
+    function loadStationPrefs() {
+      let start = DEFAULT_START_STATION;
+      let end = DEFAULT_END_STATION;
+      try {
+        const stored = JSON.parse(localStorage.getItem(STATION_PREFS_KEY));
+        if (stored && typeof stored === "object") {
+          if (NORTHBOUND_STATIONS.includes(stored.start)) start = stored.start;
+          if (NORTHBOUND_STATIONS.includes(stored.end)) end = stored.end;
+        }
+      } catch (e) {}
+      return { start, end };
+    }
+
+    function saveStationPrefs() {
+      try {
+        localStorage.setItem(STATION_PREFS_KEY, JSON.stringify({ start: startStation, end: endStation }));
+      } catch (e) {}
+    }
+
+    let { start: startStation, end: endStation } = loadStationPrefs();
+
+    const stationPanelOverlay = document.getElementById("station-panel-overlay");
+    const stationSelectBtn = document.getElementById("station-select-btn");
+    const startStationSelect = document.getElementById("start-station-select");
+    const endStationSelect = document.getElementById("end-station-select");
+    const stationPanelDoneBtn = document.getElementById("station-panel-done");
+
+    function populateStationSelects() {
+      const optionsHtml = NORTHBOUND_STATIONS.map((s) => `<option value="${s}">${s}</option>`).join("");
+      startStationSelect.innerHTML = optionsHtml;
+      endStationSelect.innerHTML = optionsHtml;
+      startStationSelect.value = startStation;
+      endStationSelect.value = endStation;
+    }
+
+    populateStationSelects();
+
+    stationSelectBtn.addEventListener("click", () => {
+      populateStationSelects();
+      stationPanelOverlay.classList.add("visible");
     });
+
+    stationPanelOverlay.addEventListener("click", (e) => {
+      if (e.target === stationPanelOverlay) stationPanelOverlay.classList.remove("visible");
+    });
+
+    stationPanelDoneBtn.addEventListener("click", () => {
+      stationPanelOverlay.classList.remove("visible");
+    });
+
+    function applyStationSelection() {
+      const newStart = startStationSelect.value;
+      const newEnd = endStationSelect.value;
+      if (newStart === newEnd) {
+        startStationSelect.value = startStation;
+        endStationSelect.value = endStation;
+        return;
+      }
+      startStation = newStart;
+      endStation = newEnd;
+      saveStationPrefs();
+      renderSchedule(currentDirection);
+    }
+
+    startStationSelect.addEventListener("change", applyStationSelection);
+    endStationSelect.addEventListener("change", applyStationSelection);
 
     const MAX_STARRED_TRAINS = 3;
     const STARRED_STORAGE_KEY = "starredTrains";
@@ -1084,7 +1217,7 @@
 
     function renderFavoritesPanel() {
       const currentStars = starredTrains[currentDirection] || [];
-      const shouldShow = stopsHidden && currentStars.length > 0;
+      const shouldShow = currentStars.length > 0;
       favoritesPanelEl.classList.toggle("visible", shouldShow);
       if (!shouldShow) {
         favoritesPanelEl.innerHTML = "";
@@ -1135,7 +1268,10 @@
 
     function getVisibleEntries(trains) {
       const nowMinutes = getEffectiveMinutes();
-      const departures = trains.map((t) => timeToScheduleMinutes(t.stops[0].time));
+      const departures = trains.map((t) => {
+        const stop = t.stops.find((s) => s.station === startStation);
+        return timeToScheduleMinutes(stop ? stop.time : t.stops[0].time);
+      });
       let cutoffIndex = -1;
       for (let i = 0; i < departures.length; i++) {
         if (departures[i] <= nowMinutes) cutoffIndex = i;
@@ -1202,7 +1338,10 @@
     function renderSchedule(direction) {
       if (!trainSchedule) return;
       currentDirection = direction;
-      const trains = trainSchedule[direction];
+      const trains = trainSchedule[direction].filter(
+        (t) =>
+          t.stops.some((s) => s.station === startStation) && t.stops.some((s) => s.station === endStation)
+      );
       const stations = direction === "northbound" ? NORTHBOUND_STATIONS : SOUTHBOUND_STATIONS;
 
       const entries = getVisibleEntries(trains);
@@ -1226,33 +1365,21 @@
           const stateClass = `${status.departed ? "departed" : ""} ${status.imminent ? "imminent" : ""}`.trim();
           const cardStyle = `style="animation-delay: ${i * 40}ms"`;
 
-          if (stopsHidden) {
-            const sjStop = train.stops.find((s) => s.station === "San Jose Diridon");
-            const sfStop = train.stops.find((s) => s.station === "San Francisco");
-            const stopBox = (stop) =>
-              `<div class="train-box split-part ${skipClass}"><div class="train-stop-row"><span>${stationLabel(stop.station)}</span><span>${stop.time}</span></div></div>`;
-            const durationMinutes = Math.abs(
-              timeToScheduleMinutes(sfStop.time) - timeToScheduleMinutes(sjStop.time)
-            );
-            const topStop = direction === "southbound" ? sfStop : sjStop;
-            const bottomStop = direction === "southbound" ? sjStop : sfStop;
-            return `<div class="train-card split ${stateClass}" ${cardStyle}>
-              <div class="train-box split-part split-header ${skipClass}">${statusLabel}<div class="train-card-header">${headerContent}</div></div>
-              ${stopBox(topStop)}
-              <div class="split-connector"><div class="split-arrow"></div><div class="split-duration">${durationMinutes} min</div></div>
-              ${stopBox(bottomStop)}
-            </div>`;
-          }
-
-          const stopsHtml = train.stops
-            .map((s) => `<div class="train-stop-row"><span>${stationLabel(s.station)}</span><span>${s.time}</span></div>`)
-            .join("");
-          return `<div class="train-card ${stateClass}" ${cardStyle}>
-            <div class="train-box full ${skipClass}">
-              ${statusLabel}
-              <div class="train-card-header">${headerContent}</div>
-              ${stopsHtml}
-            </div>
+          const startStop = train.stops.find((s) => s.station === startStation);
+          const endStop = train.stops.find((s) => s.station === endStation);
+          const stopBox = (stop) =>
+            `<div class="train-box split-part ${skipClass}"><div class="train-stop-row"><span>${stationLabel(stop.station)}</span><span>${stop.time}</span></div></div>`;
+          const durationMinutes = Math.abs(
+            timeToScheduleMinutes(endStop.time) - timeToScheduleMinutes(startStop.time)
+          );
+          const startIsFirst = train.stops.indexOf(startStop) < train.stops.indexOf(endStop);
+          const topStop = startIsFirst ? startStop : endStop;
+          const bottomStop = startIsFirst ? endStop : startStop;
+          return `<div class="train-card split ${stateClass}" ${cardStyle}>
+            <div class="train-box split-part split-header ${skipClass}">${statusLabel}<div class="train-card-header">${headerContent}</div></div>
+            ${stopBox(topStop)}
+            <div class="split-connector"><div class="split-arrow"></div><div class="split-duration">${durationMinutes} min</div></div>
+            ${stopBox(bottomStop)}
           </div>`;
         })
         .join("");
