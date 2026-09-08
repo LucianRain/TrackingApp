@@ -353,9 +353,11 @@
   .trains-row {
     position: relative;
     flex: 1;
-    display: flex;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    align-content: start;
     align-items: stretch;
-    justify-content: space-evenly;
     gap: 0.75rem;
     overflow: hidden;
     min-height: 0;
@@ -430,6 +432,7 @@
   }
   .train-box {
     flex: 1;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 0.2rem;
@@ -520,14 +523,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 2.5rem;
+    min-height: 2.75rem;
   }
   .train-connector-arrow {
     position: absolute;
     left: 50%;
     top: 0;
-    bottom: 12px;
-    width: 12px;
+    bottom: 10px;
+    width: 10px;
     transform: translateX(-50%);
     background: rgba(255, 255, 255, 0.18);
   }
@@ -535,13 +538,13 @@
     content: "";
     position: absolute;
     left: 50%;
-    bottom: -12px;
+    bottom: -10px;
     transform: translateX(-50%);
     width: 0;
     height: 0;
-    border-left: 12px solid transparent;
-    border-right: 12px solid transparent;
-    border-top: 12px solid rgba(255, 255, 255, 0.18);
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid rgba(255, 255, 255, 0.18);
   }
   .train-connector-duration {
     position: relative;
@@ -1328,9 +1331,7 @@
           const trainKey = `${direction}-${train.train}`;
           const isStarred = starredTrains[direction].includes(trainKey);
           const starHtml = `<span class="train-star ${isStarred ? "starred" : ""}" data-train-key="${trainKey}">${isStarred ? "★" : "☆"}</span>`;
-          const headerContent = skipClass
-            ? `<div class="train-type-label">${train.type}</div><div class="train-number">${train.train}${starHtml}</div>`
-            : `<div class="train-number">${train.train}${starHtml}</div>`;
+          const headerContent = `<div class="train-type-label">${train.type}</div><div class="train-number">${train.train}${starHtml}</div>`;
 
           const status = getStatusInfo(adjustedDeparture, nowMinutes);
           const statusLabel = `<div class="train-status-label">${status.text}</div>`;
