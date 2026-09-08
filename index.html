@@ -259,6 +259,13 @@
   .station-panel-row select option {
     color: #14213d;
   }
+  .service-toggle {
+    display: flex;
+    gap: 0.5rem;
+  }
+  .service-toggle .dir-btn {
+    flex: 1;
+  }
   #station-panel-done {
     align-self: flex-end;
   }
@@ -773,7 +780,7 @@
     <div class="direction-toggle">
       <button class="dir-btn active" data-dir="northbound">Northbound</button>
       <button class="dir-btn" data-dir="southbound">Southbound</button>
-      <button id="station-select-btn" class="lock-toggle">Stations</button>
+      <button id="station-select-btn" class="lock-toggle">Settings</button>
     </div>
     <div class="trains-row" id="trains-row"></div>
     <div class="favorites-panel" id="favorites-panel"></div>
@@ -792,7 +799,14 @@
   </div>
   <div class="station-panel-overlay" id="station-panel-overlay">
     <div class="station-panel">
-      <div class="station-panel-title">Select Stations</div>
+      <div class="station-panel-title">Settings</div>
+      <div class="station-panel-row">
+        <label>Service</label>
+        <div class="service-toggle">
+          <button type="button" class="dir-btn service-btn" data-service="weekday">Weekday</button>
+          <button type="button" class="dir-btn service-btn" data-service="weekend">Weekend</button>
+        </div>
+      </div>
       <div class="station-panel-row">
         <label for="start-station-select">Start</label>
         <select id="start-station-select"></select>
@@ -1019,7 +1033,7 @@
     const nowLineEl = document.createElement("div");
     nowLineEl.id = "now-line";
     nowLineEl.className = "now-line";
-    const dirButtons = document.querySelectorAll(".dir-btn");
+    const dirButtons = document.querySelectorAll(".direction-toggle .dir-btn");
 
     const STATION_PREFS_KEY = "stationPrefs";
     const DEFAULT_START_STATION = "San Jose Diridon";
@@ -1091,6 +1105,55 @@
 
     startStationSelect.addEventListener("change", applyStationSelection);
     endStationSelect.addEventListener("change", applyStationSelection);
+
+    const SERVICE_TYPE_KEY = "serviceType";
+    const DEFAULT_SERVICE_TYPE = "weekday";
+    const SERVICE_SCHEDULE_FILES = {
+      weekday: "trainSchedule.json",
+      weekend: "trainScheduleWeekend.json",
+    };
+
+    function loadServiceType() {
+      try {
+        const stored = localStorage.getItem(SERVICE_TYPE_KEY);
+        if (stored === "weekday" || stored === "weekend") return stored;
+      } catch (e) {}
+      return DEFAULT_SERVICE_TYPE;
+    }
+
+    function saveServiceType() {
+      try {
+        localStorage.setItem(SERVICE_TYPE_KEY, serviceType);
+      } catch (e) {}
+    }
+
+    let serviceType = loadServiceType();
+
+    const serviceButtons = document.querySelectorAll(".service-btn");
+
+    function updateServiceButtons() {
+      serviceButtons.forEach((b) => b.classList.toggle("active", b.dataset.service === serviceType));
+    }
+
+    function loadSchedule(direction) {
+      fetch(SERVICE_SCHEDULE_FILES[serviceType])
+        .then((res) => res.json())
+        .then((data) => {
+          trainSchedule = data;
+          setDirection(direction);
+        });
+    }
+
+    function setServiceType(type) {
+      if (type === serviceType) return;
+      serviceType = type;
+      saveServiceType();
+      updateServiceButtons();
+      loadSchedule(currentDirection);
+    }
+
+    updateServiceButtons();
+    serviceButtons.forEach((b) => b.addEventListener("click", () => setServiceType(b.dataset.service)));
 
     const MAX_STARRED_TRAINS = 3;
     const STARRED_STORAGE_KEY = "starredTrains";
@@ -1569,12 +1632,7 @@
       renderSchedule(direction);
     }
 
-    fetch("trainSchedule.json")
-      .then((res) => res.json())
-      .then((data) => {
-        trainSchedule = data;
-        setDirection(getDefaultDirection());
-      });
+    loadSchedule(getDefaultDirection());
 
     dirButtons.forEach((button) => {
       button.addEventListener("click", () => setDirection(button.dataset.dir));
