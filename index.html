@@ -415,27 +415,31 @@
   }
   .favorite-detail-row {
     display: flex;
-    justify-content: space-between;
-    gap: 0.75rem;
+    align-items: baseline;
     padding: 0.15rem 0;
   }
   .favorite-detail {
     display: flex;
-    flex-direction: column;
-    gap: 0.05rem;
+    align-items: baseline;
+    gap: 0.3rem;
     font-size: 0.8rem;
     flex: 1;
     min-width: 0;
   }
+  .favorite-detail-row .favorite-detail:first-child {
+    padding-right: 0.6rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.25);
+  }
   .favorite-detail-row .favorite-detail:last-child {
-    align-items: flex-end;
-    text-align: right;
+    justify-content: flex-end;
+    padding-left: 0.6rem;
   }
   .favorite-detail span:first-child {
     font-size: 0.65rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     opacity: 0.7;
+    white-space: nowrap;
   }
   .train-card {
     position: relative;
