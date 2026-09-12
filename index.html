@@ -1341,8 +1341,10 @@
     function getVisibleEntries(trains) {
       const nowMinutes = getEffectiveMinutes();
       const departures = trains.map((t) => {
-        const stop = t.stops.find((s) => s.station === startStation);
-        return timeToScheduleMinutes(stop ? stop.time : t.stops[0].time);
+        const startIdx = t.stops.findIndex((s) => s.station === startStation);
+        const endIdx = t.stops.findIndex((s) => s.station === endStation);
+        const originStop = startIdx < endIdx ? t.stops[startIdx] : t.stops[endIdx];
+        return timeToScheduleMinutes(originStop.time);
       });
       let cutoffIndex = -1;
       for (let i = 0; i < departures.length; i++) {
