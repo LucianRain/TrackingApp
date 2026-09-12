@@ -1106,28 +1106,86 @@
     startStationSelect.addEventListener("change", applyStationSelection);
     endStationSelect.addEventListener("change", applyStationSelection);
 
-    const SERVICE_TYPE_KEY = "serviceType";
-    const DEFAULT_SERVICE_TYPE = "weekday";
+    const SERVICE_OVERRIDE_KEY = "serviceOverride";
     const SERVICE_SCHEDULE_FILES = {
       weekday: "trainSchedule.json",
       weekend: "trainScheduleWeekend.json",
     };
 
-    function loadServiceType() {
-      try {
-        const stored = localStorage.getItem(SERVICE_TYPE_KEY);
-        if (stored === "weekday" || stored === "weekend") return stored;
-      } catch (e) {}
-      return DEFAULT_SERVICE_TYPE;
+    function dateKey(date) {
+      return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
     }
 
-    function saveServiceType() {
+    function nthWeekdayOfMonth(year, month, weekday, n) {
+      const firstWeekday = new Date(year, month, 1).getDay();
+      const day = 1 + ((weekday - firstWeekday + 7) % 7) + (n - 1) * 7;
+      return new Date(year, month, day);
+    }
+
+    function lastWeekdayOfMonth(year, month, weekday) {
+      const last = new Date(year, month + 1, 0);
+      const day = last.getDate() - ((last.getDay() - weekday + 7) % 7);
+      return new Date(year, month, day);
+    }
+
+    function observedDate(date) {
+      const day = date.getDay();
+      if (day === 6) return new Date(date.getFullYear(), date.getMonth(), date.getDate() - 1);
+      if (day === 0) return new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
+      return date;
+    }
+
+    function federalHolidayKeysForYear(year) {
+      const fixedDates = [
+        [0, 1], // New Year's Day
+        [5, 19], // Juneteenth
+        [6, 4], // Independence Day
+        [10, 11], // Veterans Day
+        [11, 25], // Christmas Day
+      ].map(([month, day]) => observedDate(new Date(year, month, day)));
+
+      const floatingDates = [
+        nthWeekdayOfMonth(year, 0, 1, 3), // MLK Day: 3rd Monday of Jan
+        nthWeekdayOfMonth(year, 1, 1, 3), // Presidents Day: 3rd Monday of Feb
+        lastWeekdayOfMonth(year, 4, 1), // Memorial Day: last Monday of May
+        nthWeekdayOfMonth(year, 8, 1, 1), // Labor Day: 1st Monday of Sep
+        nthWeekdayOfMonth(year, 9, 1, 2), // Columbus Day: 2nd Monday of Oct
+        nthWeekdayOfMonth(year, 10, 4, 4), // Thanksgiving: 4th Thursday of Nov
+      ];
+
+      return [...fixedDates, ...floatingDates].map(dateKey);
+    }
+
+    function autoServiceType(date = new Date()) {
+      const day = date.getDay();
+      if (day === 0 || day === 6) return "weekend";
+      return federalHolidayKeysForYear(date.getFullYear()).includes(dateKey(date)) ? "weekend" : "weekday";
+    }
+
+    function loadServiceOverride() {
       try {
-        localStorage.setItem(SERVICE_TYPE_KEY, serviceType);
+        const stored = JSON.parse(localStorage.getItem(SERVICE_OVERRIDE_KEY));
+        if (stored && stored.date === todayStr() && (stored.value === "weekday" || stored.value === "weekend")) {
+          return stored.value;
+        }
+      } catch (e) {}
+      return null;
+    }
+
+    function saveServiceOverride(value) {
+      try {
+        localStorage.setItem(SERVICE_OVERRIDE_KEY, JSON.stringify({ value, date: todayStr() }));
       } catch (e) {}
     }
 
-    let serviceType = loadServiceType();
+    function clearServiceOverride() {
+      try {
+        localStorage.removeItem(SERVICE_OVERRIDE_KEY);
+      } catch (e) {}
+    }
+
+    let serviceDateStr = todayStr();
+    let serviceType = loadServiceOverride() || autoServiceType();
 
     const serviceButtons = document.querySelectorAll(".service-btn");
 
@@ -1147,9 +1205,21 @@
     function setServiceType(type) {
       if (type === serviceType) return;
       serviceType = type;
-      saveServiceType();
+      saveServiceOverride(type);
       updateServiceButtons();
       loadSchedule(currentDirection);
+    }
+
+    function checkServiceDateRollover() {
+      const today = todayStr();
+      if (today === serviceDateStr) return;
+      serviceDateStr = today;
+      clearServiceOverride();
+      const autoType = autoServiceType();
+      const changed = autoType !== serviceType;
+      serviceType = autoType;
+      updateServiceButtons();
+      if (changed) loadSchedule(currentDirection);
     }
 
     updateServiceButtons();
@@ -1620,12 +1690,14 @@
     setLive(true);
 
     setInterval(() => {
+      checkServiceDateRollover();
       if (isLive) tick();
       renderFavoritesPanel();
     }, 1000);
     window.addEventListener("resize", updateNowLine);
 
     function resyncToDeviceTime() {
+      checkServiceDateRollover();
       updateClock();
       updateWorktime();
       if (isLive) tick();
