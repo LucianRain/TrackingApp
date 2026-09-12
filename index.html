@@ -1623,6 +1623,19 @@
     }, 1000);
     window.addEventListener("resize", updateNowLine);
 
+    function resyncToDeviceTime() {
+      updateClock();
+      updateWorktime();
+      if (isLive) tick();
+      renderFavoritesPanel();
+    }
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible") resyncToDeviceTime();
+    });
+    window.addEventListener("pageshow", resyncToDeviceTime);
+    window.addEventListener("focus", resyncToDeviceTime);
+
     function getDefaultDirection() {
       return new Date().getHours() < 12 ? "northbound" : "southbound";
     }
