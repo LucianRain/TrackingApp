@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Clock</title>
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon.png">
@@ -19,7 +19,7 @@
     --font-display: "Quicksand", "PT Sans", sans-serif;
     color-scheme: dark;
 
-    /* Plant palette: near-black soil, sage leaves, soft gold, terracotta pots */
+    /* Plant palette: near-black soil, sage leaves, soft gold, dewdrop blue */
     --soil: #0b110d;
     --soil-raised: #121a15;
     --text: #e7eee4;
@@ -29,7 +29,7 @@
     --leaf-rgb: 143, 203, 155;
     --gold: #e2c26b;
     --gold-rgb: 226, 194, 107;
-    --terracotta: #e0876a;
+    --dew: #7fb6e3;
 
     --glass: rgba(var(--leaf-rgb), 0.045);
     --glass-strong: rgba(18, 28, 22, 0.72);
@@ -40,6 +40,7 @@
   }
   html, body {
     margin: 0;
+    touch-action: manipulation;
     height: 100%;
     overflow: hidden;
     overscroll-behavior: none;
@@ -58,6 +59,9 @@
       radial-gradient(80% 40% at 100% 100%, rgba(var(--gold-rgb), 0.05), transparent 60%);
     background-attachment: fixed;
     transition: background-color 250ms ease;
+  }
+  * {
+    touch-action: manipulation;
   }
   ::selection {
     background: rgba(var(--leaf-rgb), 0.35);
@@ -112,10 +116,10 @@
   }
   @keyframes imminentGlow {
     0%, 100% {
-      box-shadow: 0 0 0 0 rgba(224, 135, 106, 0);
+      box-shadow: 0 0 0 0 rgba(127, 182, 227, 0);
     }
     50% {
-      box-shadow: 0 0 14px 0 rgba(224, 135, 106, 0.35);
+      box-shadow: 0 0 14px 0 rgba(127, 182, 227, 0.4);
     }
   }
   /* A tiny leaf used as a decorative bullet before titles */
@@ -580,12 +584,12 @@
     color: inherit;
   }
   .train-card.imminent .train-box {
-    border-color: var(--terracotta);
+    border-color: var(--dew);
     border-width: 2px;
     animation: imminentGlow 2.4s ease-in-out infinite;
   }
   .train-card.imminent .train-status-label {
-    color: var(--terracotta);
+    color: var(--dew);
     opacity: 1;
   }
   .train-status-label {
@@ -955,59 +959,132 @@
     const canvas = document.getElementById("squares");
     const ctx = canvas.getContext("2d");
 
-    function resizeCanvas() {
-      canvas.width = canvas.clientWidth;
-      canvas.height = canvas.clientHeight;
+    const LEAF_GREENS = ["#8fcb9b", "#74b585", "#5c9a6c", "#a9d6a8"];
+    const LEAF_GOLD = "#e2c26b";
+    let canvasWidth = 0;
+    let canvasHeight = 0;
+    let leaves = [];
+
+    // Small deterministic RNG so the scatter looks the same between resizes.
+    function mulberry32(seed) {
+      return function () {
+        seed |= 0;
+        seed = (seed + 0x6d2b79f5) | 0;
+        let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+        t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+      };
     }
-    resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
+
+    function buildLeaves() {
+      const { density, minSize, maxSize, sprigChance, goldChance } = settings.leaves;
+      const rand = mulberry32(20260928);
+      const count = Math.round((canvasWidth * canvasHeight) / 100000 * density);
+      leaves = [];
+      for (let i = 0; i < count; i++) {
+        // depth 0 = far (small, faint, slow), 1 = near (large, brighter, faster)
+        const depth = rand();
+        const isSprig = rand() < sprigChance;
+        const baseSize = minSize + (maxSize - minSize) * (0.25 + 0.75 * depth) * (0.6 + 0.4 * rand());
+        leaves.push({
+          x: rand(),
+          y: rand(),
+          depth,
+          isSprig,
+          size: isSprig ? baseSize * 2.6 : baseSize,
+          pairs: 2 + Math.floor(rand() * 3),
+          bend: (rand() - 0.5) * 0.8,
+          angle: rand() * Math.PI * 2,
+          spin: (rand() - 0.5) * 0.12,
+          swayPhase: rand() * Math.PI * 2,
+          swayFreq: 0.15 + rand() * 0.25,
+          color: rand() < goldChance ? LEAF_GOLD : LEAF_GREENS[Math.floor(rand() * LEAF_GREENS.length)],
+        });
+      }
+    }
+
+    function resizeCanvas() {
+      const dpr = window.devicePixelRatio || 1;
+      canvasWidth = canvas.clientWidth;
+      canvasHeight = canvas.clientHeight;
+      canvas.width = Math.round(canvasWidth * dpr);
+      canvas.height = Math.round(canvasHeight * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      buildLeaves();
+      if (!squaresRunning) requestAnimationFrame(updateSquares);
+    }
 
     let squaresRunning = true;
     let squaresFrameScheduled = false;
 
-    function drawLeaf(x, y, length, angle) {
-      const half = length / 2;
-      const width = length * 0.42;
-      ctx.save();
-      ctx.translate(x, y);
-      ctx.rotate(angle);
+    function leafPath(length, width) {
       ctx.beginPath();
-      ctx.moveTo(-half, 0);
-      ctx.quadraticCurveTo(0, -width, half, 0);
-      ctx.quadraticCurveTo(0, width, -half, 0);
+      ctx.moveTo(0, 0);
+      ctx.quadraticCurveTo(width, -length / 2, 0, -length);
+      ctx.quadraticCurveTo(-width, -length / 2, 0, 0);
       ctx.fill();
+    }
+
+    function drawSprig(size, pairs, bend) {
+      // Curved stem growing along -y with alternating leaves, smaller toward the tip.
+      const tipX = bend * size;
+      ctx.lineWidth = Math.max(1, size * 0.035);
+      ctx.lineCap = "round";
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.quadraticCurveTo(0, -size * 0.5, tipX, -size);
+      ctx.stroke();
+      for (let i = 0; i < pairs * 2; i++) {
+        const t = (i + 1) / (pairs * 2 + 1);
+        const px = t * t * tipX;
+        const py = -size * t;
+        const side = i % 2 === 0 ? 1 : -1;
+        const leafLen = size * 0.34 * (1 - t * 0.45);
+        ctx.save();
+        ctx.translate(px, py);
+        ctx.rotate(side * 0.95 + bend * 0.3);
+        leafPath(leafLen, leafLen * 0.38);
+        ctx.restore();
+      }
+      ctx.save();
+      ctx.translate(tipX, -size);
+      ctx.rotate(bend * 0.6);
+      leafPath(size * 0.26, size * 0.1);
       ctx.restore();
     }
 
     function updateSquares(timestamp) {
       squaresFrameScheduled = false;
-      const { cellSize, squareSize, speedX, speedY, opacity, goldEvery } = settings.grid;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.globalAlpha = opacity;
+      const { speed, sway, opacity } = settings.leaves;
+      ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
       const seconds = timestamp / 1000;
-      const shiftX = seconds * speedX;
-      const shiftY = seconds * speedY;
-      const offsetX = (shiftX % cellSize + cellSize) % cellSize;
-      const offsetY = (shiftY % cellSize + cellSize) % cellSize;
-      // World-space cell indices so each leaf keeps its angle/color as the grid wraps.
-      const baseCol = Math.floor(shiftX / cellSize);
-      const baseRow = Math.floor(shiftY / cellSize);
+      const margin = settings.leaves.maxSize * 3;
+      const spanX = canvasWidth + margin * 2;
+      const spanY = canvasHeight + margin * 2;
 
-      let col = 0;
-      for (let x = -cellSize + offsetX; x < canvas.width + cellSize; x += cellSize, col++) {
-        let row = 0;
-        for (let y = -cellSize + offsetY; y < canvas.height + cellSize; y += cellSize, row++) {
-          const wc = col - baseCol;
-          const wr = row - baseRow;
-          const hash = Math.abs((wc * 73856093) ^ (wr * 19349663));
-          const isGold = goldEvery > 0 && hash % goldEvery === 0;
-          ctx.fillStyle = isGold ? "#e2c26b" : "#8fcb9b";
-          // Stagger alternate rows so the leaves don't look like a strict grid.
-          const cx = x + cellSize / 2 + (wr % 2 === 0 ? 0 : cellSize / 2);
-          const cy = y + cellSize / 2;
-          drawLeaf(cx, cy, squareSize, ((hash % 360) * Math.PI) / 180);
+      for (const leaf of leaves) {
+        const parallax = 0.4 + leaf.depth * 0.9;
+        const swayOffset = Math.sin(seconds * leaf.swayFreq + leaf.swayPhase);
+        // Drift gently down and to the right, wandering side to side as it falls.
+        const travelX = seconds * speed * 0.55 * parallax + swayOffset * sway * parallax;
+        const travelY = seconds * speed * parallax;
+        const x = ((leaf.x * spanX + travelX) % spanX + spanX) % spanX - margin;
+        const y = ((leaf.y * spanY + travelY) % spanY + spanY) % spanY - margin;
+        const angle = leaf.angle + seconds * leaf.spin + swayOffset * 0.35;
+
+        ctx.globalAlpha = opacity * (0.45 + leaf.depth * 0.75);
+        ctx.fillStyle = leaf.color;
+        ctx.strokeStyle = leaf.color;
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(angle);
+        if (leaf.isSprig) {
+          drawSprig(leaf.size, leaf.pairs, leaf.bend);
+        } else {
+          leafPath(leaf.size, leaf.size * 0.36);
         }
+        ctx.restore();
       }
 
       if (squaresRunning) {
@@ -1024,6 +1101,8 @@
       }
     }
 
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
     setSquaresRunning(true);
 
     if ("serviceWorker" in navigator) {

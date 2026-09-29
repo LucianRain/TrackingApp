@@ -4,7 +4,7 @@
 window.VisualSettings = {
   layout: {
     // Height (px) of the bottom tab bar. The divider line and the
-    // content area (including the square grid) sit just above it.
+    // content area (including the background leaves) sit just above it.
     // Suggested range: 40 (compact) to 80 (roomy).
     tabBarHeight: 56,
   },
@@ -27,27 +27,36 @@ window.VisualSettings = {
     },
   },
 
-  // Drifting background leaves. Each cell holds one small leaf.
-  grid: {
-    // Size (px) of each grid cell (spacing between leaves).
-    // Suggested range: 40 (dense) to 120 (sparse).
-    cellSize: 72,
+  // Drifting background foliage: scattered single leaves and small sprigs
+  // at varying sizes and depths, falling slowly and swaying side to side.
+  leaves: {
+    // How many leaves per 100,000 px² of screen (a phone is ~3-4 of those).
+    // Suggested range: 3 (sparse) to 15 (lush).
+    density: 8,
 
-    // Length (px) of each leaf. Keep well under cellSize.
-    // Suggested range: 8 to 24.
-    squareSize: 14,
+    // Leaf length range (px). Far leaves use the small end, near ones the large end.
+    // Suggested range: 6 to 30.
+    minSize: 7,
+    maxSize: 22,
 
-    // Drift speed in px/second. Higher = faster movement. 0 = static.
-    // Suggested range: 0 to 20.
-    speedX: 6,
-    speedY: 4,
+    // Chance (0-1) that an item is a sprig (a stem with several leaves)
+    // instead of a single leaf. Suggested range: 0 to 0.4.
+    sprigChance: 0.2,
 
-    // Opacity of the leaves (0 = invisible, 1 = solid).
+    // Fall speed in px/second (near leaves move faster than far ones). 0 = static.
+    // Suggested range: 0 to 15.
+    speed: 5,
+
+    // How far (px) leaves wander side to side as they fall.
+    // Suggested range: 0 to 40.
+    sway: 18,
+
+    // Overall opacity of the leaves (0 = invisible, 1 = solid).
     // Suggested range: 0.03 (subtle) to 0.15 (bold — may hurt readability above 0.12).
-    opacity: 0.07,
+    opacity: 0.08,
 
-    // Every Nth leaf is drawn gold instead of green. 0 = never.
-    goldEvery: 7,
+    // Chance (0-1) that a leaf is gold instead of green.
+    goldChance: 0.12,
   },
 
   eventCard: {
