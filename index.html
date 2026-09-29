@@ -832,6 +832,14 @@
     -webkit-tap-highlight-color: transparent;
     transition: background-color 150ms ease, transform 100ms ease;
   }
+  .shortcut-actions {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  a.worktime-btn {
+    text-decoration: none;
+  }
   .worktime-btn:active {
     background: var(--pill-bg-press);
     transform: scale(0.94);
@@ -907,7 +915,22 @@
       </div>
     </div>
   </div>
-  <div class="page" id="page-home"></div>
+  <div class="page" id="page-home">
+    <div class="events-stack">
+      <div class="event-card">
+        <div class="event-label">Shortcuts</div>
+        <div class="worktime-rows">
+          <div class="worktime-row">
+            <span class="worktime-key">ABApp Test</span>
+          </div>
+          <div class="shortcut-actions">
+            <a class="worktime-btn" href="shortcuts/ABApp%20Test.shortcut">Add</a>
+            <button class="worktime-btn" data-run-shortcut="ABApp Test">Run</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="page" id="page-train">
     <div class="direction-toggle">
       <button class="dir-btn active" data-dir="northbound">Northbound</button>
@@ -1956,6 +1979,14 @@
         localStorage.setItem(TAB_STORAGE_KEY, target);
       } catch (e) {}
     }
+
+    // Home tab: run a shortcut in the Shortcuts app, telling it what triggered it.
+    document.querySelectorAll("[data-run-shortcut]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const name = encodeURIComponent(button.dataset.runShortcut);
+        location.href = `shortcuts://run-shortcut?name=${name}&input=text&text=${encodeURIComponent("ABApp button")}`;
+      });
+    });
 
     const navMenuEl = document.getElementById("nav-menu");
     const navToggleEl = document.getElementById("nav-toggle");
