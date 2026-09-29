@@ -1,16 +1,18 @@
 {
-  "_about": "Commands for the ABApp shortcut. Each command has a label (its button on the Home tab) and steps run in order. Step types: notify {title, body}; request {url, secret?} does a GET of url, replacing {secret} with the named key from the shortcut's Secrets dictionary. Keys starting with _ are ignored.",
+  "_about": "Commands for the ABApp shortcut. Each command has a label (its button on the Home tab) and steps run in order. A step is {\"notify\": {title, body}} or {\"request\": {url, secret?}}; request does a GET of url, replacing {secret} with the named key from the shortcut's Secrets dictionary. Commands starting with _ are hidden from the Home tab.",
   "test": {
     "label": "Test",
     "steps": [
       {
-        "type": "request",
-        "url": "https://lucianrain.github.io/TrackingApp/manifest.json"
+        "request": {
+          "url": "https://lucianrain.github.io/TrackingApp/manifest.json"
+        }
       },
       {
-        "type": "notify",
-        "title": "ABApp 🌱",
-        "body": "Test ran: fetched a page and showed this notification."
+        "notify": {
+          "title": "ABApp 🌱",
+          "body": "Test ran: fetched a page and showed this notification."
+        }
       }
     ]
   },
@@ -18,18 +20,21 @@
     "label": "Self test",
     "steps": [
       {
-        "type": "request",
-        "url": "http://localhost:8766/plain"
+        "request": {
+          "url": "http://localhost:8766/plain"
+        }
       },
       {
-        "type": "request",
-        "url": "http://localhost:8766/secret?k={secret}",
-        "secret": "voicemonkey"
+        "request": {
+          "url": "http://localhost:8766/secret?k={secret}",
+          "secret": "voicemonkey"
+        }
       },
       {
-        "type": "notify",
-        "title": "ABApp 🌱",
-        "body": "Self test finished."
+        "notify": {
+          "title": "ABApp 🌱",
+          "body": "Self test finished."
+        }
       }
     ]
   }
