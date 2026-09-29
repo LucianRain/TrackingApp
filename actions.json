@@ -1,0 +1,10 @@
+{
+  "_about": "Commands for the ABApp shortcut. Each command has a label (its button on the Home tab) and steps run in order. Step types: notify {title, body}; request {url, secret?} does a GET of url, replacing {secret} with the named key from the shortcut's Secrets dictionary. Keys starting with _ are ignored.",
+  "test": {
+    "label": "Test",
+    "steps": [
+      { "type": "request", "url": "https://lucianrain.github.io/TrackingApp/manifest.json" },
+      { "type": "notify", "title": "ABApp 🌱", "body": "Test ran: fetched a page and showed this notification." }
+    ]
+  }
+}

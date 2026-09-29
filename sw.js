@@ -1,4 +1,4 @@
-const CACHE_NAME = "tracking-app-v2";
+const CACHE_NAME = "tracking-app-v3";
 // How long to wait on the network before answering from cache instead.
 const NETWORK_TIMEOUT_MS = 3000;
 // Cached on install so the app works offline right after the first visit.
@@ -10,6 +10,7 @@ const APP_FILES = [
   "icon.png",
   "trainSchedule.json",
   "trainScheduleWeekend.json",
+  "actions.json",
 ];
 
 self.addEventListener("install", (event) => {

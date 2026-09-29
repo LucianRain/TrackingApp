@@ -832,13 +832,8 @@
     -webkit-tap-highlight-color: transparent;
     transition: background-color 150ms ease, transform 100ms ease;
   }
-  .shortcut-actions {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-  }
-  a.worktime-btn {
-    text-decoration: none;
+  .command-row .worktime-btn {
+    margin-top: 0;
   }
   .worktime-btn:active {
     background: var(--pill-bg-press);
@@ -919,14 +914,8 @@
     <div class="events-stack">
       <div class="event-card">
         <div class="event-label">Shortcuts</div>
-        <div class="worktime-rows">
-          <div class="worktime-row">
-            <span class="worktime-key">ABApp Test</span>
-          </div>
-          <div class="shortcut-actions">
-            <a class="worktime-btn" href="shortcuts/ABApp%20Test.shortcut" download="ABApp Test.shortcut" target="_blank" rel="noopener">Add</a>
-            <button class="worktime-btn" data-run-shortcut="ABApp Test">Run</button>
-          </div>
+        <div class="worktime-rows" id="command-list">
+          <span class="worktime-key">Loading…</span>
         </div>
       </div>
     </div>
@@ -1980,13 +1969,48 @@
       } catch (e) {}
     }
 
-    // Home tab: run a shortcut in the Shortcuts app, telling it what triggered it.
-    document.querySelectorAll("[data-run-shortcut]").forEach((button) => {
-      button.addEventListener("click", () => {
-        const name = encodeURIComponent(button.dataset.runShortcut);
-        location.href = `shortcuts://run-shortcut?name=${name}&input=text&text=${encodeURIComponent("ABApp button")}`;
-      });
+    // Home tab: one button per command in actions.json. Each runs the ABApp
+    // shortcut with the command name, and the shortcut does the actual work.
+    const commandListEl = document.getElementById("command-list");
+
+    function commandMessage(text) {
+      const el = document.createElement("span");
+      el.className = "worktime-key";
+      el.textContent = text;
+      commandListEl.replaceChildren(el);
+    }
+
+    async function loadCommands() {
+      try {
+        const res = await fetch("actions.json", { cache: "no-cache" });
+        const commands = Object.entries(await res.json()).filter(([name]) => !name.startsWith("_"));
+        if (!commands.length) return commandMessage("No commands yet");
+        commandListEl.replaceChildren(
+          ...commands.map(([name, command]) => {
+            const row = document.createElement("div");
+            row.className = "worktime-row command-row";
+            const label = document.createElement("span");
+            label.className = "worktime-key";
+            label.textContent = command.label || name;
+            const button = document.createElement("button");
+            button.className = "worktime-btn";
+            button.dataset.command = name;
+            button.textContent = "Run";
+            row.append(label, button);
+            return row;
+          })
+        );
+      } catch (e) {
+        commandMessage("Couldn't load commands");
+      }
+    }
+
+    commandListEl.addEventListener("click", (e) => {
+      const button = e.target.closest("[data-command]");
+      if (!button) return;
+      location.href = `shortcuts://run-shortcut?name=ABApp&input=text&text=${encodeURIComponent(button.dataset.command)}`;
     });
+    loadCommands();
 
     const navMenuEl = document.getElementById("nav-menu");
     const navToggleEl = document.getElementById("nav-toggle");
