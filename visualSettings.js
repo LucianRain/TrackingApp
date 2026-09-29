@@ -3,7 +3,7 @@
 
 window.VisualSettings = {
   // Each tab has its own solid background color (hue/saturation/lightness).
-  // Both sit in near-black "soil" greens so the plant theme stays dark and quiet.
+  // All sit in near-black "soil" greens so the plant theme stays dark and quiet.
   background: {
     events: {
       // Hue 0-360. ~120-160 = green.
@@ -17,6 +17,11 @@ window.VisualSettings = {
       hue: 150,
       saturation: 16,
       lightness: 5,
+    },
+    home: {
+      hue: 140,
+      saturation: 18,
+      lightness: 6,
     },
   },
 
