@@ -2,13 +2,6 @@
 // Edit values here to change the look of the app — index.html reads from this file.
 
 window.VisualSettings = {
-  layout: {
-    // Height (px) of the bottom tab bar. The divider line and the
-    // content area (including the background leaves) sit just above it.
-    // Suggested range: 40 (compact) to 80 (roomy).
-    tabBarHeight: 56,
-  },
-
   // Each tab has its own solid background color (hue/saturation/lightness).
   // Both sit in near-black "soil" greens so the plant theme stays dark and quiet.
   background: {
