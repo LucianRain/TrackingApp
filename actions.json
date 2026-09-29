@@ -3,8 +3,34 @@
   "test": {
     "label": "Test",
     "steps": [
-      { "type": "request", "url": "https://lucianrain.github.io/TrackingApp/manifest.json" },
-      { "type": "notify", "title": "ABApp 🌱", "body": "Test ran: fetched a page and showed this notification." }
+      {
+        "type": "request",
+        "url": "https://lucianrain.github.io/TrackingApp/manifest.json"
+      },
+      {
+        "type": "notify",
+        "title": "ABApp 🌱",
+        "body": "Test ran: fetched a page and showed this notification."
+      }
+    ]
+  },
+  "_selftest": {
+    "label": "Self test",
+    "steps": [
+      {
+        "type": "request",
+        "url": "http://localhost:8766/plain"
+      },
+      {
+        "type": "request",
+        "url": "http://localhost:8766/secret?k={secret}",
+        "secret": "voicemonkey"
+      },
+      {
+        "type": "notify",
+        "title": "ABApp 🌱",
+        "body": "Self test finished."
+      }
     ]
   }
 }
