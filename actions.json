@@ -15,27 +15,5 @@
         }
       }
     ]
-  },
-  "_selftest": {
-    "label": "Self test",
-    "steps": [
-      {
-        "request": {
-          "url": "http://localhost:8766/plain"
-        }
-      },
-      {
-        "request": {
-          "url": "http://localhost:8766/secret?k={secret}",
-          "secret": "voicemonkey"
-        }
-      },
-      {
-        "notify": {
-          "title": "ABApp 🌱",
-          "body": "Self test finished."
-        }
-      }
-    ]
   }
 }
