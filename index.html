@@ -11,8 +11,9 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
-<script src="visualSettings.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet"></noscript>
+<script src="visualSettings.js?v=3"></script>
 <style>
   :root {
     --font-main: "PT Sans", sans-serif;
@@ -174,8 +175,10 @@
     flex-direction: column;
     align-items: flex-end;
     gap: 0.6rem;
+    pointer-events: none;
   }
   .nav-fab {
+    pointer-events: auto;
     width: 3.25rem;
     height: 3.25rem;
     border-radius: 50%;
@@ -239,6 +242,7 @@
     transform: none;
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
     transition: opacity 160ms ease, transform 160ms ease, visibility 0s;
   }
   .nav-item {
@@ -578,9 +582,7 @@
     gap: 0.2rem;
     border-radius: 20px;
     border: 1px solid var(--line);
-    background: var(--glass-strong);
-    -webkit-backdrop-filter: blur(var(--event-blur)) brightness(var(--event-darken));
-    backdrop-filter: blur(var(--event-blur)) brightness(var(--event-darken));
+    background: rgba(16, 25, 19, 0.86);
     color: var(--text);
     font-family: var(--font-main);
     padding: 0.5rem;
@@ -937,7 +939,25 @@
     </div>
   </div>
   <script>
-    const settings = window.VisualSettings;
+    // Built-in defaults, overlaid by visualSettings.js section by section, so a
+    // stale or partial settings file (e.g. an old cached copy) can't break startup.
+    const DEFAULT_SETTINGS = {
+      background: {
+        events: { hue: 145, saturation: 20, lightness: 6 },
+        train: { hue: 150, saturation: 16, lightness: 5 },
+      },
+      leaves: { density: 8, minSize: 7, maxSize: 22, sprigChance: 0.2, speed: 5, sway: 18, opacity: 0.08, goldChance: 0.12 },
+      eventCard: { blurPx: 5, darken: 0.9 },
+    };
+    const userSettings = window.VisualSettings || {};
+    const settings = {
+      background: {
+        events: { ...DEFAULT_SETTINGS.background.events, ...(userSettings.background && userSettings.background.events) },
+        train: { ...DEFAULT_SETTINGS.background.train, ...(userSettings.background && userSettings.background.train) },
+      },
+      leaves: { ...DEFAULT_SETTINGS.leaves, ...userSettings.leaves },
+      eventCard: { ...DEFAULT_SETTINGS.eventCard, ...userSettings.eventCard },
+    };
     const root = document.documentElement.style;
     root.setProperty("--event-blur", settings.eventCard.blurPx + "px");
     root.setProperty("--event-darken", settings.eventCard.darken);
@@ -1122,8 +1142,12 @@
         });
       });
 
+      // Only reload when a new worker replaces an existing one (a real update),
+      // not when the very first worker takes control, which would load the page twice.
+      let hadController = !!navigator.serviceWorker.controller;
       navigator.serviceWorker.addEventListener("controllerchange", () => {
-        location.reload();
+        if (hadController) location.reload();
+        hadController = true;
       });
     }
 
@@ -1569,15 +1593,24 @@
       renderFavoritesPanel();
     });
 
+    // Last HTML written to the panel; this runs every second, and rebuilding
+    // unchanged DOM can swallow a tap that lands mid-rebuild.
+    let lastFavoritesHtml = null;
+    function setFavoritesHtml(html) {
+      if (html === lastFavoritesHtml) return;
+      lastFavoritesHtml = html;
+      favoritesPanelEl.innerHTML = html;
+    }
+
     function renderFavoritesPanel() {
       const currentStars = starredTrains[currentDirection] || [];
       const shouldShow = currentStars.length > 0;
       favoritesPanelEl.classList.toggle("visible", shouldShow);
       if (!shouldShow) {
-        favoritesPanelEl.innerHTML = "";
+        setFavoritesHtml("");
         return;
       }
-      favoritesPanelEl.innerHTML = currentStars
+      setFavoritesHtml(currentStars
         .map((key) => getFavoriteTrainInfo(key))
         .filter(Boolean)
         .map((info) => {
@@ -1609,7 +1642,7 @@
               </div>
             </div>`;
         })
-        .join("");
+        .join(""));
     }
 
     trainsRowEl.addEventListener("click", (e) => {
