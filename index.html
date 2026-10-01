@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet"></noscript>
-<script src="visualSettings.js?v=4"></script>
+<script src="visualSettings.js?v=5"></script>
 <style>
   :root {
     --font-main: "PT Sans", sans-serif;
@@ -869,6 +869,7 @@
       <button class="tab nav-item active" data-tab="events">Events</button>
       <button class="tab nav-item" data-tab="train">Train</button>
       <button class="tab nav-item" data-tab="home">Home</button>
+      <button class="tab nav-item" data-tab="finance">Finance</button>
       <div class="nav-divider"></div>
       <button id="update-button" class="nav-item">Update</button>
     </div>
@@ -920,6 +921,7 @@
       </div>
     </div>
   </div>
+  <div class="page" id="page-finance"></div>
   <div class="page" id="page-train">
     <div class="direction-toggle">
       <button class="dir-btn active" data-dir="northbound">Northbound</button>
@@ -963,6 +965,7 @@
         events: { hue: 145, saturation: 20, lightness: 6 },
         train: { hue: 150, saturation: 16, lightness: 5 },
         home: { hue: 140, saturation: 18, lightness: 6 },
+        finance: { hue: 135, saturation: 18, lightness: 6 },
       },
       leaves: { density: 8, minSize: 7, maxSize: 22, sprigChance: 0.2, speed: 5, sway: 18, opacity: 0.08, goldChance: 0.12 },
       eventCard: { blurPx: 5, darken: 0.9 },
@@ -973,6 +976,7 @@
         events: { ...DEFAULT_SETTINGS.background.events, ...(userSettings.background && userSettings.background.events) },
         train: { ...DEFAULT_SETTINGS.background.train, ...(userSettings.background && userSettings.background.train) },
         home: { ...DEFAULT_SETTINGS.background.home, ...(userSettings.background && userSettings.background.home) },
+        finance: { ...DEFAULT_SETTINGS.background.finance, ...(userSettings.background && userSettings.background.finance) },
       },
       leaves: { ...DEFAULT_SETTINGS.leaves, ...userSettings.leaves },
       eventCard: { ...DEFAULT_SETTINGS.eventCard, ...userSettings.eventCard },

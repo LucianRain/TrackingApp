@@ -23,6 +23,11 @@ window.VisualSettings = {
       saturation: 18,
       lightness: 6,
     },
+    finance: {
+      hue: 135,
+      saturation: 18,
+      lightness: 6,
+    },
   },
 
   // Drifting background foliage: scattered single leaves and small sprigs
